@@ -341,13 +341,39 @@
                             <i class="icon-badge menu-icon"></i><span class="nav-text">Data Pengajar</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="data-pengajar" class=""> <i class="icon-note menu-icon"></i>Data Pengajar
+                            <li><a href="/data-pengajar" class="active"> <i class="icon-note menu-icon"></i>Data Pengajar
                                 </a>
                             </li>
-                            <li><a href="add-pengajar" class=""> <i class="icon-note menu-icon"></i>Tambah Pengajar
+                            <li><a href="/add-pengajar" class=""> <i class="icon-note menu-icon"></i>Tambah Pengajar
                                 </a>
                             </li>
                             <!-- <li><a href="./index-2.html">Home 2</a></li> -->
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-badge menu-icon"></i><span class="nav-text">Data Kelas</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="/data-kelas" class=""> <i class="icon-note menu-icon"></i>Data Kelas
+                                </a>
+                            </li>
+                            <li><a href="/add-kelas" class=""> <i class="icon-note menu-icon"></i>Tambah Kelas
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-badge menu-icon"></i><span class="nav-text">Data Mapel</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="/data-mapel" class=""> <i class="icon-note menu-icon"></i>Data Mapel
+                                </a>
+                            </li>
+                            <li><a href="/add-mapel" class=""> <i class="icon-note menu-icon"></i>Tambah Mapel
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     
