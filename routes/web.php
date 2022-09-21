@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/add-pengajar', function () {
+    return view('add-pengajar');
+});
+
+Route::get('/data-pengajar', function () {
+    return view('data-pengajar');
+});
