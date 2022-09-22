@@ -14,5 +14,33 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.data-jadwal');
+});
+
+Route::get('/add-jadwal', function () {
+    return view('admin.add-jadwal');
+});
+
+Route::get('/add-pengajar', function () {
+    return view('admin.add-pengajar');
+});
+
+Route::get('/add-kelas', function () {
+    return view('admin.add-kelas');
+});
+
+Route::get('/add-mapel', function () {
+    return view('admin.add-mapel');
+});
+
+Route::get('/data-pengajar', function () {
+    return view('admin.data-pengajar');
+});
+
+Route::get('/data-kelas', function () {
+    return view('admin.data-kelas');
+});
+
+Route::get('/data-mapel', function () {
+    return view('admin.data-mapel');
 });
