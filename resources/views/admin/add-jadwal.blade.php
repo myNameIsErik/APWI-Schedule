@@ -11,12 +11,16 @@
                                 <label class="m-t-20">Kode Jadwal</label>
                                 <input type="text" class="form-control" placeholder="2017-06-04" id="mdate">
                             </div>
-                            <div class="col-md-6">
-                                <label class="m-t-20">Default Material Date Picker</label>
+                            <div class="col-md-12">
+                                <label class="m-t-20">Tanggal</label>
                                 <input type="date" class="form-control" placeholder="2017-06-04" id="mdate">
                             </div>
                             <div class="col-md-6">
-                                <label class="m-t-20">Time Picker</label>
+                                <label class="m-t-20">Jam Mulai</label>
+                                <input type="time" class="form-control" id="timepicker" placeholder="Check time">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="m-t-20">Jam Selesai</label>
                                 <input type="time" class="form-control" id="timepicker" placeholder="Check time">
                             </div>
                             <div class="col-md-6">
