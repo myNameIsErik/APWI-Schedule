@@ -11,19 +11,19 @@
                                 <label class="m-t-20">Kode Jadwal</label>
                                 <input type="text" class="form-control" placeholder="2017-06-04" id="mdate">
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-12 mt-1">
                                 <label class="m-t-20">Tanggal</label>
                                 <input type="date" class="form-control" placeholder="2017-06-04" id="mdate">
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 mt-1">
                                 <label class="m-t-20">Jam Mulai</label>
                                 <input type="time" class="form-control" id="timepicker" placeholder="Check time">
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 mt-1">
                                 <label class="m-t-20">Jam Selesai</label>
                                 <input type="time" class="form-control" id="timepicker" placeholder="Check time">
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 mt-1">
                                 <label>Mata Pelajaran</label>
                                 <select class="form-control" id="sel1">
                                     <option>1</option>
@@ -32,7 +32,7 @@
                                     <option>4</option>
                                 </select>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 mt-1">
                                 <label>Kelas</label>
                                 <select class="form-control" id="sel1">
                                     <option>1</option>
@@ -41,7 +41,7 @@
                                     <option>4</option>
                                 </select>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 mt-1">
                                 <label>Pengajar</label>
                                 <select class="form-control" id="sel1">
                                     <option>1</option>
@@ -50,9 +50,12 @@
                                     <option>4</option>
                                 </select>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 mt-1">
                                 <label class="m-t-20">Jumlah Jam Pelajaran</label>
-                                <input type="text" class="form-control" placeholder="2017-06-04" id="mdate">
+                                <input type="text" class="form-control" placeholder="6 JP" id="" disabled>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </div>
                     </form>

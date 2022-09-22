@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
     return view('admin.data-jadwal');
 });
@@ -43,4 +44,8 @@ Route::get('/data-kelas', function () {
 
 Route::get('/data-mapel', function () {
     return view('admin.data-mapel');
+});
+
+Route::get('/perubahan-jadwal', function () {
+    return view('admin.perubahan-jadwal');
 });

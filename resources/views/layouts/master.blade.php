@@ -285,6 +285,11 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="/perubahan-jadwal" aria-expanded="false">
+                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">Perubahan Jadwal</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
