@@ -5,6 +5,9 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Data Pengajar</h4>
+                <div class="text-right">
+                    <a href="/add-jadwal"><button type="button" class="btn btn-primary">Buat Jadwal</button></a>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered zero-configuration">
                         <thead>

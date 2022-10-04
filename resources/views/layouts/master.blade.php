@@ -241,53 +241,34 @@
                 <ul class="metismenu" id="menu">
                     <li class="nav-label">Dashboard</li>
                     <li>
-                        <a href="/" aria-expanded="false">
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Penjadwalan</span>
                         </a>
+                        <ul aria-expanded="false">
+                            <li>
+                                <a href="/" class=""> 
+                                    <i class="icon-note menu-icon"></i>Jadwal
+                                </a>
+                            </li>
+                            <li><a href="/perubahan-jadwal" class=""> 
+                                    <i class="icon-note menu-icon"></i>Perubahan Jadwal
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <a href="/data-pengajar" aria-expanded="false">
                             <i class="icon-badge menu-icon"></i><span class="nav-text">Data Pengajar</span>
                         </a>
-                        <ul aria-expanded="false">
-                            <li><a href="/data-pengajar" class=""> <i class="icon-note menu-icon"></i>Data Pengajar
-                                </a>
-                            </li>
-                            <li><a href="/add-pengajar" class=""> <i class="icon-note menu-icon"></i>Tambah Pengajar
-                                </a>
-                            </li>
-                            <!-- <li><a href="./index-2.html">Home 2</a></li> -->
-                        </ul>
                     </li>
                     <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <a href="/data-kelas" aria-expanded="false">
                             <i class="icon-badge menu-icon"></i><span class="nav-text">Data Kelas</span>
                         </a>
-                        <ul aria-expanded="false">
-                            <li><a href="/data-kelas" class=""> <i class="icon-note menu-icon"></i>Data Kelas
-                                </a>
-                            </li>
-                            <li><a href="/add-kelas" class="active"> <i class="icon-note menu-icon"></i>Tambah Kelas
-                                </a>
-                            </li>
-                        </ul>
                     </li>
                     <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <a href="/data-mapel" aria-expanded="false">
                             <i class="icon-badge menu-icon"></i><span class="nav-text">Data Mapel</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="/data-mapel" class=""> <i class="icon-note menu-icon"></i>Data Mapel
-                                </a>
-                            </li>
-                            <li><a href="/add-mapel" class=""> <i class="icon-note menu-icon"></i>Tambah Mapel
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="/perubahan-jadwal" aria-expanded="false">
-                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">Perubahan Jadwal</span>
                         </a>
                     </li>
                 </ul>
