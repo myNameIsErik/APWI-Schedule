@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+// admin
 Route::get('/', function () {
     return view('admin.data-jadwal');
 });
@@ -48,4 +48,23 @@ Route::get('/data-mapel', function () {
 
 Route::get('/perubahan-jadwal', function () {
     return view('admin.perubahan-jadwal');
+});
+
+// user
+Route::get('/main', function () {
+    return view('user.data-jadwal');
+});
+
+Route::get('/user-add-jadwal', function () {
+    return view('user.add-jadwal');
+});
+
+// login
+Route::get('/login', function () {
+    return view('login.login');
+});
+
+// profil
+Route::get('/profil', function () {
+    return view('user.profil');
 });
