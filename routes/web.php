@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use app\Http\Controllers\KelasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,9 +39,7 @@ Route::get('/data-pengajar', function () {
     return view('admin.data-pengajar');
 });
 
-Route::get('/data-kelas', function () {
-    return view('admin.data-kelas');
-});
+Route::get('/data-kelas', [KelasController::class, 'index']);
 
 Route::get('/data-mapel', function () {
     return view('admin.data-mapel');
