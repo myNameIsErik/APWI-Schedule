@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Kegiatan;
 use App\Models\User;
 use App\Models\Jadwal;
+use Illuminate\Support\Facades\Auth;
 
 class JadwalController extends Controller
 {
@@ -16,9 +17,15 @@ class JadwalController extends Controller
      */
     public function index()
     {
-        return view('admin.data-jadwal', [
-            "jadwal" => Jadwal::all()
-        ]);
+        if (auth()->user()->level === "Admin") {
+            return view('dashboard.jadwal.data-jadwal', [
+                'jadwal' => Jadwal::all()
+            ]);
+        } else {
+            return view('dashboard.jadwal.data-jadwal', [
+                'jadwal' => Jadwal::where('user_id', Auth::id())
+            ]);
+        }
     }
 
     /**
@@ -28,7 +35,7 @@ class JadwalController extends Controller
      */
     public function create()
     {
-        return view('admin.add-jadwal', [
+        return view('dashboard.jadwal.add-jadwal', [
             "kegiatan" => Kegiatan::all(),
             "pegawai" => User::all()
         ]);
@@ -64,7 +71,7 @@ class JadwalController extends Controller
      */
     public function show(Jadwal $jadwal)
     {
-        return view('admin.show-jadwal', [
+        return view('dashboard.jadwal.show-jadwal', [
             "jadwal" => $jadwal
         ]);
     }
@@ -77,7 +84,7 @@ class JadwalController extends Controller
      */
     public function edit(Jadwal $jadwal)
     {
-        return view('admin.edit-jadwal', [
+        return view('dashboard.jadwal.edit-jadwal', [
             "kegiatan" => Kegiatan::all(),
             "pegawai" => User::all(),
             "jadwal" => $jadwal

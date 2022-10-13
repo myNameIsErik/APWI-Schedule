@@ -14699,4 +14699,11 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
     [data-theme-version="dark"] .footer .copyright p {
       color: #fff; }
 
+  .button-logout {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: grey;
+  }
 /*# sourceMappingURL=style.css.map */

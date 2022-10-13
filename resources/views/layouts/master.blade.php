@@ -66,28 +66,42 @@
                     </div>
                 </div>
                 
-                <div class="header-right">
-                    <ul class="clearfix">
-                        <li class="icons dropdown">
-                            <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
-                                <span class="activity active"></span>
-                                <img src="images/user/1.png" height="40" width="40" alt="">
-                            </div>
-                            <div class="drop-down dropdown-profile   dropdown-menu">
-                                <div class="dropdown-content-body">
-                                    <ul>
-                                        <li>
-                                            <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
-                                        </li>
-                                        <hr class="my-2">
-                                        
-                                        <li><a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a></li>
-                                    </ul>
+                @auth
+                    <div class="header-right">
+                        <ul class="clearfix">
+                            <li class="icons dropdown d-none d-md-flex">
+                                <a class="log-user">
+                                    <span>Welcome Back, {{ auth()->user()->name }}</span>
+                                </a>
+                            </li>
+                            <li class="icons dropdown">
+                                <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
+                                    <span class="activity active"></span>
+                                    <img src="images/user/1.png" height="40" width="40" alt="">
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                                <div class="drop-down dropdown-profile   dropdown-menu">
+                                    <div class="dropdown-content-body">
+                                        <ul>
+                                            <li>
+                                                <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
+                                            </li>
+                                            <hr class="my-2">
+                                            
+                                            <li>
+                                                <form action="/logout" method="post">
+                                                    @csrf
+                                                    <button type="submit" class="button-logout">
+                                                        <i class="icon-key"></i> <span>Logout</span>
+                                                    </button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                @endauth
             </div>
         </div>
         <!--**********************************
@@ -117,6 +131,7 @@
                             </li>
                         </ul>
                     </li>
+                    @can('admin')
                     <li>
                         <a href="/data-pegawai" aria-expanded="false">
                             <i class="icon-badge menu-icon"></i><span class="nav-text">Data Pegawai</span>
@@ -127,6 +142,7 @@
                             <i class="icon-badge menu-icon"></i><span class="nav-text">Data Kegiatan</span>
                         </a>
                     </li>
+                    @endcan
                 </ul>
             </div>
         </div>

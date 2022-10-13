@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Status;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -15,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.data-pegawai', [
+        return view('dashboard.pegawai.data-pegawai', [
             "pegawai" => User::all()
         ]);
     }
@@ -27,7 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.add-pegawai', [
+        return view('dashboard.pegawai.add-pegawai', [
             "pegawai" => User::all(),
             "status" => Status::all()
         ]);
@@ -47,10 +48,12 @@ class UserController extends Controller
             'username' => 'required',
             'email' => 'required',
             'password' => 'required',
-            'status_id' => 'required',
             'level' => 'required',
+            'status_id' => 'required',
             'phone' => 'required'
         ]);
+
+        $validatedData['password'] = Hash::make($validatedData['password']);
 
         User::create($validatedData);
 
@@ -65,7 +68,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('admin.show-pegawai', [
+        return view('dashboard.pegawai.show-pegawai', [
             "user" => $user
         ]);
     }
@@ -78,7 +81,7 @@ class UserController extends Controller
      */
     public function edit(User $pegawai)
     {
-        return view('admin.edit-pegawai', [
+        return view('dashboard.pegawai.edit-pegawai', [
             "pegawai" => $pegawai,
             "status" => Status::all()
         ]);
@@ -99,11 +102,13 @@ class UserController extends Controller
             'username' => 'required',
             'email' => 'required',
             'password' => 'required',
-            'status_id' => 'required',
             'level' => 'required',
+            'status_id' => 'required',
             'phone' => 'required'
         ]);
 
+        $validatedData['password'] = Hash::make($validatedData['password']);
+        
         User::where('id', $pegawai->id)->update($validatedData);
 
         return redirect('/data-pegawai')->with('success', 'Data Pegawai Berhasil diubah.');
