@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kegiatan;
 use Illuminate\Http\Request;
-use App\Models\Kelas;
 
-class KelasController extends Controller
+class KegiatanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,8 @@ class KelasController extends Controller
      */
     public function index()
     {
-        return view('kelas', [
-            "kode_kelas" => "kode_kelas",
-            "nama_kelas" => "nama_kelas"
+        return view('admin.data-kegiatan', [
+            "kegiatan" => Kegiatan::all()
         ]);
     }
 
@@ -27,7 +26,9 @@ class KelasController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.add-kegiatan', [
+            "kegiatan" => Kegiatan::all()
+        ]);
     }
 
     /**
@@ -38,7 +39,15 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'kode_kegiatan' => 'required',
+            'nama_kegiatan' => 'required',
+            'jp' => 'required'
+        ]);
+
+        Kegiatan::create($validatedData);
+
+        return redirect('/data-kegiatan')->with('success', 'Kegiatan Berhasil dibuat.');
     }
 
     /**
@@ -58,9 +67,11 @@ class KelasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Kegiatan $kegiatan)
     {
-        //
+        return view('admin.edit-kegiatan', [
+            "kegiatan" => $kegiatan
+        ]);
     }
 
     /**
@@ -70,9 +81,17 @@ class KelasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Kegiatan $kegiatan)
     {
-        //
+        $validatedData = $request->validate([
+            'kode_kegiatan' => 'required',
+            'nama_kegiatan' => 'required',
+            'jp' => 'required'
+        ]);
+
+        Kegiatan::where('id', $kegiatan->id)->update($validatedData);
+
+        return redirect('/data-kegiatan')->with('success', 'Kegiatan Berhasil diubah.');
     }
 
     /**
@@ -81,8 +100,10 @@ class KelasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Kegiatan $kegiatan)
     {
-        //
+        Kegiatan::destroy($kegiatan->id);
+
+        return redirect('/data-kegiatan')->with('success', 'Kegiatan Berhasil dihapus.');
     }
 }

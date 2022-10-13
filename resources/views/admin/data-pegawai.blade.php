@@ -2,10 +2,10 @@
 @section('content')
 <div class="row">
     <div class="col-12">
-        <h4 class="card-title">Data Jadwal</h4>
         <div class="card">
             <div class="card-body">
-                
+                <h4 class="card-title">Data Pegawai</h4>
+
                 @if(session()->has('success'))
                 <div class="alert alert-success my-3 mx-4 col-lg-8">
                     {{ session('success') }}
@@ -13,44 +13,42 @@
                 @endif
 
                 <div class="mx-4">
-                    <a href="/add-jadwal"><button type="button" class="btn btn-primary">Buat Jadwal</button></a>
+                    <a href="/add-pegawai"><button type="button" class="btn btn-primary">Tambah Data</button></a>
                 </div>
-
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered zero-configuration">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Kegiatan</th>
-                                <th>Pengajar</th>
-                                <th>Jumlah Jam Pelajaran</th>
-                                <th>Tanggal</th>
-                                <th>Jam</th>
-                                <th>Angkatan</th>
+                                <th>NIP</th>
+                                <th>Nama</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>No HP</th>
+                                <th>Status</th>
                                 <th>Aksi</th>
-                                
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($jadwal as $jdwl)
+                            @foreach($pegawai as $pgw)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ isset($jdwl->kegiatan)?$jdwl->kegiatan->nama_kegiatan:'-' }}</td>
-                                <td>{{ isset($jdwl->user)?$jdwl->user->name:'-' }}</td>
-                                <td>{{ $jdwl->jp }}</td>
-                                <td>{{ $jdwl->created_at->format('d-m-Y') }}</td>
-                                <td>{{ $jdwl->waktu_mulai }} - {{ $jdwl->waktu_selesai }}</td>
-                                <td>{{ $jdwl->angkatan }}</td>
+                                <td>{{ $pgw->nip }}</td>
+                                <td>{{ $pgw->name }}</td>
+                                <td>{{ $pgw->username }}</td>
+                                <td>{{ $pgw->email }}</td>
+                                <td>{{ $pgw->phone }}</td>
+                                <td>{{ $pgw->status->status_name }}</td>
                                 <td>
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <a href="data-jadwal.{{ $jdwl->kegiatan_id }}"><button type="button" class="btn btn-sm mb-1 btn-primary">Lihat</button></a>
+                                            <a href="data-pegawai.{{ $pgw->username }}"><button type="button" class="btn btn-sm mb-1 btn-primary">Lihat</button></a>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
                             @endforeach
-                        </tfoot>
+                        </tbody>
                     </table>
                 </div>
             </div>

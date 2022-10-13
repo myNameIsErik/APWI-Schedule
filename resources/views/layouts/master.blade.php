@@ -9,7 +9,7 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <!-- Custom Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/style.css') }}">
     <link href="./plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
@@ -257,18 +257,13 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="/data-pengajar" aria-expanded="false">
-                            <i class="icon-badge menu-icon"></i><span class="nav-text">Data Pengajar</span>
+                        <a href="/data-pegawai" aria-expanded="false">
+                            <i class="icon-badge menu-icon"></i><span class="nav-text">Data Pegawai</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/data-kelas" aria-expanded="false">
-                            <i class="icon-badge menu-icon"></i><span class="nav-text">Data Kelas</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/data-mapel" aria-expanded="false">
-                            <i class="icon-badge menu-icon"></i><span class="nav-text">Data Mapel</span>
+                        <a href="/data-kegiatan" aria-expanded="false">
+                            <i class="icon-badge menu-icon"></i><span class="nav-text">Data Kegiatan</span>
                         </a>
                     </li>
                 </ul>
@@ -286,8 +281,7 @@
             <div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Tambah Kelas</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Dashboard</a></li>
                     </ol>
                 </div>
             </div>
@@ -322,6 +316,8 @@
     <!--**********************************
         Scripts
     ***********************************-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
     <script src="plugins/common/common.min.js"></script>
     <script src="js/custom.min.js"></script>
     <script src="js/settings.js"></script>
