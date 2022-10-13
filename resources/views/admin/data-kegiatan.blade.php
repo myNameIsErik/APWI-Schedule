@@ -2,9 +2,9 @@
 @section('content')
 <div class="row">
     <div class="col-12">
+        <h4 class="card-title">Data Kegiatan</h4>
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Data Kegiatan</h4>
 
                 @if(session()->has('success'))
                 <div class="alert alert-success my-3 mx-4 col-lg-8">

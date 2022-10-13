@@ -59,7 +59,7 @@ Route::get('/user-add-jadwal', function () {
 
 // login
 Route::get('/login', function () {
-    return view('login.login');
+    return view('login.index');
 });
 
 // profil
