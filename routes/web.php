@@ -28,15 +28,8 @@ Route::get('{jadwal}.edit', [JadwalController::class, 'edit']);
 Route::patch('data-jadwal.{jadwal}', [JadwalController::class, 'update']);
 Route::delete('data-jadwal.{jadwal}', [JadwalController::class, 'destroy']);
 
-Route::get('/add-pegawai', function () {
-    return view('admin.add-pegawai');
-});
-
-Route::get('/add-kegiatan', function () {
-    return view('admin.add-kegiatan');
-});
-
 Route::get('/data-pegawai', [UserController::class, 'index']);
+Route::get('/add-pegawai', [UserController::class, 'create']);
 Route::get('data-pegawai.{user:username}', [UserController::class, 'show']);
 Route::post('/add-pegawai', [UserController::class, 'store']);
 Route::get('{pegawai}.editP', [UserController::class, 'edit']);
@@ -44,6 +37,7 @@ Route::patch('data-pegawai.{pegawai}', [UserController::class, 'update']);
 Route::delete('data-pegawai.{pegawai}', [UserController::class, 'destroy']);
 
 Route::get('/data-kegiatan', [KegiatanController::class, 'index']);
+Route::get('/add-kegiatan', [KegiatanController::class, 'create']);
 Route::get('data-kegiatan.{kegiatan:kegiatan_id}', [KegiatanController::class, 'show']);
 Route::post('/add-kegiatan', [KegiatanController::class, 'store']);
 Route::get('{kegiatan}.editK', [KegiatanController::class, 'edit']);
