@@ -14706,4 +14706,15 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
     cursor: pointer;
     color: grey;
   }
+
+  .table-profile{
+    table-layout: fixed;
+    word-wrap: break-word;
+  }
+
+  .logo-abbr{
+    width: 50px;
+  }
+
+  
 /*# sourceMappingURL=style.css.map */

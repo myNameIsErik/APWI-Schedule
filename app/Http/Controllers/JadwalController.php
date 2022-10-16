@@ -23,7 +23,7 @@ class JadwalController extends Controller
             ]);
         } else {
             return view('dashboard.jadwal.data-jadwal', [
-                'jadwal' => Jadwal::where('user_id', Auth::id())
+                'jadwal' => Jadwal::where('user_id', Auth::user()->id)->get()
             ]);
         }
     }
@@ -125,6 +125,15 @@ class JadwalController extends Controller
         Jadwal::destroy($jadwal->id);
 
         return redirect('/')->with('success', 'Jadwal Berhasil dihapus.');
+    }
+
+    public function showFull(User $user)
+    {
+        return view('dashboard.jadwal.showfull-jadwal', [
+            $user_id = $user->id,
+            'user' => $user,
+            'jadwal' => Jadwal::where('user_id', $user_id)->get()
+        ]);
     }
 
     // public function checkJP(Request $request)

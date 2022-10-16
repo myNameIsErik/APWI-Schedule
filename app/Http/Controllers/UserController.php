@@ -97,17 +97,13 @@ class UserController extends Controller
     public function update(Request $request, User $pegawai)
     {
         $validatedData = $request->validate([
-            'name' => 'required',
             'nip' => 'required',
-            'username' => 'required',
+            'name' => 'required',
             'email' => 'required',
-            'password' => 'required',
-            'level' => 'required',
             'status_id' => 'required',
+            'level' => 'required',
             'phone' => 'required'
         ]);
-
-        $validatedData['password'] = Hash::make($validatedData['password']);
         
         User::where('id', $pegawai->id)->update($validatedData);
 

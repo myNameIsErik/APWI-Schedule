@@ -37,7 +37,7 @@
                                 <td>
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <a href="{{ $keg->id }}.editK"><button type="button" class="btn btn-sm mb-1 btn-warning">Edit</button></a>
+                                            <a href="editKegiatan-{{ $keg->kode_kegiatan }}"><button type="button" class="btn btn-sm mb-1 btn-warning text-white">Edit</button></a>
                                             <form action="data-kegiatan.{{ $keg->id }}" method="post" class="d-inline">
                                                 @method('delete')
                                                 @csrf

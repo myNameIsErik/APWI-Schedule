@@ -11,7 +11,7 @@
                             <label class="col-lg-4 col-form-label" for="name">Nama <span class="text-danger">*</span>
                             </label>
                             <div class="col-lg-6">
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Masukan Nama Pengajar.." value="{{ old('name') }}">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Masukan Nama Pegawai.." value="{{ old('name') }}">
                                 @error('name')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -23,7 +23,7 @@
                             <label class="col-lg-4 col-form-label" for="nip">NIP <span class="text-danger">*</span>
                             </label>
                             <div class="col-lg-6">
-                                <input type="text" class="form-control @error('nip') is-invalid @enderror" id="np" name="nip" placeholder="Masukan NIP Pengajar.." value="{{ old('nip') }}">
+                                <input type="text" class="form-control @error('nip') is-invalid @enderror" id="np" name="nip" placeholder="Masukan NIP Pegawai.." value="{{ old('nip') }}">
                                 @error('nip')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -35,7 +35,7 @@
                             <label class="col-lg-4 col-form-label" for="username">Username <span class="text-danger">*</span>
                             </label>
                             <div class="col-lg-6">
-                                <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" placeholder="Masukan Nama Pengajar.." value="{{ old('username') }}">
+                                <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" placeholder="Masukan Nama Pegawai.." value="{{ old('username') }}">
                                 @error('username')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -47,7 +47,7 @@
                             <label class="col-lg-4 col-form-label" for="email">Email <span class="text-danger">*</span>
                             </label>
                             <div class="col-lg-6">
-                                <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Masukan Email Pengajar.." value="{{ old('email') }}">
+                                <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Masukan Email Pegawai.." value="{{ old('email') }}">
                                 @error('email')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -65,6 +65,12 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" type="checkbox" value="" id="checkboxPassword" onclick="check()">
+                                    <label class="form-check-label" for="labelpassword">
+                                      Default Password <span id="checkboxlabel" style="display:none" class="text-danger">is 12345678</span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -104,7 +110,7 @@
                             <label class="col-lg-4 col-form-label" for="phone">No HP <span class="text-danger">*</span>
                             </label>
                             <div class="col-lg-6">
-                                <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" placeholder="Masukan No HP Pengajar.." value="{{ old('phone') }}">
+                                <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" placeholder="Masukan No HP Pegawai.." value="{{ old('phone') }}">
                                 @error('phone')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -124,4 +130,17 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+function check() {
+    var checkBoxlabel = document.getElementById("checkboxlabel");
+    var checkBox = document.getElementById("checkboxPassword");
+    if (checkBox.checked == true){
+        document.getElementById("password").value = "12345678";
+        checkBoxlabel.style.display = "";
+    } else {
+        document.getElementById("password").value = "";
+        checkBoxlabel.style.display = "none";
+    }
+}
+</script>
 @endsection

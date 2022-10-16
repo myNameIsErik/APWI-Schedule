@@ -9,18 +9,6 @@
                         @method('patch')
                         @csrf
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="name">Nama <span class="text-danger">*</span>
-                            </label>
-                            <div class="col-lg-6">
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Masukan Nama Pengajar.." value="{{ old('name', $pegawai->name) }}">
-                                @error('name')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label class="col-lg-4 col-form-label" for="nip">NIP <span class="text-danger">*</span>
                             </label>
                             <div class="col-lg-6">
@@ -33,11 +21,11 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="username">Username <span class="text-danger">*</span>
+                            <label class="col-lg-4 col-form-label" for="name">Nama <span class="text-danger">*</span>
                             </label>
                             <div class="col-lg-6">
-                                <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" placeholder="Masukan Nama Pengajar.." value="{{ old('username', $pegawai->username) }}">
-                                @error('username')
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Masukan Nama Pengajar.." value="{{ old('name', $pegawai->name) }}">
+                                @error('name')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -50,18 +38,6 @@
                             <div class="col-lg-6">
                                 <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Masukan Email Pengajar.." value="{{ old('email', $pegawai->email) }}">
                                 @error('email')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="password">Password <span class="text-danger">*</span>
-                            </label>
-                            <div class="col-lg-6">
-                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Masukan Password.." value="{{ old('password', $pegawai->password) }}">
-                                @error('password')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>

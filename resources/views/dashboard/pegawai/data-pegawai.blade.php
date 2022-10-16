@@ -22,9 +22,9 @@
                                 <th>No</th>
                                 <th>NIP</th>
                                 <th>Nama</th>
-                                <th>Username</th>
+                                <th>Jabatan</th>
+                                <th>Golongan</th>
                                 <th>Email</th>
-                                <th>No HP</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
@@ -35,14 +35,24 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $pgw->nip }}</td>
                                 <td>{{ $pgw->name }}</td>
-                                <td>{{ $pgw->username }}</td>
+                                <td>{{ $pgw->name }}</td>
+                                <td>{{ $pgw->name }}</td>
                                 <td>{{ $pgw->email }}</td>
-                                <td>{{ $pgw->phone }}</td>
-                                <td>{{ $pgw->status->status_name }}</td>
+                                <td class="text-center">
+                                    @if($pgw->status->status_name == 'Tersedia')
+                                        <button type="button" class="btn btn-success btn-sm text-white">Tersedia</button>
+                                    @elseif($pgw->status->status_name == 'Perjalanan Dinas')
+                                        <button type="button" class="btn btn-danger btn-sm text-white">Perjalanan Dinas</button>
+                                    @elseif($pgw->status->status_name == 'Maks JP')
+                                        <button type="button" class="btn btn-danger btn-sm text-white">Maks JP</button>
+                                    @else
+                                        {{ $pgw->status->status_name }}
+                                    @endif
+                                </td>
                                 <td>
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <a href="data-pegawai.{{ $pgw->username }}"><button type="button" class="btn btn-sm mb-1 btn-primary">Lihat</button></a>
+                                            <a href="data-pegawai-{{ $pgw->nip }}"><button type="button" class="btn btn-sm mb-1 btn-primary">Lihat</button></a>
                                         </div>
                                     </div>
                                 </td>

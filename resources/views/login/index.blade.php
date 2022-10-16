@@ -41,7 +41,10 @@
                     <div class="form-input-content">
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
-                                <a class="text-center"> <h4>Login Form</h4></a>
+                                <div class="text-center">
+                                    <h4>Login Form</h4>
+                                    <img src="images/logo/logo.png" width="200px" height="200px">
+                                </div>
                                 @if(session()->has('success'))
                                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                                         {{ session('success') }}
@@ -78,7 +81,7 @@
                                     </div>
                                     <button class="btn login-form__btn submit w-100 mt-2">Sign In</button>
                                 </form>
-                                <p class="mt-5 login-form__footer">Dont have account? <a href="/register" class="text-primary">Sign Up</a> now</p>
+                                {{-- <p class="mt-5 login-form__footer">Dont have account? <a href="/register" class="text-primary">Sign Up</a> now</p> --}}
                             </div>
                         </div>
                     </div>
