@@ -30,7 +30,7 @@ class JadwalController extends Controller
     {
         return view('admin.add-jadwal', [
             "kegiatan" => Kegiatan::all(),
-            "pegawai" => User::all()
+            "pegawai" => User::where('status_id', '=', 1)->get()
         ]);
     }
 
