@@ -21,9 +21,12 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('jabatan');
+            $table->string('golongan');
             $table->foreignId('status_id');
             $table->string('level');
             $table->string('phone')->unique();
+            $table->boolean('status_keanggotaan')->default(1)->change();
             $table->rememberToken();
             $table->timestamps();
         });

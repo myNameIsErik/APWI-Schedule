@@ -9,18 +9,6 @@
                         @method('patch')
                         @csrf
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="name">Nama <span class="text-danger">*</span>
-                            </label>
-                            <div class="col-lg-6">
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Masukan Nama Pengajar.." value="{{ old('name', $pegawai->name) }}">
-                                @error('name')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label class="col-lg-4 col-form-label" for="nip">NIP <span class="text-danger">*</span>
                             </label>
                             <div class="col-lg-6">
@@ -33,11 +21,11 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="username">Username <span class="text-danger">*</span>
+                            <label class="col-lg-4 col-form-label" for="name">Nama <span class="text-danger">*</span>
                             </label>
                             <div class="col-lg-6">
-                                <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" placeholder="Masukan Nama Pengajar.." value="{{ old('username', $pegawai->username) }}">
-                                @error('username')
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Masukan Nama Pengajar.." value="{{ old('name', $pegawai->name) }}">
+                                @error('name')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -57,15 +45,39 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="password">Password <span class="text-danger">*</span>
+                            <label class="col-lg-4 col-form-label" for="jabatan">Jabatan <span class="text-danger">*</span>
                             </label>
                             <div class="col-lg-6">
-                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Masukan Password.." value="{{ old('password', $pegawai->password) }}">
-                                @error('password')
+                                <input type="text" class="form-control @error('jabatan') is-invalid @enderror" id="jabatan" name="jabatan" placeholder="Masukan Jabatan.." value="{{ old('jabatan', $pegawai->jabatan) }}">
+                                @error('jabatan')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label" for="golongan">Gol. Ruang <span class="text-danger">*</span></label>
+                            <div class="col-lg-6">
+                                <select class="form-control @error('golongan') is-invalid @enderror" id="golongan" name="golongan">
+                                    <option value="{{ old('golongan', $pegawai->golongan) }}" selected>{{ $pegawai->golongan }}</option>
+                                    <option value="I/a">I/a</option>
+                                    <option value="I/b">I/b</option>
+                                    <option value="I/c">I/c</option>
+                                    <option value="I/d">I/d</option>
+                                    <option value="II/a">II/a</option>
+                                    <option value="II/b">II/b</option>
+                                    <option value="II/c">II/c</option>
+                                    <option value="II/d">II/d</option>
+                                    <option value="III/a">III/a</option>
+                                    <option value="III/b">III/b</option>
+                                    <option value="III/c">III/c</option>
+                                    <option value="III/d">III/d</option>
+                                    <option value="IV/a">IV/a</option>
+                                    <option value="IV/b">IV/b</option>
+                                    <option value="IV/c">IV/c</option>
+                                    <option value="IV/d">IV/d</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -86,7 +98,14 @@
                             <label class="col-lg-4 col-form-label" for="level">Level <span class="text-danger">*</span>
                             </label>
                             <div class="col-lg-6">
-                                <input type="text" class="form-control @error('level') is-invalid @enderror" id="level" name="level" placeholder="Masukan Level Pengajar.." value="{{ old('level', $pegawai->level) }}">
+                                <select class="form-control" id="level" name="level">
+                                    <option value="Admin" {{ old('level', $pegawai->level) == 'Admin' ? 'selected' : '' }}>
+                                        Admin
+                                    </option>
+                                    <option value="User" {{ old('level', $pegawai->level) == 'User' ? 'selected' : '' }}>
+                                        User
+                                    </option>
+                                </select>
                                 @error('level')
                                     <div class="invalid-feedback">
                                         {{ $message }}

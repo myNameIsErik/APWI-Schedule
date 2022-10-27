@@ -17,25 +17,16 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         User::create([
-            'name' => 'Wahyu',
-            'nip' => '00112233',
-            'username' => 'wahyu00',
-            'email' => 'wahyu00@gmail.com',
-            'password' => bcrypt('wahyu123'),
+            'name' => 'Admin',
+            'nip' => '00000000',
+            'username' => 'admin123',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('admin123'),
+            'jabatan' => 'Widya Iswara',
+            'golongan' => 'IV/a',
             'status_id' => 1,
-            'level' => 'admin',
+            'level' => 'Admin',
             'phone' => '085465258965'
-        ]);
-
-        User::create([
-            'name' => 'Kinanti',
-            'nip' => '00112244',
-            'username' => 'kinanti11',
-            'email' => 'kinanti11@gmail.com',
-            'password' => bcrypt('kinan123'),
-            'status_id' => 1,
-            'level' => 'user',
-            'phone' => '085465258967'
         ]);
 
         Kegiatan::create([

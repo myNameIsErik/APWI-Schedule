@@ -21,6 +21,9 @@ class CreateJadwalsTable extends Migration
             $table->time('waktu_selesai');
             $table->string('jp');
             $table->string('angkatan');
+            $table->string('keterangan')->nullable();
+            $table->string('alasan')->nullable();
+            $table->boolean('request')->default(0)->change();
             $table->timestamps();
         });
     }

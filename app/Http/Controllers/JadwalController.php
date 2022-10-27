@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Kegiatan;
 use App\Models\User;
 use App\Models\Jadwal;
+use Illuminate\Support\Facades\Auth;
 
 class JadwalController extends Controller
 {
@@ -16,9 +17,28 @@ class JadwalController extends Controller
      */
     public function index()
     {
-        return view('admin.data-jadwal', [
-            "jadwal" => Jadwal::all()
-        ]);
+        if (auth()->user()->level === "Admin") {
+            return view('dashboard.jadwal.data-jadwal', [
+                'jadwal' => Jadwal::all()
+            ]);
+        } else {
+            return view('dashboard.jadwal.data-jadwal', [
+                'jadwal' => Jadwal::where('user_id', Auth::user()->id)->get()
+            ]);
+        }
+    }
+
+    public function indexUbahJadwal()
+    {
+        if (auth()->user()->level === "Admin") {
+            return view('dashboard.rubah-jadwal.perubahan-jadwal', [
+                'jadwal' => Jadwal::where('alasan', '!=', null)->get()
+            ]);
+        } else {
+            return view('dashboard.rubah-jadwal.perubahan-jadwal', [
+                'jadwal' => Jadwal::where('user_id', Auth::user()->id)->get()
+            ]);
+        }
     }
 
     /**
@@ -28,7 +48,7 @@ class JadwalController extends Controller
      */
     public function create()
     {
-        return view('admin.add-jadwal', [
+        return view('dashboard.jadwal.add-jadwal', [
             "kegiatan" => Kegiatan::all(),
             "pegawai" => User::where('status_id', '=', 1)->get()
         ]);
@@ -48,7 +68,8 @@ class JadwalController extends Controller
             'waktu_mulai' => 'required',
             'waktu_selesai' => 'required',
             'jp' => 'required',
-            'angkatan' => 'required'
+            'angkatan' => 'required',
+            'keterangan' => 'required'
         ]);
 
         Jadwal::create($validatedData);
@@ -64,7 +85,7 @@ class JadwalController extends Controller
      */
     public function show(Jadwal $jadwal)
     {
-        return view('admin.show-jadwal', [
+        return view('dashboard.jadwal.show-jadwal', [
             "jadwal" => $jadwal
         ]);
     }
@@ -77,7 +98,7 @@ class JadwalController extends Controller
      */
     public function edit(Jadwal $jadwal)
     {
-        return view('admin.edit-jadwal', [
+        return view('dashboard.jadwal.edit-jadwal', [
             "kegiatan" => Kegiatan::all(),
             "pegawai" => User::all(),
             "jadwal" => $jadwal
@@ -99,7 +120,9 @@ class JadwalController extends Controller
             'waktu_mulai' => 'required',
             'waktu_selesai' => 'required',
             'jp' => 'required',
-            'angkatan' => 'required'
+            'angkatan' => 'required',
+            'keterangan' => 'required',
+            'alasan' => 'required'
         ]);
 
         Jadwal::where('id', $jadwal->id)->update($validatedData);
@@ -118,6 +141,15 @@ class JadwalController extends Controller
         Jadwal::destroy($jadwal->id);
 
         return redirect('/')->with('success', 'Jadwal Berhasil dihapus.');
+    }
+
+    public function showFull(User $user)
+    {
+        return view('dashboard.jadwal.showfull-jadwal', [
+            $user_id = $user->id,
+            'user' => $user,
+            'jadwal' => Jadwal::where('user_id', $user_id)->get()
+        ]);
     }
 
     // public function checkJP(Request $request)

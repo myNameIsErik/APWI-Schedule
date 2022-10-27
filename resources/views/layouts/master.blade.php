@@ -7,10 +7,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>APWI-Schedule</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/logo/logo.png">
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/style.css') }}">
     <link href="./plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <!-- CSS only -->
+
+    <!-- Date picker plugins css -->
+    <link href="./plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
 
 </head>
 
@@ -41,8 +45,8 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="/">
-                    <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
+                <a href="/" class="text-decoration-none">
+                    {{-- <b class="logo-abbr"><img src="images/logo.png" alt=""> </b> --}}
                     <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
                         <h3 class="text-white text-center">E-Schedule</h3>
@@ -66,28 +70,42 @@
                     </div>
                 </div>
                 
-                <div class="header-right">
-                    <ul class="clearfix">
-                        <li class="icons dropdown">
-                            <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
-                                <span class="activity active"></span>
-                                <img src="images/user/1.png" height="40" width="40" alt="">
-                            </div>
-                            <div class="drop-down dropdown-profile   dropdown-menu">
-                                <div class="dropdown-content-body">
-                                    <ul>
-                                        <li>
-                                            <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
-                                        </li>
-                                        <hr class="my-2">
-                                        
-                                        <li><a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a></li>
-                                    </ul>
+                @auth
+                    <div class="header-right">
+                        <ul class="clearfix">
+                            <li class="icons dropdown d-none d-md-flex">
+                                <a class="log-user">
+                                    <span>Welcome Back, {{ auth()->user()->name }}</span>
+                                </a>
+                            </li>
+                            <li class="icons dropdown">
+                                <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
+                                    <span class="activity active"></span>
+                                    <img src="images/user/1.png" height="40" width="40" alt="">
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                                <div class="drop-down dropdown-profile   dropdown-menu">
+                                    <div class="dropdown-content-body">
+                                        <ul>
+                                            <li>
+                                                <a href="/profile" class="text-decoration-none text-muted"><i class="icon-user"></i> <span>Profile</span></a>
+                                            </li>
+                                            <hr class="my-2">
+                                            
+                                            <li>
+                                                <form action="/logout" method="post">
+                                                    @csrf
+                                                    <button type="submit" class="button-logout">
+                                                        <i class="icon-key"></i> <span>Logout</span>
+                                                    </button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                @endauth
             </div>
         </div>
         <!--**********************************
@@ -102,31 +120,33 @@
                 <ul class="metismenu" id="menu">
                     <li class="nav-label">Dashboard</li>
                     <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <a class="has-arrow text-decoration-none" href="javascript:void()" aria-expanded="false">
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Penjadwalan</span>
                         </a>
                         <ul aria-expanded="false">
                             <li>
-                                <a href="/" class=""> 
+                                <a href="/" class="text-decoration-none"> 
                                     <i class="icon-note menu-icon"></i>Jadwal
                                 </a>
                             </li>
-                            <li><a href="/perubahan-jadwal" class=""> 
+                            <li><a href="/perubahan-jadwal" class="text-decoration-none"> 
                                     <i class="icon-note menu-icon"></i>Perubahan Jadwal
                                 </a>
                             </li>
                         </ul>
                     </li>
+                    @can('admin')
                     <li>
-                        <a href="/data-pegawai" aria-expanded="false">
+                        <a href="/data-pegawai" aria-expanded="false" class="text-decoration-none">
                             <i class="icon-badge menu-icon"></i><span class="nav-text">Data Pegawai</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/data-kegiatan" aria-expanded="false">
+                        <a href="/data-kegiatan" aria-expanded="false" class="text-decoration-none">
                             <i class="icon-badge menu-icon"></i><span class="nav-text">Data Kegiatan</span>
                         </a>
                     </li>
+                    @endcan
                 </ul>
             </div>
         </div>
@@ -142,7 +162,7 @@
             <div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Dashboard</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)" class="text-decoration-none">Dashboard</a></li>
                     </ol>
                 </div>
             </div>
@@ -178,18 +198,28 @@
         Scripts
     ***********************************-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    
+
     <script src="plugins/common/common.min.js"></script>
     <script src="js/custom.min.js"></script>
     <script src="js/settings.js"></script>
     <script src="js/gleek.js"></script>
     <script src="js/styleSwitcher.js"></script>
-
+    
     <script src="./plugins/validation/jquery.validate.min.js"></script>
     <script src="./plugins/validation/jquery.validate-init.js"></script>
     <script src="./plugins/tables/js/jquery.dataTables.min.js"></script>
     <script src="./plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
     <script src="./plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+
+    <script src="./plugins/moment/moment.js"></script>
+    <script src="./plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+    <!-- Clock Plugin JavaScript -->
+    <script src="./plugins/clockpicker/dist/jquery-clockpicker.min.js"></script>
+    
+    <script src="./plugins/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js"></script>
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="./plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="./js/plugins-init/form-pickers-init.js"></script>
 
 </body>
 
