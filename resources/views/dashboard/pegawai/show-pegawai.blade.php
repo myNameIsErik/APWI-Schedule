@@ -15,14 +15,14 @@
                         <ul class="list-inline mb-3">
                             <li class="list-inline-item">
                                 <a href="editPegawai-{{ $user->nip }}">
-                                <button type="button" class="btn btn-warning text-white btn-sm">Edit Data</button>
+                                <button type="button" class="btn btn-warning text-white btn-sm"><i class="bi bi-pencil-square"></i> Edit Data</button>
                                 </a>
                             </li>
                             <li class="list-inline-item">
                                 <form action="data-pegawai.{{ $user->id }}" method="post">
                                     @method('delete')
                                     @csrf
-                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                    <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-dash-circle"></i> Hapus</button>
                                 </form>
                             </li>
                         </ul>
@@ -57,11 +57,11 @@
                             <th scope="row">Status</th>
                             <td>
                                 @if($user->status->status_name == 'Tersedia')
-                                    <button type="button" class="btn btn-success btn-sm text-white" disabled>Tersedia</button>
+                                    <button type="button" class="btn btn-success btn-sm text-white" style="pointer-events: none;">Tersedia</button>
                                 @elseif($user->status->status_name == 'Perjalanan Dinas')
-                                    <button type="button" class="btn btn-danger btn-sm text-white" disabled>Perjalanan Dinas</button>
+                                    <button type="button" class="btn btn-danger btn-sm text-white" style="pointer-events: none;">Perjalanan Dinas</button>
                                 @elseif($user->status->status_name == 'Maks JP')
-                                    <button type="button" class="btn btn-danger btn-sm text-white" disabled>Maks JP</button>
+                                    <button type="button" class="btn btn-danger btn-sm text-white" style="pointer-events: none;">Maks JP</button>
                                 @else
                                     {{ $user->status->status_name }}
                                 @endif
@@ -70,13 +70,13 @@
                         <tr>
                             <th scope="row">Roles:</th>
                             <td>
-                                <button type="button" class="btn btn-info btn-sm text-white" disabled>{{ $user->level }}</button>    
+                                <button type="button" class="btn btn-info btn-sm text-white" style="pointer-events: none;">{{ $user->level }}</button>    
                             </td>
                         </tr>
                         <tr>
                             <th scope="row">Jadwal:</th>
                             <td>
-                                <a href="jadwal-{{ $user->nip }}"><button type="button" class="btn btn-primary btn-sm text-white">Lihat Semua Jadwal</button></a> 
+                                <a href="jadwal-{{ $user->nip }}"><button type="button" class="btn btn-primary btn-sm text-white"><i class="bi bi-calendar2-check"></i> Lihat Semua Jadwal</button></a> 
                             </td>
                         </tr>
                         </tbody>

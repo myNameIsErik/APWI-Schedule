@@ -17,7 +17,7 @@ class UserController extends Controller
     public function index()
     {
         return view('dashboard.pegawai.data-pegawai', [
-            "pegawai" => User::all()
+            "pegawai" => User::all()->sortBy('name')
         ]);
     }
 
@@ -40,20 +40,33 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, User $user)
     {
-        $validatedData = $request->validate([
+
+        $rules = [
             'name' => 'required',
-            'nip' => 'required',
-            'username' => 'required',
-            'email' => 'required',
-            'password' => 'required',
             'jabatan' => 'required',
             'golongan' => 'required',
             'level' => 'required',
-            'status_id' => 'required',
-            'phone' => 'required'
-        ]);
+        ];
+
+        if($request->nip != $user->nip){
+            $rules['nip'] = 'required|unique:users';
+        }
+
+        if($request->email != $user->email){
+            $rules['email'] = 'unique:users';
+        }
+
+        if($request->phone != $user->phone){
+            $rules['phone'] = 'unique:users';
+        }
+
+        $validatedData = $request->validate($rules);
+        
+        $validatedData['status_id'] = '1';
+        $validatedData['username'] = $validatedData['nip'];
+        $validatedData['password'] = $validatedData['nip'];
 
         $validatedData['password'] = Hash::make($validatedData['password']);
 
@@ -98,16 +111,30 @@ class UserController extends Controller
      */
     public function update(Request $request, User $pegawai)
     {
-        $validatedData = $request->validate([
+        $rules = [
             'nip' => 'required',
             'name' => 'required',
-            'email' => 'required',
             'jabatan' => 'required',
             'golongan' => 'required',
-            'status_id' => 'required',
             'level' => 'required',
-            'phone' => 'required'
-        ]);
+            'status_id' => 'required',
+        ];
+
+        if($request->nip != $pegawai->nip){
+            $rules['nip'] = 'required|unique:users';
+        }
+
+        if($request->email != $pegawai->email){
+            $rules['email'] = 'unique:users';
+        }
+
+        if($request->phone != $pegawai->phone){
+            $rules['phone'] = 'unique:users';
+        }
+
+        $validatedData = $request->validate($rules);
+        
+        $validatedData['username'] = $validatedData['nip'];
         
         User::where('id', $pegawai->id)->update($validatedData);
 

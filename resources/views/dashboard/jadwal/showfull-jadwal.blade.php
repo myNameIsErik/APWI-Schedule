@@ -6,9 +6,9 @@
         <div class="card">
             <div class="card-body">
                 @can('admin')
-                <div class="mx-4">
-                    <a href="/"><button type="button" class="btn btn-primary">Back To Jadwal</button></a>
-                </div>
+                    <div class="mx-4">
+                        <a href="/"><button type="button" class="btn btn-primary"><i class="bi bi-arrow-bar-left"></i> Back To Jadwal</button></a>
+                    </div>
                 @endcan
 
                 @if(session()->has('success'))

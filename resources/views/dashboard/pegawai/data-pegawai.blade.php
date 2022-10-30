@@ -13,7 +13,7 @@
                 @endif
 
                 <div class="mx-4">
-                    <a href="/add-pegawai"><button type="button" class="btn btn-primary">Tambah Data</button></a>
+                    <a href="/add-pegawai"><button type="button" class="btn btn-primary"><i class="bi bi-person-plus"></i> Tambah Pegawai</button></a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered zero-configuration">
@@ -52,7 +52,7 @@
                                 <td>
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <a href="data-pegawai-{{ $pgw->nip }}"><button type="button" class="btn btn-sm mb-1 btn-primary">Lihat</button></a>
+                                            <a href="data-pegawai-{{ $pgw->nip }}"><button type="button" class="btn btn-sm mb-1 btn-primary"><i class="bi bi-eye"></i> Lihat</button></a>
                                         </div>
                                     </div>
                                 </td>

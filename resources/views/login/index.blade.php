@@ -64,8 +64,8 @@
                                 <form action="/login" method="post" class="mt-4 mb-4 login-input">
                                     @csrf
                                     <div class="form-group">
-                                        <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" value="{{ old('email') }}" autofocus required>
-                                        @error('email')
+                                        <input type="login" name="login" id="login" class="form-control @error('login') is-invalid @enderror" placeholder="Email or NIP" value="{{ old('login') }}" autofocus required>
+                                        @error('login')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>

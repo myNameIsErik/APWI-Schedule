@@ -18,7 +18,7 @@
 
                 @can('admin')
                 <div class="mx-4">
-                    <a href="/add-jadwal"><button type="button" class="btn btn-primary">Buat Jadwal</button></a>
+                    <a href="/add-jadwal"><button type="button" class="btn btn-primary"><i class="bi bi-calendar-plus"></i> Buat Jadwal</button></a>
                 </div>
                 @endcan
 
@@ -51,11 +51,11 @@
                                     @can('admin')
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <a href="{{ $jdwl->id }}.edit"><button type="button" class="btn btn-sm mb-1 btn-warning text-white">Edit</button></a>
+                                            <a href="{{ $jdwl->id }}.edit"><button type="button" class="btn btn-sm mb-1 btn-warning text-white"><i class="bi bi-pencil-square"></i> Edit</button></a>
                                             <form action="data-jadwal.{{ $jdwl->id }}" method="post" class="d-inline">
                                                 @method('delete')
                                                 @csrf
-                                                <button type="submit" class="btn btn-sm mb-1 btn-danger">Hapus</button>
+                                                <button type="submit" class="btn btn-sm mb-1 btn-danger"><i class="bi bi-dash-circle"></i> Hapus</button>
                                             </form>
                                         </div>
                                     </div>

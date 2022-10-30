@@ -25,12 +25,24 @@ class ProfileController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $validatedData = $request->validate([
-            'nip' => 'required',
+        $rules = [
             'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required'
-        ]);
+            'jabatan' => 'required',
+        ];
+
+        if($request->nip != $user->nip){
+            $rules['nip'] = 'unique:users';
+        }
+
+        if($request->email != $user->email){
+            $rules['email'] = 'unique:users';
+        }
+
+        if($request->phone != $user->phone){
+            $rules['phone'] = 'unique:users';
+        }
+
+        $validatedData = $request->validate($rules);
         
         User::where('id', $user->id)->update($validatedData);
 
