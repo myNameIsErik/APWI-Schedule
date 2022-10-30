@@ -33,6 +33,12 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="col-md-6 mt-1">
+                                <label for="pengajar">Tanggal</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control mydatepicker" placeholder="bulan/tanggal/tahun" id="tanggal" value="{{ old('tanggal', $jadwal->tanggal) }}"> <span class="input-group-append"><span class="input-group-text"><i class="mdi mdi-calendar-check"></i></span></span>
+                                </div>
+                            </div>
                             <div class="col-md-6 mt-4">
                                 <label for="mulai" class="m-t-20">Jam Mulai</label>
                                 <input type="time" class="form-control @error('waktu_mulai') is-invalid @enderror" id="mulai" name="waktu_mulai" placeholder="Check time" value="{{ old('waktu_mulai', $jadwal->waktu_mulai) }}" @if(Auth::user()->level == 'User')disabled @endif>

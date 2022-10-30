@@ -32,18 +32,6 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="jp">Jumlah Jam Pelajaran <span class="text-danger">*</span>
-                            </label>
-                            <div class="col-lg-6">
-                                <input type="text" class="form-control @error('jp') is-invalid @enderror" id="jp" name="jp" placeholder="Masukan Nama Kegiatan.." value="{{ old('jp') }}">
-                                @error('jp')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <div class="col-lg-8 ml-auto">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>

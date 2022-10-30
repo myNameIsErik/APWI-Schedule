@@ -14,7 +14,7 @@
                 
                 <div class="row mb-5">
                     <div class="col-12">
-                        <h3 class="mb-0">Tanggal: {{ $jadwal->created_at->format('d-m-Y') }}</h3>
+                        <h3 class="mb-0">Tanggal: {{ $jadwal->tanggal->format('d-m-Y') }}</h3>
                         <button class="btn btn-success px-5" disabled>Pukul: {{ $jadwal->waktu_mulai }} - {{ $jadwal->waktu_selesai }}</button>
                     </div>
                 </div>

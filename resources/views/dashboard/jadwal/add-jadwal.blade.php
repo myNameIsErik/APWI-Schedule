@@ -42,7 +42,12 @@
                             <div class="col-md-6 mt-1">
                                 <label for="pengajar">Tanggal</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control mydatepicker" placeholder="bulan/tanggal/tahun"> <span class="input-group-append"><span class="input-group-text"><i class="mdi mdi-calendar-check"></i></span></span>
+                                    <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" placeholder="bulan/tanggal/tahun" value="{{ old('tanggal') }}">
+                                    @error('tanggal')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                                 </div>
                             </div>
                             <div id="form_mulai" class="col-md-6 mt-1">

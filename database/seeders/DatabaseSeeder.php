@@ -31,14 +31,12 @@ class DatabaseSeeder extends Seeder
 
         Kegiatan::create([
             'kode_kegiatan' => 'PKP',
-            'nama_kegiatan' => 'Pelatihan Kepemimpinan',
-            'jp' => '6'
+            'nama_kegiatan' => 'Pelatihan Kepemimpinan'
         ]);
 
         Kegiatan::create([
             'kode_kegiatan' => 'PKA',
-            'nama_kegiatan' => 'Pelatihan Keanggotaan',
-            'jp' => '3'
+            'nama_kegiatan' => 'Pelatihan Keanggotaan'
         ]);
 
         Status::create([

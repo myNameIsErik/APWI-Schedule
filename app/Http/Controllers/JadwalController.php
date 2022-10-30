@@ -65,6 +65,7 @@ class JadwalController extends Controller
         $validatedData = $request->validate([
             'kegiatan_id' => 'required',
             'user_id' => 'required',
+            'tanggal' => 'required',
             'waktu_mulai' => 'required',
             'waktu_selesai' => 'required',
             'jp' => 'required',
@@ -72,8 +73,8 @@ class JadwalController extends Controller
             'keterangan' => 'required'
         ]);
 
+        
         Jadwal::create($validatedData);
-
         return redirect('/')->with('success', 'Jadwal Berhasil dibuat.');
     }
 
@@ -117,6 +118,7 @@ class JadwalController extends Controller
         $validatedData = $request->validate([
             'kegiatan_id' => 'required',
             'user_id' => 'required',
+            'tanggal' => 'required',
             'waktu_mulai' => 'required',
             'waktu_selesai' => 'required',
             'jp' => 'required',

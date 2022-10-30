@@ -10,6 +10,10 @@
                 <div class="alert alert-success my-3 mx-4 col-lg-8">
                     {{ session('success') }}
                 </div>
+                @elseif(session()->has('error'))
+                <div class="alert alert-danger my-3 mx-4 col-lg-8">
+                    {{ session('error') }}
+                </div>
                 @endif
 
                 @can('admin')
@@ -40,7 +44,7 @@
                                 <td>{{ isset($jdwl->kegiatan)?$jdwl->kegiatan->nama_kegiatan:'-' }}</td>
                                 <td>{{ isset($jdwl->user)?$jdwl->user->name:'-' }}</td>
                                 <td>{{ $jdwl->jp }}</td>
-                                <td>{{ $jdwl->created_at->format('d-m-Y') }}</td>
+                                <td>{{ $jdwl->tanggal }}</td>
                                 <td>{{ $jdwl->waktu_mulai }} - {{ $jdwl->waktu_selesai }}</td>
                                 <td>{{ $jdwl->angkatan }}</td>
                                 <td>

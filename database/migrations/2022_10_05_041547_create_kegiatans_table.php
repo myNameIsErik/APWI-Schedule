@@ -17,7 +17,6 @@ class CreateKegiatansTable extends Migration
             $table->id();
             $table->string('kode_kegiatan');
             $table->string('nama_kegiatan');
-            $table->string('jp');
             $table->timestamps();
         });
     }
