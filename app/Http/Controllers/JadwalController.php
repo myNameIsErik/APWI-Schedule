@@ -50,7 +50,7 @@ class JadwalController extends Controller
     {
         return view('dashboard.jadwal.add-jadwal', [
             "kegiatan" => Kegiatan::all(),
-            "pegawai" => User::where('status_id', '=', 1)->get()
+            "pegawai" => User::where('status_id', '=', 1)->orderBy('name')->get()
         ]);
     }
 
@@ -71,6 +71,13 @@ class JadwalController extends Controller
             'angkatan' => 'required',
             'keterangan' => 'required'
         ]);
+
+        if(!is_numeric($validatedData['user_id'])){
+            $getUserName = $validatedData['user_id'];
+            $getId = User::where('name', $getUserName)->first()->id;
+    
+            $validatedData['user_id'] = $getId;
+        }
 
         Jadwal::create($validatedData);
 

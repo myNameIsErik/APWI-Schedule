@@ -1,5 +1,7 @@
 @extends('...layouts.master')
 @section('content')
+
+
 <div class="row justify-content-center">
     <div class="col-lg-12">
         <div class="card">
@@ -29,7 +31,69 @@
                             </div>
                             <div class="col-md-6 mt-1">
                                 <label for="pengajar">Pegawai</label>
-                                <select class="form-control" id="pengajar" name="user_id">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Cari Pegawai" name="user_id" list="list-pengajar" id="pengajar" autocomplete="off">
+                                    <datalist id="list-pengajar">
+                                        @foreach($pegawai as $pgw)
+                                            <option value="{{ $pgw->name }}"></option>
+                                            {{-- @if(old('kegiatan_id') == $keg->id)
+                                                <option value="{{ $pgw->id }}" selected>{{ $pgw->name }}</option>
+                                            @else
+                                            @endif --}}
+                                        @endforeach
+                                    </datalist>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#bd-example-modal-lg"><i class="bi bi-search"></i> Search</button>
+                                        
+                                        <div id="bd-example-modal-lg" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">List Pegawai</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped table-bordered zero-configuration">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>No</th>
+                                                                        <th>Pegawai</th>
+                                                                        <th>Jabatan</th>
+                                                                        <th>Gol.Ruang</th>
+                                                                        <th>Aksi</th>
+                                                                        
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                        @foreach($pegawai as $pgw)
+                                                                        <tr>
+                                                                            <td>{{ $loop->iteration }}</td>
+                                                                            <td>{{ $pgw->name }}</td>
+                                                                            <td>{{ $pgw->jabatan }}</td>
+                                                                            <td>{{ $pgw->golongan }}</td>
+                                                                            <td>
+                                                                                <div class="text-center">
+                                                                                    <button type="button" id="btn_select" class="btn btn-primary text-white"
+                                                                                    data-name="{{ $pgw->name }}"><i class="bi bi-check-lg"></i> Pilih</button>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        @endforeach
+                                                                </tfoot>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- <select class="form-control" id="pengajar" name="user_id">
                                     @foreach($pegawai as $pgw)
                                         @if(old('kegiatan_id') == $keg->id)
                                             <option value="{{ $pgw->id }}" selected>{{ $pgw->name }}</option>
@@ -37,7 +101,7 @@
                                             <option value="{{ $pgw->id }}">{{ $pgw->name }}</option>
                                         @endif
                                     @endforeach
-                                </select>
+                                </select> --}}
                             </div>
                             <div class="col-md-6 mt-1">
                                 <label for="pengajar">Tanggal</label>
@@ -101,6 +165,7 @@
     </div>
 </div>
 <script>
+    // Change Tipe Jadwal
     document.getElementById('tipe_jadwal').addEventListener('change', function () {
         var style = this.value == 1 ? '' : 'none';
         var styleClass = this.value == 1 ? 'col-md-4 mt-1' : 'col-md-6 mt-1';
@@ -111,10 +176,34 @@
         document.getElementById('form_jamPelajaran').style.display = style;
         document.getElementById('form_angkatan').style.display = style;
         document.getElementById('form_keterangan').classList = styleClass;
-        
     });
 
+    //  Get Name In DataTables
+    try{
+        const btnSelect = document.querySelectorAll('#btn_select');
+        btnSelect.forEach((button, index) => {
+            button.addEventListener('click', function() {
+                var user_name = this.getAttribute('data-name');
+
+                document.getElementById("pengajar").value = user_name;
+                $('#bd-example-modal-lg').modal('hide');
+            });
+        });
+    } catch (error) {
+        
+    }
+
+    // $(document).ready(function() {
+    //     $(document).on('click', '#btn_select', function() {
+    //         var user_name = $(this).data('name');
+
+    //         $('#pengajar').val(user_name);
+    //     })
+    // })
+
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
 {{-- <script>
     const kegiatan = document.querySelector('#kegiatan');
     const jp = document.querySelector('#jp');

@@ -15,6 +15,7 @@
 
     <!-- Date picker plugins css -->
     <link href="./plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
 </head>
 
@@ -126,7 +127,7 @@
                         <ul aria-expanded="false">
                             <li>
                                 <a href="/" class="text-decoration-none"> 
-                                    <i class="icon-note menu-icon"></i>Jadwal
+                                    <i class="bi bi-calendar3"></i>Jadwal
                                 </a>
                             </li>
                             <li><a href="/perubahan-jadwal" class="text-decoration-none"> 
@@ -138,12 +139,12 @@
                     @can('admin')
                     <li>
                         <a href="/data-pegawai" aria-expanded="false" class="text-decoration-none">
-                            <i class="icon-badge menu-icon"></i><span class="nav-text">Data Pegawai</span>
+                            <i class="bi bi-people"></i><span class="nav-text">Data Pegawai</span>
                         </a>
                     </li>
                     <li>
                         <a href="/data-kegiatan" aria-expanded="false" class="text-decoration-none">
-                            <i class="icon-badge menu-icon"></i><span class="nav-text">Data Kegiatan</span>
+                            <i class="bi bi-bookmark"></i><span class="nav-text">Data Kegiatan</span>
                         </a>
                     </li>
                     @endcan
@@ -162,7 +163,7 @@
             <div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)" class="text-decoration-none">Dashboard</a></li>
+                        {{-- <li class="breadcrumb-item active"><a href="javascript:void(0)" class="text-decoration-none">Dashboard</a></li> --}}
                     </ol>
                 </div>
             </div>

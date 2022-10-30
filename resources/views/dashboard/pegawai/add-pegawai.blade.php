@@ -31,7 +31,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label class="col-lg-4 col-form-label" for="username">Username <span class="text-danger">*</span>
                             </label>
                             <div class="col-lg-6">
@@ -42,10 +42,9 @@
                                     </div>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="email">Email <span class="text-danger">*</span>
-                            </label>
+                            <label class="col-lg-4 col-form-label" for="email">Email</label>
                             <div class="col-lg-6">
                                 <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Masukan Email Pegawai.." value="{{ old('email') }}">
                                 @error('email')
@@ -55,7 +54,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label class="col-lg-4 col-form-label" for="password">Password <span class="text-danger">*</span>
                             </label>
                             <div class="col-lg-6">
@@ -72,7 +71,7 @@
                                     </label>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label" for="jabatan">Jabatan <span class="text-danger">*</span>
                             </label>
@@ -89,7 +88,7 @@
                             <label class="col-lg-4 col-form-label" for="golongan">Gol. Ruang <span class="text-danger">*</span></label>
                             <div class="col-lg-6">
                                 <select class="form-control @error('golongan') is-invalid @enderror" id="golongan" name="golongan">
-                                    <option value="{{ old('golongan') }}" selected>{{ old('golongan') }}</option>
+                                    <option value="" selected disabled>Pilih Golongan..</option>
                                     <option value="I/a">I/a</option>
                                     <option value="I/b">I/b</option>
                                     <option value="I/c">I/c</option>
@@ -109,7 +108,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label class="col-lg-4 col-form-label" for="status_id">Status <span class="text-danger">*</span></label>
                             <div class="col-lg-6">
                                 <select class="form-control" id="status_id" name="status_id">
@@ -122,7 +121,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label" for="level">Level <span class="text-danger">*</span>
                             </label>
@@ -143,8 +142,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="phone">No HP <span class="text-danger">*</span>
-                            </label>
+                            <label class="col-lg-4 col-form-label" for="phone">No HP</label>
                             <div class="col-lg-6">
                                 <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" placeholder="Masukan No HP Pegawai.." value="{{ old('phone') }}">
                                 @error('phone')

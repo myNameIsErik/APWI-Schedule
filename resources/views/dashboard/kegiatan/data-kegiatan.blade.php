@@ -13,7 +13,7 @@
                 @endif
 
                 <div class="mx-4">
-                    <a href="/add-kegiatan"><button type="button" class="btn btn-info">Tambah Kegiatan</button></a>
+                    <a href="/add-kegiatan"><button type="button" class="btn btn-info"><i class="bi bi-bookmark-plus"></i> Tambah Kegiatan</button></a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered zero-configuration">
@@ -22,7 +22,7 @@
                                 <th>No</th>
                                 <th>Kode Kegiatan</th>
                                 <th>Nama Kegiatan</th>
-                                <th>Jumlah Jam Pelajaran</th>
+                                {{-- <th>Jumlah Jam Pelajaran</th> --}}
                                 <th>Aksi</th>
                                 
                             </tr>
@@ -33,15 +33,15 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $keg->kode_kegiatan }}</td>
                                 <td>{{ $keg->nama_kegiatan }}</td>
-                                <td>{{ $keg->jp }}</td>
+                                {{-- <td>{{ $keg->jp }}</td> --}}
                                 <td>
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <a href="editKegiatan-{{ $keg->kode_kegiatan }}"><button type="button" class="btn btn-sm mb-1 btn-warning text-white">Edit</button></a>
+                                            <a href="editKegiatan-{{ $keg->kode_kegiatan }}"><button type="button" class="btn btn-sm mb-1 btn-warning text-white"><i class="bi bi-pencil-square"></i> Edit</button></a>
                                             <form action="data-kegiatan.{{ $keg->id }}" method="post" class="d-inline">
                                                 @method('delete')
                                                 @csrf
-                                                <button type="submit" class="btn btn-sm mb-1 btn-danger">Hapus</button>
+                                                <button type="submit" class="btn btn-sm mb-1 btn-danger"><i class="bi bi-dash-circle"></i> Hapus</button>
                                             </form>
                                         </div>
                                     </div>

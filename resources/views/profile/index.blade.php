@@ -22,7 +22,7 @@
                 My Profile
                 <div class="float-right">
                     <a href="editProfile-{{ $profile->nip }}">
-                    <button type="button" class="btn btn-primary btn-sm">Edit Profile</button>
+                    <button type="button" class="btn btn-warning btn-sm text-white"><i class="bi bi-pencil-square"></i> Edit Profile</button>
                     </a>
                 </div>
                 </div>
@@ -39,11 +39,11 @@
                         </tr>
                         <tr>
                             <th scope="row">Jabatan:</th>
-                            <td>{{ $profile->name }}</td>
+                            <td>{{ $profile->jabatan }}</td>
                         </tr>
                         <tr>
                             <th scope="row">Golongan:</th>
-                            <td>{{ $profile->name }}</td>
+                            <td>{{ $profile->golongan }}</td>
                         </tr>
                         <tr>
                             <th scope="row">E-mail:</th>
@@ -56,7 +56,7 @@
                         <tr>
                             <th scope="row">Roles:</th>
                             <td>
-                                <button type="button" class="btn btn-info btn-sm text-white">{{ $profile->level }}</button>    
+                                <button type="button" class="btn btn-info btn-sm text-white" style="pointer-events: none">{{ $profile->level }}</button>    
                             </td>
                         </tr>
                         </tbody>
