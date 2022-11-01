@@ -25,7 +25,7 @@
                                 <th>Jabatan</th>
                                 <th>Golongan</th>
                                 <th>Email</th>
-                                <th>Status</th>
+                                {{-- <th>Status</th> --}}
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -38,7 +38,7 @@
                                 <td>{{ $pgw->jabatan }}</td>
                                 <td>{{ $pgw->golongan }}</td>
                                 <td>{{ $pgw->email }}</td>
-                                <td class="text-center">
+                                {{-- <td class="text-center">
                                     @if($pgw->status->status_name == 'Tersedia')
                                         <button type="button" class="btn btn-success btn-sm text-white">Tersedia</button>
                                     @elseif($pgw->status->status_name == 'Perjalanan Dinas')
@@ -48,7 +48,7 @@
                                     @else
                                         {{ $pgw->status->status_name }}
                                     @endif
-                                </td>
+                                </td> --}}
                                 <td>
                                     <div class="row">
                                         <div class="col-lg-12">

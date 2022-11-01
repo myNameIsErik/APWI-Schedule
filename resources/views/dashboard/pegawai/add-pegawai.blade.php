@@ -8,11 +8,11 @@
                     <form class="form-valide" action="/add-pegawai" method="post">
                         @csrf
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="name">Nama <span class="text-danger">*</span>
+                            <label class="col-lg-4 col-form-label" for="nip">NIP <span class="text-danger">*</span>
                             </label>
                             <div class="col-lg-6">
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Masukan Nama Pegawai.." value="{{ old('name') }}">
-                                @error('name')
+                                <input type="text" class="form-control @error('nip') is-invalid @enderror" id="np" name="nip" placeholder="Masukan NIP Pegawai.." value="{{ old('nip') }}">
+                                @error('nip')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -20,11 +20,11 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="nip">NIP <span class="text-danger">*</span>
+                            <label class="col-lg-4 col-form-label" for="name">Nama <span class="text-danger">*</span>
                             </label>
                             <div class="col-lg-6">
-                                <input type="text" class="form-control @error('nip') is-invalid @enderror" id="np" name="nip" placeholder="Masukan NIP Pegawai.." value="{{ old('nip') }}">
-                                @error('nip')
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Masukan Nama Pegawai.." value="{{ old('name') }}">
+                                @error('name')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -54,24 +54,6 @@
                                 @enderror
                             </div>
                         </div>
-                        {{-- <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="password">Password <span class="text-danger">*</span>
-                            </label>
-                            <div class="col-lg-6">
-                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Masukan Password.." value="{{ old('password') }}">
-                                @error('password')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                                <div class="form-check mt-2">
-                                    <input class="form-check-input" type="checkbox" value="" id="checkboxPassword" onclick="check()">
-                                    <label class="form-check-label" for="labelpassword">
-                                      Default Password <span id="checkboxlabel" style="display:none" class="text-danger">is 12345678</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div> --}}
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label" for="jabatan">Jabatan <span class="text-danger">*</span>
                             </label>
@@ -108,20 +90,6 @@
                                 </select>
                             </div>
                         </div>
-                        {{-- <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="status_id">Status <span class="text-danger">*</span></label>
-                            <div class="col-lg-6">
-                                <select class="form-control" id="status_id" name="status_id">
-                                    @foreach($status as $stat)
-                                        @if(old('status_id') == $stat->id)
-                                            <option value="{{ $stat->id }}" selected>{{ $stat->status_name }}</option>
-                                        @else
-                                            <option value="{{ $stat->id }}">{{ $stat->status_name }}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div> --}}
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label" for="level">Level <span class="text-danger">*</span>
                             </label>
@@ -164,17 +132,5 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-function check() {
-    var checkBoxlabel = document.getElementById("checkboxlabel");
-    var checkBox = document.getElementById("checkboxPassword");
-    if (checkBox.checked == true){
-        document.getElementById("password").value = "12345678";
-        checkBoxlabel.style.display = "";
-    } else {
-        document.getElementById("password").value = "";
-        checkBoxlabel.style.display = "none";
-    }
-}
-</script>
+
 @endsection

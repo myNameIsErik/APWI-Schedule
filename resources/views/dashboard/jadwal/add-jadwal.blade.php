@@ -11,14 +11,14 @@
                         @csrf
                         <div class="row form-material">
                             <div class="col-md-6 mt-1">
-                                <label for="tipe_kegiatan">Tipe Jadwal</label>
+                                <label for="tipe_kegiatan">Tipe Jadwal</label> <span class="text-danger">*</span>
                                 <select class="form-control" id="tipe_jadwal" name="tipe_jadwal">
                                     <option value="1" selected>Mengajar</option>
                                     <option value="2">Perjalanan Dinas</option>
                                 </select>
                             </div>
                             <div id="form_kegiatan" class="col-md-6 mt-1">
-                                <label for="kegiatan">Kegiatan</label>
+                                <label for="kegiatan">Kegiatan</label> <span class="text-danger">*</span>
                                 <select class="form-control" id="kegiatan" name="kegiatan_id">
                                     @foreach($kegiatan as $keg)
                                         @if(old('kegiatan_id') == $keg->id)
@@ -29,84 +29,10 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-6 mt-1">
-                                <label for="pengajar">Pegawai</label>
+                            <div id="form_date" class="col-md-4 mt-2">
+                                <label for="pengajar">Tanggal</label> <span class="text-danger">*</span>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Cari Pegawai" name="user_id" list="list-pengajar" id="pengajar" autocomplete="off">
-                                    <datalist id="list-pengajar">
-                                        @foreach($pegawai as $pgw)
-                                            <option value="{{ $pgw->name }}"></option>
-                                            {{-- @if(old('kegiatan_id') == $keg->id)
-                                                <option value="{{ $pgw->id }}" selected>{{ $pgw->name }}</option>
-                                            @else
-                                            @endif --}}
-                                        @endforeach
-                                    </datalist>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#bd-example-modal-lg"><i class="bi bi-search"></i> Search</button>
-                                        
-                                        <div id="bd-example-modal-lg" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">List Pegawai</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="table-responsive">
-                                                            <table class="table table-striped table-bordered zero-configuration">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>No</th>
-                                                                        <th>Pegawai</th>
-                                                                        <th>Jabatan</th>
-                                                                        <th>Gol.Ruang</th>
-                                                                        <th>Aksi</th>
-                                                                        
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                        @foreach($pegawai as $pgw)
-                                                                        <tr>
-                                                                            <td>{{ $loop->iteration }}</td>
-                                                                            <td>{{ $pgw->name }}</td>
-                                                                            <td>{{ $pgw->jabatan }}</td>
-                                                                            <td>{{ $pgw->golongan }}</td>
-                                                                            <td>
-                                                                                <div class="text-center">
-                                                                                    <button type="button" id="btn_select" class="btn btn-primary text-white"
-                                                                                    data-name="{{ $pgw->name }}"><i class="bi bi-check-lg"></i> Pilih</button>
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
-                                                                        @endforeach
-                                                                </tfoot>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {{-- <select class="form-control" id="pengajar" name="user_id">
-                                    @foreach($pegawai as $pgw)
-                                        @if(old('kegiatan_id') == $keg->id)
-                                            <option value="{{ $pgw->id }}" selected>{{ $pgw->name }}</option>
-                                        @else
-                                            <option value="{{ $pgw->id }}">{{ $pgw->name }}</option>
-                                        @endif
-                                    @endforeach
-                                </select> --}}
-                            </div>
-                            <div class="col-md-6 mt-1">
-                                <label for="pengajar">Tanggal</label>
-                                <div class="input-group">
-                                    <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" placeholder="bulan/tanggal/tahun" value="{{ old('tanggal') }}">
+                                    <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" placeholder="Tanggal Kegiatan" value="{{ old('tanggal') }}">
                                     @error('tanggal')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -114,8 +40,8 @@
                                 @enderror
                                 </div>
                             </div>
-                            <div id="form_mulai" class="col-md-6 mt-1">
-                                <label for="mulai" class="m-t-20">Jam Mulai</label>
+                            <div id="form_mulai" class="col-md-4 mt-2">
+                                <label for="mulai" class="m-t-20">Jam Mulai</label> <span class="text-danger">*</span>
                                 <input type="time" class="form-control @error('waktu_mulai') is-invalid @enderror" id="mulai" name="waktu_mulai" placeholder="Check time" value="{{ old('waktu_mulai') }}">
                                 @error('waktu_mulai')
                                     <div class="invalid-feedback">
@@ -123,8 +49,8 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div id="form_selesai" class="col-md-6 mt-1">
-                                <label for="selesai" class="m-t-20">Jam Selesai</label>
+                            <div id="form_selesai" class="col-md-4 mt-2">
+                                <label for="selesai" class="m-t-20">Jam Selesai</label> <span class="text-danger">*</span>
                                 <input type="time" class="form-control @error('waktu_selesai') is-invalid @enderror" id="selesai" name="waktu_selesai" placeholder="Check time" value="{{ old('waktu_selesai') }}">
                                 @error('waktu_selesai')
                                     <div class="invalid-feedback">
@@ -132,17 +58,28 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div id="form_jamPelajaran"class="col-md-4 mt-1">
-                                <label for="jp" class="m-t-20">Jumlah Jam Pelajaran</label>
-                                <input type="text" class="form-control @error('jp') is-invalid @enderror" placeholder="" id="jp" name="jp" value="{{ old('jp') }}">
+                            <div class="col-md-12 mt-2">
+                                <button id="btn_check" type="button" class="btn btn-info my-2">Check</button><span id="checkSpan" class="ml-2 text-danger" style="display: none;"></span>
+                            </div>
+                            <div id="form_pengajar" class="col-md-6 mt-2">
+                                <label for="pengajar">Pegawai</label> <span class="text-danger">*</span>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Cari Pegawai" name="user_id" list="list-pengajar" id="pengajar" autocomplete="off">
+                                    <datalist id="list-pengajar">
+                                    </datalist>
+                                </div>
+                            </div>
+                            <div id="form_jamPelajaran"class="col-md-3 mt-2">
+                                <label for="jp" class="m-t-20">Jumlah Jam Pelajaran</label> <span class="text-danger">*</span>
+                                <input type="text" class="form-control @error('jp') is-invalid @enderror" placeholder="" id="jp" name="jp" value="{{ old('jp') }}" readonly="true">
                                 @error('jp')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
-                            <div id="form_angkatan" class="col-md-4 mt-1">
-                                <label for="angkatan" class="m-t-20">Angkatan</label>
+                            <div id="form_angkatan" class="col-md-3 mt-2">
+                                <label for="angkatan" class="m-t-20">Angkatan</label> <span class="text-danger">*</span>
                                 <input type="text" class="form-control @error('angkatan') is-invalid @enderror" placeholder="Angkatan" id="angkatan" name="angkatan" value="{{ old('angkatan') }}">
                                 @error('angkatan')
                                     <div class="invalid-feedback">
@@ -150,7 +87,7 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div id="form_keterangan" class="col-md-4 mt-1">
+                            <div id="form_keterangan" class="col-md-6 mt-2">
                                 <label for="angkatan" class="m-t-20">Keterangan</label>
                                 <textarea class="form-control @error('keterangan') is-invalid @enderror" placeholder="Keterangan" id="keterangan" name="keterangan" value="{{ old('keterangan') }}" rows="3"></textarea>
                                 @error('keterangan')
@@ -159,8 +96,8 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="col-12 mt-3">
-                                <button type="submit" class="btn btn-info">Simpan</button>
+                            <div id="form_submit" class="col-12 mt-3">
+                                <button id="btnSubmit" type="submit" class="btn btn-info">Simpan</button>
                             </div>
                         </div>
                     </form>
@@ -169,46 +106,135 @@
         </div>
     </div>
 </div>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script>
-    // Change Tipe Jadwal
-    document.getElementById('tipe_jadwal').addEventListener('change', function () {
-        var style = this.value == 1 ? '' : 'none';
-        var styleClass = this.value == 1 ? 'col-md-4 mt-1' : 'col-md-6 mt-1';
+    $(document).ready(() => {
+        $('#btn_check').on('click', () => {
+            var check_tipe = document.getElementById("tipe_jadwal").value
+            var tipe_jadwal = document.getElementById("tanggal").value;
+            var tipe_jadwal2 = document.getElementById("mulai").value;
+            var tipe_jadwal3 = document.getElementById("selesai").value;
+            
+            if(check_tipe == 1){
+                if (!tipe_jadwal || !tipe_jadwal2 || !tipe_jadwal3) {
+                    var checkSpan = document.getElementById('checkSpan');
+                    checkSpan.style.display = '';
+                    checkSpan.innerHTML = "Lengkapi Inputan!"
+                    setTimeout(() => {
+                        checkSpan.style.display = 'none';
+                    }, 3000);
+                } else {
+                    var checkSpan = document.getElementById('checkSpan');
+                    checkSpan.style.display = '';
+                    checkSpan.innerHTML = "Check Pegawai Berhasil!"
+                    setTimeout(() => {
+                        checkSpan.style.display = 'none';
+                    }, 3000);
 
-        document.getElementById('form_kegiatan').style.display = style;
-        document.getElementById('form_mulai').style.display = style;
-        document.getElementById('form_selesai').style.display = style;
-        document.getElementById('form_jamPelajaran').style.display = style;
-        document.getElementById('form_angkatan').style.display = style;
-        document.getElementById('form_keterangan').classList = styleClass;
-    });
+                    //Get startTime
+                    var startTime = tipe_jadwal2;
+                    var arrStart = startTime.split(':');
+                    var endStartHrs = $.trim(arrStart[0]);
+                    var endStartMnt = $.trim(arrStart[1]);
+                    
+                    //Get endTime
+                    var endTime = tipe_jadwal3;
+                    var arrEnd = endTime.split(':');
+                    var endHoursHrs = $.trim(arrEnd[0]);
+                    var endHoursMnt = $.trim(arrEnd[1]);
 
-    //  Get Name In DataTables
-    try{
-        const btnSelect = document.querySelectorAll('#btn_select');
-        btnSelect.forEach((button, index) => {
-            button.addEventListener('click', function() {
-                var user_name = this.getAttribute('data-name');
+                    //Get results
+                    var getHours = endHoursHrs - endStartHrs;
+                    var getMnts = endHoursMnt - endStartMnt;
+                    var y = (getHours*60) + getMnts;
+                    var z = y / 45;
+                    var str = z.toString();
 
-                document.getElementById("pengajar").value = user_name;
-                $('#bd-example-modal-lg').modal('hide');
-            });
+                    var arrFix = str.split('.');
+                    var results = $.trim(arrFix[0])
+
+                    var jp = document.getElementById('jp');
+                    jp.value  = results;
+
+                    $.ajax({
+                        type: 'GET',
+                        url: '{{ url('/get-pegawai') }}',
+                        data: {
+                            tanggal: tipe_jadwal,
+                            mulai: tipe_jadwal2,
+                            selesai: tipe_jadwal3,
+                        },
+                        dataType: "json",
+                        success: function ({data, debug}) {
+                            console.log(debug, data);
+                            $('#list-pengajar').html(data.map(({ id, name }) => (`<option value="${name}"></option>`)).join(''));
+                        },
+                        error: function (xhr) {
+                            alert('Error')
+                        }
+                    });
+                }
+            } else {
+                if(!tipe_jadwal){
+                    var checkSpan = document.getElementById('checkSpan');
+                    checkSpan.style.display = '';
+                    checkSpan.innerHTML = "Lengkapi Inputan!"
+                    setTimeout(() => {
+                        checkSpan.style.display = 'none';
+                    }, 3000);
+                } else {
+                    var checkSpan = document.getElementById('checkSpan');
+                    checkSpan.style.display = '';
+                    checkSpan.innerHTML = "Check Pegawai Berhasil!"
+                    setTimeout(() => {
+                        checkSpan.style.display = 'none';
+                    }, 3000);
+
+                    $.ajax({
+                        type: 'GET',
+                        url: '{{ url('/get-pegawai') }}',
+                        data: {
+                            tanggal: tipe_jadwal,
+                            mulai: '00:00:00',
+                            selesai: '23:59:59',
+                        },
+                        dataType: "json",
+                        success: function ({data, debug}) {
+                            console.log(debug, data);
+                            $('#list-pengajar').html(data.map(({ id, name }) => (`<option value="${name}"></option>`)).join(''));
+                        },
+                        error: function (xhr) {
+                            alert('Error')
+                        }
+                    });
+                }
+            }
         });
-    } catch (error) {
         
-    }
+        
 
-    // $(document).ready(function() {
-    //     $(document).on('click', '#btn_select', function() {
-    //         var user_name = $(this).data('name');
+        // Change Tipe Jadwal
+        document.getElementById('tipe_jadwal').addEventListener('change', function () {
 
-    //         $('#pengajar').val(user_name);
-    //     })
-    // })
+            var style = this.value == 1 ? '' : 'none';
+            var styleClass = this.value == 1 ? 'col-md-4 mt-1' : 'col-md-6 mt-1';
 
+            var btnSubmit = document.getElementById('btnSubmit');
+            btnSubmit = this.value == 1 ? btnSubmit.classList.remove('pull-right') : btnSubmit.classList.add('pull-right');
+
+            document.getElementById('form_kegiatan').style.display = style;
+            document.getElementById('form_mulai').style.display = style;
+            document.getElementById('form_selesai').style.display = style;
+            document.getElementById('form_jamPelajaran').style.display = style;
+            document.getElementById('form_angkatan').style.display = style;
+            document.getElementById('form_keterangan').classList = styleClass;
+            document.getElementById('form_date').classList = styleClass;
+        });
+    })
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+
 {{-- <script>
     const kegiatan = document.querySelector('#kegiatan');
     const jp = document.querySelector('#jp');

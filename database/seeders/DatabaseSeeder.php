@@ -38,17 +38,5 @@ class DatabaseSeeder extends Seeder
             'kode_kegiatan' => 'PKA',
             'nama_kegiatan' => 'Pelatihan Keanggotaan'
         ]);
-
-        Status::create([
-            'status_name' => 'Tersedia'
-        ]);
-
-        Status::create([
-            'status_name' => 'Perjalanan Dinas'
-        ]);
-
-        Status::create([
-            'status_name' => 'Maks JP'
-        ]);
     }
 }

@@ -22,9 +22,7 @@
                                 <th>No</th>
                                 <th>Kode Kegiatan</th>
                                 <th>Nama Kegiatan</th>
-                                {{-- <th>Jumlah Jam Pelajaran</th> --}}
                                 <th>Aksi</th>
-                                
                             </tr>
                         </thead>
                         <tbody>
@@ -33,10 +31,6 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $keg->kode_kegiatan }}</td>
                                 <td>{{ $keg->nama_kegiatan }}</td>
-<<<<<<< HEAD
-=======
-                                {{-- <td>{{ $keg->jp }}</td> --}}
->>>>>>> 6e0901aff0ceddb253dc5d91cd5d0662137ba79e
                                 <td>
                                     <div class="row">
                                         <div class="col-lg-12">

@@ -36,18 +36,37 @@
                             @foreach($jadwal as $jdwl)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ isset($jdwl->kegiatan)?$jdwl->kegiatan->nama_kegiatan:'-' }}</td>
-                                <td>{{ isset($jdwl->user)?$jdwl->user->name:'-' }}</td>
-                                <td>{{ $jdwl->jp }}</td>
-                                <td>{{ $jdwl->created_at->format('d-m-Y') }}</td>
-                                <td>{{ $jdwl->waktu_mulai }} - {{ $jdwl->waktu_selesai }}</td>
-                                <td>{{ $jdwl->angkatan }}</td>
                                 <td>
+                                    @if (!$jdwl->kegiatan)
+                                        Perjalanan Dinas
+                                    @else
+                                        {{ $jdwl->kegiatan->nama_kegiatan }}
+                                    @endif    
+                                </td>
+                                <td>{{ isset($jdwl->user)?$jdwl->user->name:'-' }}</td>
+                                <td>
+                                    @if($jdwl->jp < 15)
+                                        {{ $jdwl->jp }}
+                                    @else
+                                        Full Day
+                                    @endif
+                                </td>
+                                <td>{{ date('d-m-Y', strtotime($jdwl->waktu_mulai)); }}</td>
+                                <td>{{ date('H:i', strtotime($jdwl->waktu_mulai)) }} - {{ date('H:i', strtotime($jdwl->waktu_selesai)) }}</td>
+                                <td>{{ isset($jdwl->angkatan)?$jdwl->angkatan:'-' }}</td>
+                                <td>
+                                    @can('admin')
                                     <div class="row">
-                                        <div class="col-lg-12">
-                                            <a href="data-jadwal.{{ $jdwl->kegiatan_id }}"><button type="button" class="btn btn-sm mb-1 btn-primary">Lihat</button></a>
+                                        <div class="col-lg-12" style="white-space: nowrap">
+                                            <a href="{{ $jdwl->id }}.edit"><button type="button" class="btn btn-sm mb-1 btn-warning text-white"><i class="bi bi-pencil-square"></i> Edit</button></a>
+                                            <form action="data-jadwal.{{ $jdwl->id }}" method="post" class="d-inline">
+                                                @method('delete')
+                                                @csrf
+                                                <button type="submit" class="btn btn-sm mb-1 btn-danger"><i class="bi bi-dash-circle"></i> Hapus</button>
+                                            </form>
                                         </div>
                                     </div>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

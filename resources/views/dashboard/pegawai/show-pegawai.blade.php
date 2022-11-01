@@ -53,7 +53,7 @@
                             <th scope="row">Phone:</th>
                             <td>{{ $user->phone }}</td>
                         </tr>
-                        <tr>
+                        {{-- <tr>
                             <th scope="row">Status</th>
                             <td>
                                 @if($user->status->status_name == 'Tersedia')
@@ -66,7 +66,7 @@
                                     {{ $user->status->status_name }}
                                 @endif
                             </td>
-                        </tr>
+                        </tr> --}}
                         <tr>
                             <th scope="row">Roles:</th>
                             <td>

@@ -117,7 +117,6 @@ class UserController extends Controller
             'jabatan' => 'required',
             'golongan' => 'required',
             'level' => 'required',
-            'status_id' => 'required',
         ];
 
         if($request->nip != $pegawai->nip){

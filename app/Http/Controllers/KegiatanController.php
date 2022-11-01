@@ -42,7 +42,6 @@ class KegiatanController extends Controller
         $validatedData = $request->validate([
             'kode_kegiatan' => 'required',
             'nama_kegiatan' => 'required',
-            'jp' => 'required'
         ]);
 
         Kegiatan::create($validatedData);
@@ -86,7 +85,6 @@ class KegiatanController extends Controller
         $validatedData = $request->validate([
             'kode_kegiatan' => 'required',
             'nama_kegiatan' => 'required',
-            'jp' => 'required'
         ]);
 
         Kegiatan::where('id', $kegiatan->id)->update($validatedData);
