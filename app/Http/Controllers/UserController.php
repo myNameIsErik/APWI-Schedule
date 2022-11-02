@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Status;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -30,7 +29,6 @@ class UserController extends Controller
     {
         return view('dashboard.pegawai.add-pegawai', [
             "pegawai" => User::all(),
-            "status" => Status::all()
         ]);
     }
 
@@ -46,7 +44,7 @@ class UserController extends Controller
         $rules = [
             'name' => 'required',
             'jabatan' => 'required',
-            'golongan' => 'required',
+            // 'golongan' => 'required',
             'level' => 'required',
         ];
 
@@ -64,8 +62,6 @@ class UserController extends Controller
 
         $validatedData = $request->validate($rules);
         
-        $validatedData['status_id'] = '1';
-        $validatedData['username'] = $validatedData['nip'];
         $validatedData['password'] = $validatedData['nip'];
 
         $validatedData['password'] = Hash::make($validatedData['password']);
@@ -97,8 +93,7 @@ class UserController extends Controller
     public function edit(User $pegawai)
     {
         return view('dashboard.pegawai.edit-pegawai', [
-            "pegawai" => $pegawai,
-            "status" => Status::all()
+            "pegawai" => $pegawai
         ]);
     }
 
@@ -115,8 +110,9 @@ class UserController extends Controller
             'nip' => 'required',
             'name' => 'required',
             'jabatan' => 'required',
-            'golongan' => 'required',
+            // 'golongan' => 'required',
             'level' => 'required',
+            'status_anggota' => 'required'
         ];
 
         if($request->nip != $pegawai->nip){
@@ -132,8 +128,6 @@ class UserController extends Controller
         }
 
         $validatedData = $request->validate($rules);
-        
-        $validatedData['username'] = $validatedData['nip'];
         
         User::where('id', $pegawai->id)->update($validatedData);
 

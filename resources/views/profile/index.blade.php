@@ -3,17 +3,17 @@
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
+@if(session()->has('success'))
+    <div class="alert alert-success my-3 mx-2 col-lg-8">
+        {{ session('success') }}
+    </div>
+@endif
+@if(session()->has('successPassword'))
+    <div class="alert alert-success my-3 mx-2 col-lg-8">
+        {{ session('successPassword') }}
+    </div>
+@endif
 <div class="row justify-content-center">
-    @if(session()->has('success'))
-        <div class="alert alert-success my-3 mx-2 col-lg-8">
-            {{ session('success') }}
-        </div>
-    @endif
-    @if(session()->has('successPassword'))
-        <div class="alert alert-success my-3 mx-2 col-lg-8">
-            {{ session('successPassword') }}
-        </div>
-    @endif
     <div class="col-12">
         {{-- <h4 class="card-title"></h4> --}}
         @foreach($profiles as $profile)
@@ -52,6 +52,16 @@
                         <tr>
                             <th scope="row">Phone:</th>
                             <td>{{ $profile->phone }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Status Anggota:</th>
+                            <td>
+                                @if($profile->status_anggota == 1)
+                                        <button type="button" class="btn btn-success btn-sm text-white">Aktif</button>
+                                    @else
+                                        <button type="button" class="btn btn-danger btn-sm text-white">Tidak Aktif</button>
+                                    @endif  
+                            </td>
                         </tr>
                         <tr>
                             <th scope="row">Roles:</th>

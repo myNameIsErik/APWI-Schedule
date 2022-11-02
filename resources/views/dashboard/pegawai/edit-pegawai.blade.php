@@ -79,20 +79,19 @@
                                 </select>
                             </div>
                         </div>
-                        {{-- <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="status_id">Status <span class="text-danger">*</span></label>
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label" for="status_anggota">Status <span class="text-danger">*</span></label>
                             <div class="col-lg-6">
-                                <select class="form-control" id="status_id" name="status_id">
-                                    @foreach($status as $stat)
-                                        @if(old('status_id', $pegawai->status_id) == $stat->id)
-                                            <option value="{{ $stat->id }}" selected>{{ $stat->status_name }}</option>
-                                        @else
-                                            <option value="{{ $stat->id }}">{{ $stat->status_name }}</option>
-                                        @endif
-                                    @endforeach
+                                <select class="form-control" id="status_anggota" name="status_anggota">
+                                    <option value="1" {{ old('status_anggota', $pegawai->status_anggota) == 1 ? 'selected' : '' }}>
+                                        Aktif
+                                    </option>
+                                    <option value="0" {{ old('status_anggota', $pegawai->status_anggota) == 2 ? 'selected' : '' }}>
+                                        Tidak Aktif
+                                    </option>
                                 </select>
                             </div>
-                        </div> --}}
+                        </div>
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label" for="level">Level <span class="text-danger">*</span>
                             </label>

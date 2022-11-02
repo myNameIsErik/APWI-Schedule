@@ -28,6 +28,7 @@ class ProfileController extends Controller
         $rules = [
             'name' => 'required',
             'jabatan' => 'required',
+            'status_anggota' => 'required'
         ];
 
         if($request->nip != $user->nip){

@@ -40,7 +40,7 @@ class KegiatanController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'kode_kegiatan' => 'required',
+            'kode_kegiatan' => 'required|unique:users',
             'nama_kegiatan' => 'required',
         ]);
 

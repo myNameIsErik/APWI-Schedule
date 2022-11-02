@@ -19,12 +19,10 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => 'Admin',
             'nip' => '00000000',
-            'username' => 'admin123',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin123'),
             'jabatan' => 'Widya Iswara',
-            'golongan' => 'IV/a',
-            'status_id' => 1,
+            // 'golongan_id' => '1',
             'level' => 'Admin',
             'phone' => '085465258965'
         ]);
