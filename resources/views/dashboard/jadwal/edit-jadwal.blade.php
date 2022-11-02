@@ -33,7 +33,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-6 mt-1">
+                            <div class="col-md-6 mt-4">
                                 <label for="pengajar">Tanggal</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control mydatepicker" placeholder="bulan/tanggal/tahun" id="tanggal" value="{{ old('tanggal', $jadwal->tanggal) }}"> <span class="input-group-append"><span class="input-group-text"><i class="mdi mdi-calendar-check"></i></span></span>
