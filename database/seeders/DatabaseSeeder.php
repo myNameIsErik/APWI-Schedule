@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin123'),
             'jabatan' => 'Widya Iswara',
-            'golongan_id' => null,
+            'golongan_id' => 1,
             'level' => 'Admin',
             'phone' => '085465258965'
         ]);

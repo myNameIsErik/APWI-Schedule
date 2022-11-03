@@ -20,7 +20,7 @@ class JadwalController extends Controller
     {
         if (auth()->user()->level === "Admin") {
             return view('dashboard.jadwal.data-jadwal', [
-                'jadwal' => Jadwal::all()
+                'jadwal' => Jadwal::orderBy('waktu_mulai', 'asc')->get()
             ]);
         } else {
             return view('dashboard.jadwal.data-jadwal', [
@@ -211,10 +211,13 @@ class JadwalController extends Controller
 
     public function checkJadwal(Request $request)
     {
+        $limit_max_jp = 15;
         $tanggal_mulai = $request->tanggal.' '.$request->mulai;
         $tanggal_selesai = $request->tanggal.' '.$request->selesai;
+        $jp = (int) $request->jp;
         
         $arr_user_id = [];
+
         $bentrok = DB::table('jadwals')->select('user_id')->whereRaw("
         (waktu_mulai <= STR_TO_DATE('$tanggal_mulai', '%Y-%m-%d %H:%i') AND waktu_selesai >= STR_TO_DATE('$tanggal_mulai', '%Y-%m-%d %H:%i')) OR
         (waktu_mulai <= STR_TO_DATE('$tanggal_selesai', '%Y-%m-%d %H:%i') AND waktu_selesai >= STR_TO_DATE('$tanggal_selesai', '%Y-%m-%d %H:%i')) OR 
@@ -223,6 +226,18 @@ class JadwalController extends Controller
         foreach($bentrok as $item){
             $arr_user_id[] = $item->user_id;
         }
+
+        $max_jp = DB::table('jadwals')
+        ->select('user_id')
+        ->whereRaw("waktu_mulai >= STR_TO_DATE('$request->tanggal 00:00:00', '%Y-%m-%d %H:%i:%s') AND waktu_selesai <= STR_TO_DATE('$request->tanggal 23:59:59', '%Y-%m-%d %H:%i:%s')")
+        ->groupBy('user_id')
+        ->having(DB::raw("(SUM(jp)+$jp)"), '>', $limit_max_jp)
+        ->get()->toArray();
+        foreach($max_jp as $item){
+            $arr_user_id[] = $item->user_id;
+        }
+
+
         $checking = DB::table('users')->whereNotIn('id', $arr_user_id)->get();
         
         echo json_encode([
@@ -237,9 +252,11 @@ class JadwalController extends Controller
 
     public function checkJadwalUpdate(Request $request)
     {
+        $limit_max_jp = 15;
         $tanggal_mulai = $request->tanggal.' '.$request->mulai;
         $tanggal_selesai = $request->tanggal.' '.$request->selesai;
-        $id = 1; //harusna diambil ti $request
+        $id = $request->id;
+        $jp = (int) $request->jp;
         
         $arr_user_id = [];
         $bentrok = DB::table('jadwals')->select('user_id')->whereRaw("
@@ -252,6 +269,17 @@ class JadwalController extends Controller
             $arr_user_id[] = $item->user_id;
         }
         
+        $max_jp = DB::table('jadwals')
+            ->select('user_id')
+            ->whereRaw("(waktu_mulai >= STR_TO_DATE('$request->tanggal 00:00:00', '%Y-%m-%d %H:%i:%s') AND waktu_selesai <= STR_TO_DATE('$request->tanggal 23:59:59', '%Y-%m-%d %H:%i:%s')) 
+            AND id != '$id'")
+            ->groupBy('user_id')
+            ->having(DB::raw("(SUM(jp)+$jp)"), '>', $limit_max_jp)
+            ->get()->toArray();
+        foreach($max_jp as $item){
+            $arr_user_id[] = $item->user_id;
+        }
+
         $checking = DB::table('users')->whereNotIn('id', $arr_user_id)->get();
         
         echo json_encode([
