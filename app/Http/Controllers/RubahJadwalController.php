@@ -83,7 +83,8 @@ class RubahJadwalController extends Controller
             $validatedData = $request->validate([
                 'user_id' => 'required',
                 'tanggal' => 'required',
-                'keterangan' => ''
+                'keterangan' => '',
+                'alasan' => 'required'
             ]);
 
             $validatedData['kegiatan_id'] = null;
@@ -101,7 +102,8 @@ class RubahJadwalController extends Controller
                 'waktu_selesai' => 'required',
                 'jp' => 'required',
                 'angkatan' => 'required',
-                'keterangan' => ''
+                'keterangan' => '',
+                'alasan' => 'required'
             ]);
    
             $validatedData['waktu_mulai'] = $validatedData['tanggal'] . " " . $validatedData['waktu_mulai'];

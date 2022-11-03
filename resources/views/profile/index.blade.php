@@ -43,7 +43,7 @@
                         </tr>
                         <tr>
                             <th scope="row">Golongan:</th>
-                            <td>{{ $profile->golongan }}</td>
+                            <td>{{ $profile->golongan->jenis_golongan }}</td>
                         </tr>
                         <tr>
                             <th scope="row">E-mail:</th>
@@ -57,9 +57,9 @@
                             <th scope="row">Status Anggota:</th>
                             <td>
                                 @if($profile->status_anggota == 1)
-                                        <button type="button" class="btn btn-success btn-sm text-white">Aktif</button>
+                                        <button type="button" class="btn btn-success btn-sm text-white" style="pointer-events: none">Aktif</button>
                                     @else
-                                        <button type="button" class="btn btn-danger btn-sm text-white">Tidak Aktif</button>
+                                        <button type="button" class="btn btn-danger btn-sm text-white" style="pointer-events: none">Tidak Aktif</button>
                                     @endif  
                             </td>
                         </tr>

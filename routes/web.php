@@ -57,6 +57,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/add-jadwal', [JadwalController::class, 'create']);
     Route::get('data-jadwal.{jadwal:kegiatan_id}', [JadwalController::class, 'show']);
     Route::post('/add-jadwal', [JadwalController::class, 'store']);
+    Route::get('{jadwal}.edit', [JadwalController::class, 'edit']);
+    Route::patch('data-jadwal.{jadwal}', [JadwalController::class, 'update']);
     Route::delete('data-jadwal.{jadwal}', [JadwalController::class, 'destroy']);
     Route::get('jadwal-{user:nip}', [JadwalController::class, 'showFull']);
 
@@ -70,7 +72,7 @@ Route::group(['middleware' => 'auth'], function () {
 //perubahan jadwal
 Route::get('/perubahan-jadwal', [RubahJadwalController::class, 'index']);
 Route::get('{jadwal}.editJadwal', [RubahJadwalController::class, 'edit']);
-Route::patch('data-jadwal.{jadwal}', [JadwalController::class, 'update']);
+Route::patch('data-ubahJadwal.{jadwal}', [RubahJadwalController::class, 'update']);
 
 // login
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');

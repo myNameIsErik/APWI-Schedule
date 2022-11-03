@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Golongan;
 use App\Models\User;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
@@ -16,10 +17,11 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function edit(User $user)
+    public function edit(User $user, Golongan $golongan)
     {
         return view('profile.edit-profile', [
             "user" => $user,
+            "golongan" => $golongan
         ]);
     }
 
