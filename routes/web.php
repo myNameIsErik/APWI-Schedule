@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GolonganController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\RubahJadwalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +43,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('data-kegiatan.{kegiatan}', [KegiatanController::class, 'update']);
     Route::delete('data-kegiatan.{kegiatan}', [KegiatanController::class, 'destroy']);
 
+    //golongan
+    Route::get('/data-golongan', [GolonganController::class, 'index']);
+    Route::get('data-golongan.{golongan:golongan_id}', [GolonganController::class, 'show']);
+    Route::get('/add-golongan', [GolonganController::class, 'create']);
+    Route::post('/add-golongan', [GolonganController::class, 'store']);
+    Route::get('editGolongan-{golongan:kode_golongan}', [GolonganController::class, 'edit']);
+    Route::patch('data-golongan.{golongan}', [GolonganController::class, 'update']);
+    Route::delete('data-golongan.{golongan}', [GolonganController::class, 'destroy']);
+
     //jadwal
     
     Route::get('/add-jadwal', [JadwalController::class, 'create']);
@@ -48,12 +59,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/add-jadwal', [JadwalController::class, 'store']);
     Route::delete('data-jadwal.{jadwal}', [JadwalController::class, 'destroy']);
     Route::get('jadwal-{user:nip}', [JadwalController::class, 'showFull']);
+
+    //ajax
+    Route::get('/get-pegawai', [JadwalController::class, 'checkJadwal']);
+    Route::get('/get-pegawaiUpdate', [JadwalController::class, 'checkJadwalUpdate']);
 });
 
 // Route::get('/add-jadwal/checkJP', [JadwalController::class, 'checkJP']);
 
 //perubahan jadwal
-Route::get('{jadwal}.edit', [JadwalController::class, 'edit']);
+Route::get('/perubahan-jadwal', [RubahJadwalController::class, 'index']);
+Route::get('{jadwal}.editJadwal', [RubahJadwalController::class, 'edit']);
 Route::patch('data-jadwal.{jadwal}', [JadwalController::class, 'update']);
 
 // login
@@ -61,22 +77,24 @@ Route::get('/login', [LoginController::class, 'index'])->name('login')->middlewa
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
-// register
-Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
-Route::post('/register', [RegisterController::class, 'store']);
-
 // profil
 Route::get('/profile', [ProfileController::class, 'index']);
 Route::get('editProfile-{user:nip}', [ProfileController::class, 'edit']);
 Route::patch('profile.{user}', [ProfileController::class, 'update']);
 Route::post('change-password', [ProfileController::class, 'changePassword'])->name('change.password');
 
+Route::get('/rubahjadwal', [RubahJadwalController::class, 'test']);
+
+// register
+// Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
+// Route::post('/register', [RegisterController::class, 'store']);
+
 // Route::get('/perubahan-jadwal', function () {
 //     return view('dashboard.rubah-jadwal.perubahan-jadwal');
 // });
-Route::get('/perubahan-jadwal', [JadwalController::class, 'indexUbahJadwal']);
+// Route::get('/perubahan-jadwal', [JadwalController::class, 'indexUbahJadwal']);
 
 // user
-Route::get('/main', function () {
-    return view('user.data-jadwal');
-});
+// Route::get('/main', function () {
+//     return view('user.data-jadwal');
+// });

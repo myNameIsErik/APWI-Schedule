@@ -33,8 +33,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="email">Email <span class="text-danger">*</span>
-                            </label>
+                            <label class="col-lg-4 col-form-label" for="email">Email</label>
                             <div class="col-lg-6">
                                 <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Masukan Email Pengajar.." value="{{ old('email', $pegawai->email) }}">
                                 @error('email')
@@ -60,37 +59,23 @@
                             <label class="col-lg-4 col-form-label" for="golongan">Gol. Ruang <span class="text-danger">*</span></label>
                             <div class="col-lg-6">
                                 <select class="form-control @error('golongan') is-invalid @enderror" id="golongan" name="golongan">
-                                    <option value="{{ old('golongan', $pegawai->golongan) }}" selected>{{ $pegawai->golongan }}</option>
-                                    <option value="I/a">I/a</option>
-                                    <option value="I/b">I/b</option>
-                                    <option value="I/c">I/c</option>
-                                    <option value="I/d">I/d</option>
-                                    <option value="II/a">II/a</option>
-                                    <option value="II/b">II/b</option>
-                                    <option value="II/c">II/c</option>
-                                    <option value="II/d">II/d</option>
-                                    <option value="III/a">III/a</option>
-                                    <option value="III/b">III/b</option>
-                                    <option value="III/c">III/c</option>
-                                    <option value="III/d">III/d</option>
-                                    <option value="IV/a">IV/a</option>
-                                    <option value="IV/b">IV/b</option>
-                                    <option value="IV/c">IV/c</option>
-                                    <option value="IV/d">IV/d</option>
+                                    <option value="{{ old('golongan', $pegawai->golongan_id) }}" selected>{{ $pegawai->golongan->jenis_golongan }}</option>
+                                    @foreach($golongan as $gol)
+                                    <option value="{{ $gol->id }}">{{ $gol->jenis_golongan }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="status_id">Status <span class="text-danger">*</span></label>
+                            <label class="col-lg-4 col-form-label" for="status_anggota">Status <span class="text-danger">*</span></label>
                             <div class="col-lg-6">
-                                <select class="form-control" id="status_id" name="status_id">
-                                    @foreach($status as $stat)
-                                        @if(old('status_id', $pegawai->status_id) == $stat->id)
-                                            <option value="{{ $stat->id }}" selected>{{ $stat->status_name }}</option>
-                                        @else
-                                            <option value="{{ $stat->id }}">{{ $stat->status_name }}</option>
-                                        @endif
-                                    @endforeach
+                                <select class="form-control" id="status_anggota" name="status_anggota">
+                                    <option value="1" {{ old('status_anggota', $pegawai->status_anggota) == 1 ? 'selected' : '' }}>
+                                        Aktif
+                                    </option>
+                                    <option value="0" {{ old('status_anggota', $pegawai->status_anggota) == 2 ? 'selected' : '' }}>
+                                        Tidak Aktif
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -114,8 +99,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="phone">No HP <span class="text-danger">*</span>
-                            </label>
+                            <label class="col-lg-4 col-form-label" for="phone">No HP</label>
                             <div class="col-lg-6">
                                 <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" placeholder="Masukan No HP Pengajar.." value="{{ old('phone', $pegawai->phone) }}">
                                 @error('phone')

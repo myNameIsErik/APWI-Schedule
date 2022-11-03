@@ -36,17 +36,13 @@
                                 <td>{{ $pgw->nip }}</td>
                                 <td>{{ $pgw->name }}</td>
                                 <td>{{ $pgw->jabatan }}</td>
-                                <td>{{ $pgw->golongan }}</td>
+                                <td>{{ isset($pgw->golongan)?$pgw->golongan->jenis_golongan:'-' }}</td>
                                 <td>{{ $pgw->email }}</td>
                                 <td class="text-center">
-                                    @if($pgw->status->status_name == 'Tersedia')
-                                        <button type="button" class="btn btn-success btn-sm text-white">Tersedia</button>
-                                    @elseif($pgw->status->status_name == 'Perjalanan Dinas')
-                                        <button type="button" class="btn btn-danger btn-sm text-white">Perjalanan Dinas</button>
-                                    @elseif($pgw->status->status_name == 'Maks JP')
-                                        <button type="button" class="btn btn-danger btn-sm text-white">Maks JP</button>
+                                    @if($pgw->status_anggota == 1)
+                                        <button type="button" class="btn btn-success btn-sm text-white">Aktif</button>
                                     @else
-                                        {{ $pgw->status->status_name }}
+                                        <button type="button" class="btn btn-danger btn-sm text-white">Tidak Aktif</button>
                                     @endif
                                 </td>
                                 <td>

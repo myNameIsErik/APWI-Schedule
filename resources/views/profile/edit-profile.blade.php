@@ -95,6 +95,20 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for="roles">Status Anggota<span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-6">
+                                    <select class="form-control" id="status_anggota" name="status_anggota">
+                                        <option value="1" {{ old('status_anggota', $user->status_anggota) == 1 ? 'selected' : '' }}>
+                                            Aktif
+                                        </option>
+                                        <option value="0" {{ old('status_anggota', $user->status_anggota) == 2 ? 'selected' : '' }}>
+                                            Tidak Aktif
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
 
                             <div class="form-group row">
                                 <div class="col-lg-8 ml-auto">
@@ -134,7 +148,7 @@
                                     </div>
                                 </div>
                                 <div id="" class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="jabatan">Golongan <span class="text-danger">*</span>
+                                    <label class="col-lg-4 col-form-label" for="golongan">Golongan <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
                                         <select class="form-control" id="golongan" name="golongan" readonly="true">
@@ -154,6 +168,18 @@
                                     <div class="col-lg-6">
                                         <input type="text" class="form-control @error('level') is-invalid @enderror" id="level" name="level" placeholder="level.." value="{{ old('level', $user->level) }}" readonly="true">
                                         @error('level')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="roles">Status Anggota<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control @error('status_anggota') is-invalid @enderror" id="status_anggota" name="status_anggota" placeholder="status_anggota.." value="{{ old('status_anggota', $user->status_anggota) == 1 ? 'Aktif' : 'Tidak Aktif' }}" readonly="true">
+                                        @error('status_anggota')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>

@@ -16,12 +16,10 @@ class RegisterController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'nip' => 'required|max:255',
-            'username' => 'required|min:5|max:255|unique:users',
             'email' => 'required|email:dns|unique:users',
             'password' => 'required|min:8|max:255'
         ]);
 
-        $validatedData['status_id'] = '1';
         $validatedData['level'] = 'User';
         $validatedData['password'] = Hash::make($validatedData['password']);
         

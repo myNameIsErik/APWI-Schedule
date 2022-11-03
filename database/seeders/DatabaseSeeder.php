@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Kegiatan;
-use App\Models\status;
+use App\Models\Golongan;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -19,12 +19,10 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => 'Admin',
             'nip' => '00000000',
-            'username' => 'admin123',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin123'),
             'jabatan' => 'Widya Iswara',
-            'golongan' => 'IV/a',
-            'status_id' => 1,
+            'golongan_id' => null,
             'level' => 'Admin',
             'phone' => '085465258965'
         ]);
@@ -39,16 +37,8 @@ class DatabaseSeeder extends Seeder
             'nama_kegiatan' => 'Pelatihan Keanggotaan'
         ]);
 
-        Status::create([
-            'status_name' => 'Tersedia'
-        ]);
-
-        Status::create([
-            'status_name' => 'Perjalanan Dinas'
-        ]);
-
-        Status::create([
-            'status_name' => 'Maks JP'
+        Golongan::create([
+            'jenis_golongan' => 'I/A'
         ]);
     }
 }

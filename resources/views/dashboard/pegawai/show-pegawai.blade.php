@@ -43,7 +43,7 @@
                         </tr>
                         <tr>
                             <th scope="row">Golongan:</th>
-                            <td>{{ $user->golongan }}</td>
+                            <td>{{ $user->golongan->jenis_golongan }}</td>
                         </tr>
                         <tr>
                             <th scope="row">E-mail:</th>
@@ -54,16 +54,12 @@
                             <td>{{ $user->phone }}</td>
                         </tr>
                         <tr>
-                            <th scope="row">Status</th>
+                            <th scope="row">Status Anggota</th>
                             <td>
-                                @if($user->status->status_name == 'Tersedia')
-                                    <button type="button" class="btn btn-success btn-sm text-white" style="pointer-events: none;">Tersedia</button>
-                                @elseif($user->status->status_name == 'Perjalanan Dinas')
-                                    <button type="button" class="btn btn-danger btn-sm text-white" style="pointer-events: none;">Perjalanan Dinas</button>
-                                @elseif($user->status->status_name == 'Maks JP')
-                                    <button type="button" class="btn btn-danger btn-sm text-white" style="pointer-events: none;">Maks JP</button>
+                                @if($user->status_anggota == 1)
+                                    <button type="button" class="btn btn-success btn-sm text-white" style="pointer-events: none;">Aktif</button>
                                 @else
-                                    {{ $user->status->status_name }}
+                                    <button type="button" class="btn btn-danger btn-sm text-white" style="pointer-events: none;">Tidak Aktif</button>
                                 @endif
                             </td>
                         </tr>

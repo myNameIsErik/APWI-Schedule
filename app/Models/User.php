@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Golongan;
 use App\Models\Jadwal;
-use App\Models\Status;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -47,8 +47,8 @@ class User extends Authenticatable
         return $this->hasMany(Jadwal::class);
     }
 
-    public function status()
+    public function golongan()
     {
-        return $this->belongsTo(Status::class);
+        return $this->belongsTo(Golongan::class);
     }
 }

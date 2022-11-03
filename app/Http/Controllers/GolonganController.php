@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kegiatan;
+use App\Models\Golongan;
 use Illuminate\Http\Request;
 
-class KegiatanController extends Controller
+class GolonganController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class KegiatanController extends Controller
      */
     public function index()
     {
-        return view('dashboard.kegiatan.data-kegiatan', [
-            "kegiatan" => Kegiatan::all()
+        return view('dashboard.golongan.data-golongan', [
+            "golongan" => Golongan::all()
         ]);
     }
 
@@ -26,8 +26,8 @@ class KegiatanController extends Controller
      */
     public function create()
     {
-        return view('dashboard.kegiatan.add-kegiatan', [
-            "kegiatan" => Kegiatan::all()
+        return view('dashboard.golongan.add-golongan', [
+            "golongan" => Golongan::all()
         ]);
     }
 
@@ -40,13 +40,12 @@ class KegiatanController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'kode_kegiatan' => 'required|unique:kegiatans',
-            'nama_kegiatan' => 'required',
+            'jenis_golongan' => 'required|unique:golongans'
         ]);
 
-        Kegiatan::create($validatedData);
+        Golongan::create($validatedData);
 
-        return redirect('/data-kegiatan')->with('success', 'Kegiatan Berhasil dibuat.');
+        return redirect('/data-golongan')->with('success', 'Golongan Berhasil dibuat.');
     }
 
     /**
@@ -66,10 +65,10 @@ class KegiatanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kegiatan $kegiatan)
+    public function edit(Golongan $golongan)
     {
-        return view('dashboard.kegiatan.edit-kegiatan', [
-            "kegiatan" => $kegiatan
+        return view('dashboard.golongan.edit-golongan', [
+            "golongan" => $golongan
         ]);
     }
 
@@ -80,16 +79,16 @@ class KegiatanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kegiatan $kegiatan)
+    public function update(Request $request, Golongan $golongan)
     {
         $validatedData = $request->validate([
-            'kode_kegiatan' => 'required',
-            'nama_kegiatan' => 'required',
+            'golongan' => 'required',
+            'ruang' => 'required',
         ]);
 
-        Kegiatan::where('id', $kegiatan->id)->update($validatedData);
+        Golongan::where('id', $golongan->id)->update($validatedData);
 
-        return redirect('/data-kegiatan')->with('success', 'Kegiatan Berhasil diubah.');
+        return redirect('/data-golongan')->with('success', 'Golongan Berhasil diubah.');
     }
 
     /**
@@ -98,10 +97,10 @@ class KegiatanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kegiatan $kegiatan)
+    public function destroy(Golongan $golongan)
     {
-        Kegiatan::destroy($kegiatan->id);
+        Golongan::destroy($golongan->id);
 
-        return redirect('/data-kegiatan')->with('success', 'Kegiatan Berhasil dihapus.');
+        return redirect('/data-golongan')->with('success', 'Golongan Berhasil dihapus.');
     }
 }

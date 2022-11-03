@@ -8,11 +8,11 @@
                     <form class="form-valide" action="/add-pegawai" method="post">
                         @csrf
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="name">Nama <span class="text-danger">*</span>
+                            <label class="col-lg-4 col-form-label" for="nip">NIP <span class="text-danger">*</span>
                             </label>
                             <div class="col-lg-6">
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Masukan Nama Pegawai.." value="{{ old('name') }}">
-                                @error('name')
+                                <input type="text" class="form-control @error('nip') is-invalid @enderror" id="np" name="nip" placeholder="Masukan NIP Pegawai.." value="{{ old('nip') }}">
+                                @error('nip')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -20,11 +20,11 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="nip">NIP <span class="text-danger">*</span>
+                            <label class="col-lg-4 col-form-label" for="name">Nama <span class="text-danger">*</span>
                             </label>
                             <div class="col-lg-6">
-                                <input type="text" class="form-control @error('nip') is-invalid @enderror" id="np" name="nip" placeholder="Masukan NIP Pegawai.." value="{{ old('nip') }}">
-                                @error('nip')
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Masukan Nama Pegawai.." value="{{ old('name') }}">
+                                @error('name')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -54,24 +54,6 @@
                                 @enderror
                             </div>
                         </div>
-                        {{-- <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="password">Password <span class="text-danger">*</span>
-                            </label>
-                            <div class="col-lg-6">
-                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Masukan Password.." value="{{ old('password') }}">
-                                @error('password')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                                <div class="form-check mt-2">
-                                    <input class="form-check-input" type="checkbox" value="" id="checkboxPassword" onclick="check()">
-                                    <label class="form-check-label" for="labelpassword">
-                                      Default Password <span id="checkboxlabel" style="display:none" class="text-danger">is 12345678</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div> --}}
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label" for="jabatan">Jabatan <span class="text-danger">*</span>
                             </label>
@@ -87,41 +69,17 @@
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label" for="golongan">Gol. Ruang <span class="text-danger">*</span></label>
                             <div class="col-lg-6">
-                                <select class="form-control @error('golongan') is-invalid @enderror" id="golongan" name="golongan">
-                                    <option value="" selected disabled>Pilih Golongan..</option>
-                                    <option value="I/a">I/a</option>
-                                    <option value="I/b">I/b</option>
-                                    <option value="I/c">I/c</option>
-                                    <option value="I/d">I/d</option>
-                                    <option value="II/a">II/a</option>
-                                    <option value="II/b">II/b</option>
-                                    <option value="II/c">II/c</option>
-                                    <option value="II/d">II/d</option>
-                                    <option value="III/a">III/a</option>
-                                    <option value="III/b">III/b</option>
-                                    <option value="III/c">III/c</option>
-                                    <option value="III/d">III/d</option>
-                                    <option value="IV/a">IV/a</option>
-                                    <option value="IV/b">IV/b</option>
-                                    <option value="IV/c">IV/c</option>
-                                    <option value="IV/d">IV/d</option>
-                                </select>
-                            </div>
-                        </div>
-                        {{-- <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="status_id">Status <span class="text-danger">*</span></label>
-                            <div class="col-lg-6">
-                                <select class="form-control" id="status_id" name="status_id">
-                                    @foreach($status as $stat)
-                                        @if(old('status_id') == $stat->id)
-                                            <option value="{{ $stat->id }}" selected>{{ $stat->status_name }}</option>
+                                <select class="form-control @error('golongan') is-invalid @enderror" id="golongan" name="golongan_id">
+                                    @foreach($golongan as $gol)
+                                        @if(old('golongan_id') == $gol->id)
+                                            <option value="{{ $gol->id }}" selected>{{ $gol->jenis_golongan }}</option>
                                         @else
-                                            <option value="{{ $stat->id }}">{{ $stat->status_name }}</option>
+                                            <option value="{{ $gol->id }}">{{ $gol->jenis_golongan }}</option>
                                         @endif
                                     @endforeach
                                 </select>
                             </div>
-                        </div> --}}
+                        </div>
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label" for="level">Level <span class="text-danger">*</span>
                             </label>
@@ -164,17 +122,4 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-function check() {
-    var checkBoxlabel = document.getElementById("checkboxlabel");
-    var checkBox = document.getElementById("checkboxPassword");
-    if (checkBox.checked == true){
-        document.getElementById("password").value = "12345678";
-        checkBoxlabel.style.display = "";
-    } else {
-        document.getElementById("password").value = "";
-        checkBoxlabel.style.display = "none";
-    }
-}
-</script>
 @endsection

@@ -6,6 +6,7 @@
             <div class="card">
                 @foreach($jadwal as $jdwl)
                 <div class="card-body">
+                    @if(Auth::user()->level == 'Admin')
                     <div class="bootstrap-media">
                         <div class="media">
                             <div class="media-body">
@@ -25,6 +26,11 @@
                             </div>
                         </div>
                     </div>
+                    @else
+                    <div class="col-lg-12 mt-3 text-left">
+                        <h6>Belum Ada Riwayat Perubahan.</h6>
+                    </div>
+                    @endif
                 </div>
                 @endforeach
             </div>
