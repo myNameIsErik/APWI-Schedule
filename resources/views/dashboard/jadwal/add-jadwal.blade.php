@@ -13,8 +13,12 @@
                             <div class="col-md-6 mt-1">
                                 <label for="tipe_kegiatan">Tipe Jadwal</label> <span class="text-danger">*</span>
                                 <select class="form-control" id="tipe_jadwal" name="tipe_jadwal">
-                                    <option value="1" selected>Mengajar</option>
-                                    <option value="2">Perjalanan Dinas</option>
+                                    @if(old('tipe_jadwal'))
+                                        <option value="{{ old('tipe_jadwal') }}">{{ old('tipe_jadwal') }}</option>
+                                    @else
+                                        <option value="1" selected>Mengajar</option>
+                                        <option value="2">Perjalanan Dinas</option>
+                                    @endif
                                 </select>
                             </div>
                             <div id="form_kegiatan" class="col-md-6 mt-1">

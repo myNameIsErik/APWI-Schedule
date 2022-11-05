@@ -13,12 +13,12 @@
                             <div class="col-md-6 mt-4">
                                 <label for="tipe_kegiatan">Tipe Jadwal</label> <span class="text-danger">*</span>
                                 <select class="form-control" id="tipe_jadwal" name="tipe_jadwal">
-                                    @if ($jadwal->kegiatan_id != null)
-                                        <option value="1" selected>Mengajar</option>
+                                    @if(old('tipe_jadwal', $jadwal->tipe_jadwal) == $jadwal->tipe_jadwal)
+                                        <option value="{{ old('tipe_jadwal', $jadwal->tipe_jadwal) }}" selected>Mengajar</option>
                                         <option value="2">Perjalanan Dinas</option>
                                     @else
+                                        <option value="{{ old('tipe_jadwal', $jadwal->tipe_jadwal) }}" selected>Perjalan Dinas</option>
                                         <option value="1">Mengajar</option>
-                                        <option value="2" selected>Perjalanan Dinas</option>
                                     @endif
                                 </select>
                             </div>
@@ -106,7 +106,7 @@
                             </div>
                             <div id="form_keterangan" class="col-md-6 mt-4">
                                 <label for="angkatan" class="m-t-20">Keterangan</label>
-                                <textarea class="form-control @error('keterangan') is-invalid @enderror" placeholder="Keterangan" id="keterangan" name="keterangan" rows="3">{{ old('keterangan', $jadwal->keterangan) }}</textarea>
+                                <textarea class="form-control @error('keterangan') is-invalid @enderror" on placeholder="Keterangan" id="keterangan" name="keterangan" rows="3">{{ old('keterangan', $jadwal->keterangan) }}</textarea>
                                 @error('keterangan')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -229,6 +229,44 @@
             }
         }
     });
+
+    // Change Tipe Jadwal
+    // document.getElementById('tipe_jadwal').addEventListener('change', function () {
+
+    // var style = this.value == 1 ? '' : 'none';
+    // var styleClass = this.value == 1 ? 'col-md-4 mt-1' : 'col-md-6 mt-1';
+
+    // var btnSubmit = document.getElementById('btnSubmit');
+    // btnSubmit = this.value == 1 ? btnSubmit.classList.remove('pull-right') : btnSubmit.classList.add('pull-right');
+
+    // document.getElementById('form_kegiatan').style.display = style;
+    // document.getElementById('form_mulai').style.display = style;
+    // document.getElementById('form_selesai').style.display = style;
+    // document.getElementById('form_jamPelajaran').style.display = style;
+    // document.getElementById('form_angkatan').style.display = style;
+    // document.getElementById('form_keterangan').classList = styleClass;
+    // document.getElementById('form_date').classList = styleClass;
+    // });
+</script>
+<script>
+    public function changeType() {
+        document.getElementById('tipe_jadwal').addEventListener('change', function () {
+
+        var style = this.value == 1 ? '' : 'none';
+        var styleClass = this.value == 1 ? 'col-md-4 mt-1' : 'col-md-6 mt-1';
+
+        var btnSubmit = document.getElementById('btnSubmit');
+        btnSubmit = this.value == 1 ? btnSubmit.classList.remove('pull-right') : btnSubmit.classList.add('pull-right');
+
+        document.getElementById('form_kegiatan').style.display = style;
+        document.getElementById('form_mulai').style.display = style;
+        document.getElementById('form_selesai').style.display = style;
+        document.getElementById('form_jamPelajaran').style.display = style;
+        document.getElementById('form_angkatan').style.display = style;
+        document.getElementById('form_keterangan').classList = styleClass;
+        document.getElementById('form_date').classList = styleClass;
+        });
+    }
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>

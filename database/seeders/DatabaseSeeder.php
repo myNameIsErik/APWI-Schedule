@@ -36,9 +36,5 @@ class DatabaseSeeder extends Seeder
             'kode_kegiatan' => 'PKA',
             'nama_kegiatan' => 'Pelatihan Keanggotaan'
         ]);
-
-        Golongan::create([
-            'jenis_golongan' => 'I/A'
-        ]);
     }
 }

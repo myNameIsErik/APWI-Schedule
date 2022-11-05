@@ -45,10 +45,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     //golongan
     Route::get('/data-golongan', [GolonganController::class, 'index']);
-    Route::get('data-golongan.{golongan:golongan_id}', [GolonganController::class, 'show']);
     Route::get('/add-golongan', [GolonganController::class, 'create']);
     Route::post('/add-golongan', [GolonganController::class, 'store']);
-    Route::get('editGolongan-{golongan:kode_golongan}', [GolonganController::class, 'edit']);
+    Route::get('editGolongan-{golongan:nama_pangkat}', [GolonganController::class, 'edit']);
     Route::patch('data-golongan.{golongan}', [GolonganController::class, 'update']);
     Route::delete('data-golongan.{golongan}', [GolonganController::class, 'destroy']);
 

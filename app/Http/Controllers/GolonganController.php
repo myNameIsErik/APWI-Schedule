@@ -40,7 +40,9 @@ class GolonganController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'jenis_golongan' => 'required|unique:golongans'
+            'nama_pangkat' => 'required',
+            'jenis_golongan' => 'required',
+            'ruang' => 'required'
         ]);
 
         Golongan::create($validatedData);
@@ -82,8 +84,9 @@ class GolonganController extends Controller
     public function update(Request $request, Golongan $golongan)
     {
         $validatedData = $request->validate([
-            'golongan' => 'required',
-            'ruang' => 'required',
+            'nama_pangkat' => 'required',
+            'jenis_golongan' => 'required',
+            'ruang' => 'required'
         ]);
 
         Golongan::where('id', $golongan->id)->update($validatedData);

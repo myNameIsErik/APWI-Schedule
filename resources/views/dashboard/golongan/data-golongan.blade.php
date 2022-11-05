@@ -20,7 +20,8 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Golongan</th>
+                                <th>Pangkat</th>
+                                <th>Gol./Ruang</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -28,12 +29,13 @@
                             @foreach($golongan as $gol)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $gol->jenis_golongan }}</td>
+                                <td>{{ $gol->nama_pangkat }}</td>
+                                <td>{{ $gol->jenis_golongan }} / {{ $gol->ruang }}</td>
                                 {{-- <td>{{ $gol->jp }}</td> --}}
                                 <td>
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <a href="editGolongan-{{ $gol->jenis_golongan }}"><button type="button" class="btn btn-sm mb-1 btn-warning text-white"><i class="bi bi-pencil-square"></i> Edit</button></a>
+                                            <a href="editGolongan-{{ $gol->nama_pangkat }}"><button type="button" class="btn btn-sm mb-1 btn-warning text-white"><i class="bi bi-pencil-square"></i> Edit</button></a>
                                             <form action="data-golongan.{{ $gol->id }}" method="post" class="d-inline">
                                                 @method('delete')
                                                 @csrf
