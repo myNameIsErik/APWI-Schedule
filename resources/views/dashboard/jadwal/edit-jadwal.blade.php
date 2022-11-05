@@ -231,24 +231,24 @@
     });
 
     // Change Tipe Jadwal
-    // document.getElementById('tipe_jadwal').addEventListener('change', function () {
+    document.getElementById('tipe_jadwal').addEventListener('change', function () {
 
-    // var style = this.value == 1 ? '' : 'none';
-    // var styleClass = this.value == 1 ? 'col-md-4 mt-1' : 'col-md-6 mt-1';
+    var style = this.value == 1 ? '' : 'none';
+    var styleClass = this.value == 1 ? 'col-md-4 mt-1' : 'col-md-6 mt-1';
 
-    // var btnSubmit = document.getElementById('btnSubmit');
-    // btnSubmit = this.value == 1 ? btnSubmit.classList.remove('pull-right') : btnSubmit.classList.add('pull-right');
+    var btnSubmit = document.getElementById('btnSubmit');
+    btnSubmit = this.value == 1 ? btnSubmit.classList.remove('pull-right') : btnSubmit.classList.add('pull-right');
 
-    // document.getElementById('form_kegiatan').style.display = style;
-    // document.getElementById('form_mulai').style.display = style;
-    // document.getElementById('form_selesai').style.display = style;
-    // document.getElementById('form_jamPelajaran').style.display = style;
-    // document.getElementById('form_angkatan').style.display = style;
-    // document.getElementById('form_keterangan').classList = styleClass;
-    // document.getElementById('form_date').classList = styleClass;
-    // });
+    document.getElementById('form_kegiatan').style.display = style;
+    document.getElementById('form_mulai').style.display = style;
+    document.getElementById('form_selesai').style.display = style;
+    document.getElementById('form_jamPelajaran').style.display = style;
+    document.getElementById('form_angkatan').style.display = style;
+    document.getElementById('form_keterangan').classList = styleClass;
+    document.getElementById('form_date').classList = styleClass;
+    });
 </script>
-<script>
+{{-- <script>
     public function changeType() {
         document.getElementById('tipe_jadwal').addEventListener('change', function () {
 
@@ -267,7 +267,7 @@
         document.getElementById('form_date').classList = styleClass;
         });
     }
-</script>
+</script> --}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
 {{-- <script>
