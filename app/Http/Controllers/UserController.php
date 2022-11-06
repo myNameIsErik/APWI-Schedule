@@ -8,6 +8,7 @@ use App\Models\Golongan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -76,7 +77,10 @@ class UserController extends Controller
         
         Mail::to($email)->send(new NotifUser($validatedData));
 
-        return redirect('/data-pegawai')->with('success', 'Data Pegawai Berhasil dibuat.');
+        Alert::success('Congrats', 'Data Pegawai Berhasil dibuat.');
+        
+        return redirect('/data-pegawai');
+        // return redirect('/data-pegawai')->with('success', 'Data Pegawai Berhasil dibuat.');
     }
 
     /**
@@ -140,7 +144,10 @@ class UserController extends Controller
         
         User::where('id', $pegawai->id)->update($validatedData);
 
-        return redirect('/data-pegawai')->with('success', 'Data Pegawai Berhasil diubah.');
+        Alert::success('Congrats', 'Data Pegawai Berhasil diubah!');
+
+        return redirect('/data-pegawai');
+        // return redirect('/data-pegawai')->with('success', 'Data Pegawai Berhasil diubah.');
     }
 
     /**
@@ -153,6 +160,9 @@ class UserController extends Controller
     {
         User::destroy($pegawai->id);
 
-        return redirect('/data-pegawai')->with('success', 'Data Pegawai Berhasil dihapus.');
+        Alert::success('Congrats', 'Data Pegawai Berhasil dihapus.');
+
+        return redirect('/data-pegawai');
+        // return redirect('/data-pegawai')->with('success', 'Data Pegawai Berhasil dihapus.');
     }
 }

@@ -19,10 +19,10 @@
                                 </a>
                             </li>
                             <li class="list-inline-item">
-                                <form action="data-pegawai.{{ $user->id }}" method="post">
+                                <form action="data-pegawai.{{ $user->id }}" method="post" onclick="return confirm('Apakah anda yakin ingin menghapus pegawai ini?');">
                                     @method('delete')
                                     @csrf
-                                    <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-dash-circle"></i> Hapus</button>
+                                    <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Hapus</button>
                                 </form>
                             </li>
                         </ul>

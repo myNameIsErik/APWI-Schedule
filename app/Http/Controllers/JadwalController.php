@@ -11,6 +11,7 @@ use App\Mail\NotificationEmail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class JadwalController extends Controller
 {
@@ -23,11 +24,24 @@ class JadwalController extends Controller
     {
         if (auth()->user()->level === "Admin") {
             return view('dashboard.jadwal.data-jadwal', [
-                'jadwal' => Jadwal::all()
+                'jadwal' => Jadwal::where('request', false)->whereRaw("((STR_TO_DATE(waktu_mulai, '%Y-%m-%d') ) >= curdate())")->orderBy('waktu_mulai', 'ASC')->get()
             ]);
         } else {
             return view('dashboard.jadwal.data-jadwal', [
-                'jadwal' => Jadwal::where('user_id', Auth::user()->id)->get()
+                'jadwal' => Jadwal::where('user_id', Auth::user()->id)->where('request', false)->whereRaw("((STR_TO_DATE(waktu_mulai, '%Y-%m-%d') ) >= curdate())")->orderBy('waktu_mulai', 'ASC')->get()
+            ]);
+        }
+    }
+
+    public function history()
+    {
+        if (auth()->user()->level === "Admin") {
+            return view('dashboard.jadwal.history-jadwal', [
+                'jadwal' => Jadwal::whereRaw("((STR_TO_DATE(waktu_mulai, '%Y-%m-%d') ) < curdate())")->orderBy('waktu_mulai', 'DESC')->get()
+            ]);
+        } else {
+            return view('dashboard.jadwal.history-jadwal', [
+                'jadwal' => Jadwal::where('user_id', Auth::user()->id)->whereRaw("((STR_TO_DATE(waktu_mulai, '%Y-%m-%d') ) < curdate())")->orderBy('waktu_mulai', 'DESC')->get()
             ]);
         }
     }
@@ -54,16 +68,6 @@ class JadwalController extends Controller
     public function store(Request $request)
     {
         $checkTipeJadwal = $request->tipe_jadwal;
-
-        // $user_id=2;
-        // $jadwals = Jadwal::all();  
-        // $arrayJdwl = [];
-        
-        // foreach($jadwals as $item){
-        //     $arrayJdwl[] = $item->user_id;
-        // }
-
-        // dd($arrayJdwl);
 
         if($checkTipeJadwal != 1){
             $validatedData = $request->validate([
@@ -108,13 +112,17 @@ class JadwalController extends Controller
 
         Jadwal::create($validatedData);
 
-        $searchEmail = $request->user_id;
+        Alert::success('Congrats', 'Jadwal Berhasil dibuat!');
+        
+        $getIdUser = $validatedData['user_id'];
 
-        $getEmail = User::select('email')->where('email', 'like', '%' .$searchEmail .'%')->get();
+        $getEmail = User::find($getIdUser)->email;
 
         Mail::to($getEmail)->send(new NotifJadwal($validatedData));
         
-        return redirect('/')->with('success', 'Jadwal Berhasil dibuat.');
+        return redirect('/');
+  
+        // return redirect('/')->with('success', 'Jadwal Berhasil dibuat.');
     }
 
     /**
@@ -155,6 +163,7 @@ class JadwalController extends Controller
     public function update(Request $request, Jadwal $jadwal)
     {
         $checkTipeJadwal = $request->tipe_jadwal;
+        $checkRequest = $jadwal->request;
 
         if($checkTipeJadwal != 1){
             $validatedData = $request->validate([
@@ -196,11 +205,18 @@ class JadwalController extends Controller
             $validatedData['user_id'] = $getId;
         }
 
+        if($checkRequest == true){
+            $validatedData['request'] = false;
+            $validatedData['alasan'] = null;
+        }
+
         Jadwal::where('id', $jadwal->id)->update($validatedData);
-
-        return redirect('/')->with('success', 'Jadwal Berhasil diubah.');
+        
+        Alert::success('Congrats', 'Jadwal Berhasil diubah!');
+        return redirect('/');
+        // return redirect('/')->with('success', 'Jadwal Berhasil diubah.');
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *
@@ -209,9 +225,11 @@ class JadwalController extends Controller
      */
     public function destroy(Jadwal $jadwal)
     {
-        Jadwal::destroy($jadwal->id);
+        // Jadwal::destroy($jadwal->id);
 
-        return redirect('/')->with('success', 'Jadwal Berhasil dihapus.');
+        Alert::success('Congrats', 'Jadwal Berhasil dihapus!');
+        return redirect('/');
+        // return redirect('/')->with('success', 'Jadwal Berhasil dihapus.');
     }
 
     public function showFull(User $user)
@@ -225,10 +243,13 @@ class JadwalController extends Controller
 
     public function checkJadwal(Request $request)
     {
+        $limit_max_jp = 15;
         $tanggal_mulai = $request->tanggal.' '.$request->mulai;
         $tanggal_selesai = $request->tanggal.' '.$request->selesai;
+        $jp = (int) $request->jp;
         
         $arr_user_id = [];
+
         $bentrok = DB::table('jadwals')->select('user_id')->whereRaw("
         (waktu_mulai <= STR_TO_DATE('$tanggal_mulai', '%Y-%m-%d %H:%i') AND waktu_selesai >= STR_TO_DATE('$tanggal_mulai', '%Y-%m-%d %H:%i')) OR
         (waktu_mulai <= STR_TO_DATE('$tanggal_selesai', '%Y-%m-%d %H:%i') AND waktu_selesai >= STR_TO_DATE('$tanggal_selesai', '%Y-%m-%d %H:%i')) OR 
@@ -237,7 +258,18 @@ class JadwalController extends Controller
         foreach($bentrok as $item){
             $arr_user_id[] = $item->user_id;
         }
-        $checking = DB::table('users')->whereNotIn('id', $arr_user_id)->get();
+
+        $max_jp = DB::table('jadwals')
+        ->select('user_id')
+        ->whereRaw("waktu_mulai >= STR_TO_DATE('$request->tanggal 00:00:00', '%Y-%m-%d %H:%i:%s') AND waktu_selesai <= STR_TO_DATE('$request->tanggal 23:59:59', '%Y-%m-%d %H:%i:%s')")
+        ->groupBy('user_id')
+        ->having(DB::raw("(SUM(jp)+$jp)"), '>', $limit_max_jp)
+        ->get()->toArray();
+        foreach($max_jp as $item){
+            $arr_user_id[] = $item->user_id;
+        }
+
+        $checking = DB::table('users')->where('status_anggota', true)->whereNotIn('id', $arr_user_id)->get();
         
         echo json_encode([
             'data' => $checking,
@@ -251,9 +283,11 @@ class JadwalController extends Controller
 
     public function checkJadwalUpdate(Request $request)
     {
+        $limit_max_jp = 15;
         $tanggal_mulai = $request->tanggal.' '.$request->mulai;
         $tanggal_selesai = $request->tanggal.' '.$request->selesai;
-        $id = 1; //harusna diambil ti $request
+        $id = $request->id;
+        $jp = (int) $request->jp;
         
         $arr_user_id = [];
         $bentrok = DB::table('jadwals')->select('user_id')->whereRaw("
@@ -266,7 +300,18 @@ class JadwalController extends Controller
             $arr_user_id[] = $item->user_id;
         }
         
-        $checking = DB::table('users')->whereNotIn('id', $arr_user_id)->get();
+        $max_jp = DB::table('jadwals')
+            ->select('user_id')
+            ->whereRaw("(waktu_mulai >= STR_TO_DATE('$request->tanggal 00:00:00', '%Y-%m-%d %H:%i:%s') AND waktu_selesai <= STR_TO_DATE('$request->tanggal 23:59:59', '%Y-%m-%d %H:%i:%s')) 
+            AND id != '$id'")
+            ->groupBy('user_id')
+            ->having(DB::raw("(SUM(jp)+$jp)"), '>', $limit_max_jp)
+            ->get()->toArray();
+        foreach($max_jp as $item){
+            $arr_user_id[] = $item->user_id;
+        }
+
+        $checking = DB::table('users')->where('status_anggota', true)->whereNotIn('id', $arr_user_id)->get();
         
         echo json_encode([
             'data' => $checking,
@@ -277,23 +322,4 @@ class JadwalController extends Controller
             ]
         ]);
     }
-
-    // public function indexUbahJadwal()
-    // {
-    //     if (auth()->user()->level === "Admin") {
-    //         return view('dashboard.rubah-jadwal.perubahan-jadwal', [
-    //             'jadwal' => Jadwal::where('alasan', '!=', null)->get()
-    //         ]);
-    //     } else {
-    //         return view('dashboard.rubah-jadwal.perubahan-jadwal', [
-    //             'jadwal' => Jadwal::where('user_id', Auth::user()->id)->get()
-    //         ]);
-    //     }
-    // }
-    
-    // public function checkJP(Request $request)
-    // {
-    //     $jp = Kegiatan::select(Jadwal::class, 'jp', $request->kegiatan_id);
-    //     return response()->json(['jp' => $jp]);
-    // }
 }

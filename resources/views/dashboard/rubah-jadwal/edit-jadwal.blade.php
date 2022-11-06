@@ -6,7 +6,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="form-validation">
-                    <form class="form-valide" action="data-jadwal.{{ $jadwal->id }}" method="post">
+                    <form class="form-valide" action="data-ubahJadwal.{{ $jadwal->id }}" method="post">
                         @method('patch')
                         @csrf
                         <div class="row form-material">
@@ -63,7 +63,7 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="col-md-12 mt-2">
+                            {{-- <div class="col-md-12 mt-2">
                                 <button id="btn_checkJadwalUpdate" type="button" class="btn btn-info my-2">Check</button><span id="checkSpan" class="ml-2 text-danger" style="display: none;" disabled></span>
                             </div>
                             <div id="form_pengajar" class="col-md-6 mt-2">
@@ -100,7 +100,7 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
-                            </div>
+                            </div> --}}
                             <div id="form_alasan" class="col-md-6 mt-4">
                                 <label for="angkatan" class="m-t-20">Alasan</label>
                                 <textarea class="form-control @error('alasan') is-invalid @enderror" placeholder="Masukkan Alasan Perubahan Jadwal..." id="alasan" name="alasan" rows="3">{{ old('alasan', $jadwal->alasan) }}</textarea>
@@ -121,131 +121,6 @@
     </div>
 </div>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script>
-    $(document).ready(() => {
-        $('#btn_checkJadwalUpdate').on('click', () => {
-            var check_tipe = document.getElementById("tipe_jadwal").value
-            var tipe_jadwal = document.getElementById("tanggal").value;
-            var tipe_jadwal2 = document.getElementById("mulai").value;
-            var tipe_jadwal3 = document.getElementById("selesai").value;
-            
-            if(check_tipe == 1){
-                if (!tipe_jadwal || !tipe_jadwal2 || !tipe_jadwal3) {
-                    var checkSpan = document.getElementById('checkSpan');
-                    checkSpan.style.display = '';
-                    checkSpan.innerHTML = "Lengkapi Inputan!"
-                    setTimeout(() => {
-                        checkSpan.style.display = 'none';
-                    }, 3000);
-                } else {
-                    //Get startTime
-                    var startTime = tipe_jadwal2;
-                    var arrStart = startTime.split(':');
-                    var endStartHrs = $.trim(arrStart[0]);
-                    var endStartMnt = $.trim(arrStart[1]);
-                    
-                    //Get endTime
-                    var endTime = tipe_jadwal3;
-                    var arrEnd = endTime.split(':');
-                    var endHoursHrs = $.trim(arrEnd[0]);
-                    var endHoursMnt = $.trim(arrEnd[1]);
-
-                    //Get results
-                    var getHours = endHoursHrs - endStartHrs;
-                    var getMnts = endHoursMnt - endStartMnt;
-                    var y = (getHours*60) + getMnts;
-                    var z = y / 45;
-                    var str = z.toString();
-                    var arrFix = str.split('.');
-                    var results = $.trim(arrFix[0])
-
-                    var jp = document.getElementById('jp');
-                    jp.value  = results;
-
-                    
-                    var checkSpan = document.getElementById('checkSpan');
-                    checkSpan.style.display = '';
-                    checkSpan.innerHTML = "Check Pegawai Berhasil!"
-                    setTimeout(() => {
-                        checkSpan.style.display = 'none';
-                    }, 3000);
-
-                    $.ajax({
-                        type: 'GET',
-                        url: '{{ url('/get-pegawaiUpdate') }}',
-                        data: {
-                            tanggal: tipe_jadwal,
-                            mulai: tipe_jadwal2,
-                            selesai: tipe_jadwal3,
-                        },
-                        dataType: "json",
-                        success: function ({data, debug}) {
-                            console.log(debug, data);
-                            $('#list-pengajar').html(data.map(({ id, name }) => (`<option value="${name}"></option>`)).join(''));
-                        },
-                        error: function (xhr) {
-                            alert('Error')
-                        }
-                    });
-                }
-            } else {
-                if(!tipe_jadwal){
-                    var checkSpan = document.getElementById('checkSpan');
-                    checkSpan.style.display = '';
-                    checkSpan.innerHTML = "Lengkapi Inputan!"
-                    setTimeout(() => {
-                        checkSpan.style.display = 'none';
-                    }, 3000);
-                } else {
-                    var checkSpan = document.getElementById('checkSpan');
-                    checkSpan.style.display = '';
-                    checkSpan.innerHTML = "Check Pegawai Berhasil!"
-                    setTimeout(() => {
-                        checkSpan.style.display = 'none';
-                    }, 3000);
-
-                    $.ajax({
-                        type: 'GET',
-                        url: '{{ url('/get-pegawaiUpdate') }}',
-                        data: {
-                            tanggal: tipe_jadwal,
-                            mulai: '00:00:00',
-                            selesai: '23:59:59',
-                        },
-                        dataType: "json",
-                        success: function ({data, debug}) {
-                            console.log(debug, data);
-                            $('#list-pengajar').html(data.map(({ id, name }) => (`<option value="${name}"></option>`)).join(''));
-                        },
-                        error: function (xhr) {
-                            alert('Error')
-                        }
-                    });
-                }
-            }
-        });
-            
-        // Change Tipe Jadwal
-        document.getElementById('tipe_jadwal').addEventListener('change', function () {
-
-            var style = this.value == 1 ? '' : 'none';
-            var styleClass = this.value == 1 ? 'col-md-6 mt-1' : 'col-md-6 mt-1';
-
-            var btnSubmit = document.getElementById('btnSubmit');
-            btnSubmit = this.value == 1 ? btnSubmit.classList.remove('pull-right') : btnSubmit.classList.add('pull-right');
-
-            document.getElementById('form_kegiatan').style.display = style;
-            document.getElementById('form_mulai').style.display = style;
-            document.getElementById('form_selesai').style.display = style;
-            document.getElementById('form_jamPelajaran').style.display = style;
-            document.getElementById('form_angkatan').style.display = style;
-            document.getElementById('form_keterangan').classList = styleClass;
-            document.getElementById('form_date').classList = styleClass;
-
-
-        });
-    })
-</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
 {{-- <script>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Golongan;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class GolonganController extends Controller
 {
@@ -15,7 +16,7 @@ class GolonganController extends Controller
     public function index()
     {
         return view('dashboard.golongan.data-golongan', [
-            "golongan" => Golongan::all()
+            "golongan" => Golongan::orderBy('jenis_golongan', 'ASC')->get()
         ]);
     }
 
@@ -47,7 +48,10 @@ class GolonganController extends Controller
 
         Golongan::create($validatedData);
 
-        return redirect('/data-golongan')->with('success', 'Golongan Berhasil dibuat.');
+        Alert::success('Congrats', 'Golongan Berhasil dibuat!');
+
+        return redirect('/data-golongan');
+        // return redirect('/data-golongan')->with('success', 'Golongan Berhasil dibuat.');
     }
 
     /**
@@ -91,7 +95,10 @@ class GolonganController extends Controller
 
         Golongan::where('id', $golongan->id)->update($validatedData);
 
-        return redirect('/data-golongan')->with('success', 'Golongan Berhasil diubah.');
+        Alert::success('Congrats', 'Golongan Berhasil diubah!');
+
+        return redirect('/data-golongan');
+        // return redirect('/data-golongan')->with('success', 'Golongan Berhasil diubah.');
     }
 
     /**
@@ -103,7 +110,10 @@ class GolonganController extends Controller
     public function destroy(Golongan $golongan)
     {
         Golongan::destroy($golongan->id);
+        
+        Alert::success('Congrats', 'Golongan Berhasil dihapus!');
 
-        return redirect('/data-golongan')->with('success', 'Golongan Berhasil dihapus.');
+        return redirect('/data-golongan');
+        // return redirect('/data-golongan')->with('success', 'Golongan Berhasil dihapus.');
     }
 }

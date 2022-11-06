@@ -147,21 +147,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div id="" class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="golongan">Golongan <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <select class="form-control" id="golongan" name="golongan" readonly="true">
-                                            {{-- @foreach($kegiatan as $keg)
-                                                @if(old('kegiatan_id') == $keg->id)
-                                                    <option value="{{ $keg->id }}" selected>{{ $keg->nama_kegiatan }}</option>
-                                                @else
-                                                    <option value="{{ $keg->id }}">{{ $keg->nama_kegiatan }}</option>
-                                                @endif
-                                            @endforeach --}}
-                                        </select>
-                                    </div>
-                                </div>
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="roles">Roles <span class="text-danger">*</span>
                                     </label>

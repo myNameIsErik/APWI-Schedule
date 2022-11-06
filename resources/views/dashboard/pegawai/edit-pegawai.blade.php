@@ -61,7 +61,7 @@
                                 <select class="form-control @error('golongan_id') is-invalid @enderror" id="golongan_id" name="golongan_id">
                                     <option value="{{ old('golongan_id', $pegawai->golongan_id) }}" selected>{{ $pegawai->golongan->nama_pangkat }}</option>
                                     @foreach($golongan as $gol)
-                                    <option value="{{ $gol->id }}">{{ $gol->nama_pangkat }}</option>
+                                        <option value="{{ $gol->id }}">{{ $gol->nama_pangkat }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -73,7 +73,7 @@
                                     <option value="1" {{ old('status_anggota', $pegawai->status_anggota) == 1 ? 'selected' : '' }}>
                                         Aktif
                                     </option>
-                                    <option value="0" {{ old('status_anggota', $pegawai->status_anggota) == 2 ? 'selected' : '' }}>
+                                    <option value="0" {{ old('status_anggota', $pegawai->status_anggota) == 0 ? 'selected' : '' }}>
                                         Tidak Aktif
                                     </option>
                                 </select>

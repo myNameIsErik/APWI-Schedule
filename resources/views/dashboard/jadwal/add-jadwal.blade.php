@@ -155,7 +155,7 @@
                     var str = z.toString();
 
                     var arrFix = str.split('.');
-                    var results = $.trim(arrFix[0]);
+                    var results = $.trim(arrFix[0])
 
                     var jp = document.getElementById('jp');
                     jp.value  = results;
@@ -202,7 +202,7 @@
                             tanggal: tipe_jadwal,
                             mulai: '00:00:00',
                             selesai: '23:59:59',
-                            jp:15,
+                            jp: 15,
                         },
                         dataType: "json",
                         success: function ({data, debug}) {

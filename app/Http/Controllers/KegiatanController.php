@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kegiatan;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KegiatanController extends Controller
 {
@@ -46,7 +47,10 @@ class KegiatanController extends Controller
 
         Kegiatan::create($validatedData);
 
-        return redirect('/data-kegiatan')->with('success', 'Kegiatan Berhasil dibuat.');
+        Alert::success('Congrats', 'Kegiatan Berhasil dibuat!');
+
+        return redirect('/data-kegiatan');
+        // return redirect('/data-kegiatan')->with('success', 'Kegiatan Berhasil dibuat.');
     }
 
     /**
@@ -89,7 +93,10 @@ class KegiatanController extends Controller
 
         Kegiatan::where('id', $kegiatan->id)->update($validatedData);
 
-        return redirect('/data-kegiatan')->with('success', 'Kegiatan Berhasil diubah.');
+        Alert::success('Congrats', 'Kegiatan Berhasil diubah!');
+
+        return redirect('/data-kegiatan');
+        // return redirect('/data-kegiatan')->with('success', 'Kegiatan Berhasil diubah.');
     }
 
     /**
@@ -102,6 +109,9 @@ class KegiatanController extends Controller
     {
         Kegiatan::destroy($kegiatan->id);
 
-        return redirect('/data-kegiatan')->with('success', 'Kegiatan Berhasil dihapus.');
+        Alert::success('Congrats', 'Kegiatan Berhasil dihapus!');
+
+        return redirect('/data-kegiatan');
+        // return redirect('/data-kegiatan')->with('success', 'Kegiatan Berhasil dihapus.');
     }
 }

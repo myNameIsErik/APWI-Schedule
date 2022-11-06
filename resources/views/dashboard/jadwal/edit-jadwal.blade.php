@@ -231,10 +231,10 @@
                         error: function (xhr) {
                             alert('Error')
                         }
-                });
+                    });
+                }
             }
-        }
-    });
+        });
 
     // Change Tipe Jadwal
     document.getElementById('tipe_jadwal').addEventListener('change', function () {

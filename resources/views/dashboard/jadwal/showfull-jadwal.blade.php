@@ -62,7 +62,7 @@
                                             <form action="data-jadwal.{{ $jdwl->id }}" method="post" class="d-inline">
                                                 @method('delete')
                                                 @csrf
-                                                <button type="submit" class="btn btn-sm mb-1 btn-danger"><i class="bi bi-dash-circle"></i> Hapus</button>
+                                                <button type="submit" class="btn btn-sm mb-1 btn-danger"><i class="bi bi-trash"></i> Hapus</button>
                                             </form>
                                         </div>
                                     </div>
