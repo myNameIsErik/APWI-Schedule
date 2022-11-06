@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use App\Mail\NotifUser;
 use App\Models\Golongan;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -70,6 +72,10 @@ class UserController extends Controller
 
         User::create($validatedData);
 
+        $email = $request->email;
+        
+        Mail::to($email)->send(new NotifUser($validatedData));
+
         return redirect('/data-pegawai')->with('success', 'Data Pegawai Berhasil dibuat.');
     }
 
@@ -113,7 +119,7 @@ class UserController extends Controller
             'nip' => 'required',
             'name' => 'required',
             'jabatan' => 'required',
-            // 'golongan' => 'required',
+            'golongan_id' => 'required',
             'level' => 'required',
             'status_anggota' => 'required'
         ];

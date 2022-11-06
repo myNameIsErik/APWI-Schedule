@@ -67,14 +67,14 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="golongan">Gol. Ruang <span class="text-danger">*</span></label>
+                            <label class="col-lg-4 col-form-label" for="golongan">Pangkat <span class="text-danger">*</span></label>
                             <div class="col-lg-6">
                                 <select class="form-control @error('golongan') is-invalid @enderror" id="golongan" name="golongan_id">
                                     @foreach($golongan as $gol)
                                         @if(old('golongan_id') == $gol->id)
-                                            <option value="{{ $gol->id }}" selected>{{ $gol->jenis_golongan }}</option>
+                                            <option value="{{ $gol->id }}" selected>{{ $gol->nama_pangkat }}</option>
                                         @else
-                                            <option value="{{ $gol->id }}">{{ $gol->jenis_golongan }}</option>
+                                            <option value="{{ $gol->id }}">{{ $gol->nama_pangkat }}</option>
                                         @endif
                                     @endforeach
                                 </select>

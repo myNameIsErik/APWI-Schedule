@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Kegiatan;
 use App\Models\User;
 use App\Models\Jadwal;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Kegiatan;
+use App\Mail\NotifJadwal;
+use Illuminate\Http\Request;
+use App\Mail\NotificationEmail;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class JadwalController extends Controller
 {
@@ -104,6 +107,13 @@ class JadwalController extends Controller
         }
 
         Jadwal::create($validatedData);
+
+        $searchEmail = $request->user_id;
+
+        $getEmail = User::select('email')->where('email', 'like', '%' .$searchEmail .'%')->get();
+
+        Mail::to($getEmail)->send(new NotifJadwal($validatedData));
+        
         return redirect('/')->with('success', 'Jadwal Berhasil dibuat.');
     }
 

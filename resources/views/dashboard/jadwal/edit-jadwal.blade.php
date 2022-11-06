@@ -13,13 +13,19 @@
                             <div class="col-md-6 mt-4">
                                 <label for="tipe_kegiatan">Tipe Jadwal</label> <span class="text-danger">*</span>
                                 <select class="form-control" id="tipe_jadwal" name="tipe_jadwal">
-                                    @if(old('tipe_jadwal', $jadwal->tipe_jadwal) == $jadwal->tipe_jadwal)
+                                    <option value="1" {{ old('tipe_jadwal', $jadwal->tipe_jadwal) == '1' ? 'selected' : '' }}>
+                                        Mengajar
+                                    </option>
+                                    <option value="2" {{ old('tipe_jadwal', $jadwal->tipe_jadwal) == '2' ? 'selected' : '' }}>
+                                        Perjalanan Dinas
+                                    </option>
+                                    {{-- @if(old('tipe_jadwal', $jadwal->tipe_jadwal) == '1')
                                         <option value="{{ old('tipe_jadwal', $jadwal->tipe_jadwal) }}" selected>Mengajar</option>
                                         <option value="2">Perjalanan Dinas</option>
                                     @else
                                         <option value="{{ old('tipe_jadwal', $jadwal->tipe_jadwal) }}" selected>Perjalan Dinas</option>
                                         <option value="1">Mengajar</option>
-                                    @endif
+                                    @endif --}}
                                 </select>
                             </div>
                             <div id="form_kegiatan" class="col-md-6 mt-4">
@@ -249,7 +255,7 @@
     });
 </script>
 {{-- <script>
-    public function changeType() {
+    function changeType() {
         document.getElementById('tipe_jadwal').addEventListener('change', function () {
 
         var style = this.value == 1 ? '' : 'none';

@@ -42,8 +42,8 @@
                             <td>{{ $user->jabatan }}</td>
                         </tr>
                         <tr>
-                            <th scope="row">Golongan:</th>
-                            <td>{{ $user->golongan->jenis_golongan }}</td>
+                            <th scope="row">Pangkat-Gol/Ruang:</th>
+                            <td>{{ $user->golongan->nama_pangkat }}-{{ $user->golongan->jenis_golongan }}/{{ $user->golongan->ruang }}</td>
                         </tr>
                         <tr>
                             <th scope="row">E-mail:</th>
