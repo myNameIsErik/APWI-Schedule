@@ -133,9 +133,7 @@ class JadwalController extends Controller
      */
     public function show(Jadwal $jadwal)
     {
-        return view('dashboard.jadwal.show-jadwal', [
-            "jadwal" => $jadwal
-        ]);
+    
     }
 
     /**
@@ -225,7 +223,7 @@ class JadwalController extends Controller
      */
     public function destroy(Jadwal $jadwal)
     {
-        // Jadwal::destroy($jadwal->id);
+        Jadwal::destroy($jadwal->id);
 
         Alert::success('Congrats', 'Jadwal Berhasil dihapus!');
         return redirect('/');
@@ -237,7 +235,7 @@ class JadwalController extends Controller
         return view('dashboard.jadwal.showfull-jadwal', [
             $user_id = $user->id,
             'user' => $user,
-            'jadwal' => Jadwal::where('user_id', $user_id)->get()
+            'jadwal' => Jadwal::where('user_id', $user_id)->orderBy('waktu_mulai', 'DESC')->get()
         ]);
     }
 

@@ -15,7 +15,6 @@
 @endif
 <div class="row justify-content-center">
     <div class="col-12">
-        {{-- <h4 class="card-title"></h4> --}}
         @foreach($profiles as $profile)
             <div class="card">
                 <div class="card-header">
@@ -129,7 +128,6 @@
                                             </div>
                                         </form>
                                     </div>
-                                
                     </div>
                 </div>
             </div>

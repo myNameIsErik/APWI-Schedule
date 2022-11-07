@@ -31,18 +31,6 @@
                                 @enderror
                             </div>
                         </div>
-                        {{-- <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="username">Username <span class="text-danger">*</span>
-                            </label>
-                            <div class="col-lg-6">
-                                <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" placeholder="Masukan Nama Pegawai.." value="{{ old('username') }}">
-                                @error('username')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                        </div> --}}
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label" for="email">Email</label>
                             <div class="col-lg-6">

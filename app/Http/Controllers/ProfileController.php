@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProfileController extends Controller
 {
@@ -29,8 +30,8 @@ class ProfileController extends Controller
     {
         $rules = [
             'name' => 'required',
-            'jabatan' => 'required',
-            'status_anggota' => 'required'
+            'jabatan' => '',
+            'status_anggota' => ''
         ];
 
         if($request->nip != $user->nip){
@@ -49,7 +50,9 @@ class ProfileController extends Controller
         
         User::where('id', $user->id)->update($validatedData);
 
-        return redirect('/profile')->with('success', 'Data Profile Berhasil diubah.');
+        Alert::success('Congrats', 'Data Profile Berhasil diubah!');
+        return redirect('/profile');
+        // return redirect('/profile')->with('success', 'Data Profile Berhasil diubah.');
     }
 
     public function changePassword(Request $request)
@@ -63,6 +66,8 @@ class ProfileController extends Controller
    
         User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
 
-        return redirect('/profile')->with('successPassword', 'Password Berhasil diubah.');
+        Alert::success('Congrats', 'Password Berhasil diubah!');
+        return redirect('/profile');
+        // return redirect('/profile')->with('successPassword', 'Password Berhasil diubah.');
     }
 }

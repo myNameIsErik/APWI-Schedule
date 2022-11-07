@@ -5,7 +5,6 @@
 
 <div class="row">
     <div class="col-12">
-        {{-- <h4 class="card-title"></h4> --}}
             <div class="card">
                 <div class="card-header">
                     Data Pegawai {{ $user->name }}

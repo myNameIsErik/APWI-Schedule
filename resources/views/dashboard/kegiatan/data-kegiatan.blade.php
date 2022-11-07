@@ -31,7 +31,6 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $keg->kode_kegiatan }}</td>
                                 <td>{{ $keg->nama_kegiatan }}</td>
-                                {{-- <td>{{ $keg->jp }}</td> --}}
                                 <td>
                                     <div class="row">
                                         <div class="col-lg-12">

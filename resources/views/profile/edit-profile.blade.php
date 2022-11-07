@@ -163,7 +163,7 @@
                                     <label class="col-lg-4 col-form-label" for="roles">Status Anggota<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control @error('status_anggota') is-invalid @enderror" id="status_anggota" name="status_anggota" placeholder="status_anggota.." value="{{ old('status_anggota', $user->status_anggota) == 1 ? 'Aktif' : 'Tidak Aktif' }}" readonly="true">
+                                        <input type="text" class="form-control @error('status_anggota') is-invalid @enderror" id="status_anggota" name="status_anggota" placeholder="status_anggota.." value="{{ old('status_anggota', $user->status_anggota) == 1 ? 'Aktif' : 'Tidak Aktif' }}" disabled>
                                         @error('status_anggota')
                                             <div class="invalid-feedback">
                                                 {{ $message }}

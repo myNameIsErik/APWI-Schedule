@@ -31,7 +31,6 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $gol->nama_pangkat }}</td>
                                 <td>{{ $gol->jenis_golongan }} / {{ $gol->ruang }}</td>
-                                {{-- <td>{{ $gol->jp }}</td> --}}
                                 <td>
                                     <div class="row">
                                         <div class="col-lg-12">

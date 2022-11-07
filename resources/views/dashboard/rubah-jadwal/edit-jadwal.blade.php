@@ -63,44 +63,6 @@
                                     </div>
                                 @enderror
                             </div>
-                            {{-- <div class="col-md-12 mt-2">
-                                <button id="btn_checkJadwalUpdate" type="button" class="btn btn-info my-2">Check</button><span id="checkSpan" class="ml-2 text-danger" style="display: none;" disabled></span>
-                            </div>
-                            <div id="form_pengajar" class="col-md-6 mt-2">
-                                <label for="pengajar">Pegawai</label> <span class="text-danger">*</span>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Cari Pegawai" name="user_id" list="list-pengajar" id="pengajar" autocomplete="off" value="{{ old('pengajar', $jadwal->user->name) }}" disabled>
-                                    <datalist id="list-pengajar">
-                                    </datalist>
-                                </div>
-                            </div>
-                            <div id="form_jamPelajaran"class="col-md-3 mt-2">
-                                <label for="jp" class="m-t-20">Jumlah Jam Pelajaran</label> <span class="text-danger">*</span>
-                                <input type="text" class="form-control @error('jp') is-invalid @enderror" placeholder="" id="jp" name="jp" value="{{ old('jp', $jadwal->jp) }}" readonly="true" disabled>
-                                @error('jp')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div id="form_angkatan" class="col-md-3 mt-2">
-                                <label for="angkatan" class="m-t-20">Angkatan</label> <span class="text-danger">*</span>
-                                <input type="text" class="form-control @error('angkatan') is-invalid @enderror" placeholder="Angkatan" id="angkatan" name="angkatan" value="{{ old('angkatan', $jadwal->angkatan) }}" disabled>
-                                @error('angkatan')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div id="form_keterangan" class="col-md-6 mt-4">
-                                <label for="angkatan" class="m-t-20">Keterangan</label>
-                                <textarea class="form-control @error('keterangan') is-invalid @enderror" placeholder="Keterangan" id="keterangan" name="keterangan" rows="3" disabled>{{ old('keterangan', $jadwal->keterangan) }}</textarea>
-                                @error('keterangan')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div> --}}
                             <div id="form_alasan" class="col-md-6 mt-4">
                                 <label for="angkatan" class="m-t-20">Alasan</label>
                                 <textarea class="form-control @error('alasan') is-invalid @enderror" placeholder="Masukkan Alasan Perubahan Jadwal..." id="alasan" name="alasan" rows="3">{{ old('alasan', $jadwal->alasan) }}</textarea>
@@ -123,14 +85,4 @@
 <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
-{{-- <script>
-    const kegiatan = document.querySelector('#kegiatan');
-    const jp = document.querySelector('#jp');
-
-    kegiatan.addEventListener('change', function() {
-        fetch('/add-data/checkJP?kegiatan=' + kegiatan.value)
-        .then(response => response.json())
-        .then(data => jp.value = data.jp)
-    });
-</script> --}}
 @endsection

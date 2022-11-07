@@ -19,16 +19,9 @@
                                     <option value="2" {{ old('tipe_jadwal', $jadwal->tipe_jadwal) == '2' ? 'selected' : '' }}>
                                         Perjalanan Dinas
                                     </option>
-                                    {{-- @if(old('tipe_jadwal', $jadwal->tipe_jadwal) == '1')
-                                        <option value="{{ old('tipe_jadwal', $jadwal->tipe_jadwal) }}" selected>Mengajar</option>
-                                        <option value="2">Perjalanan Dinas</option>
-                                    @else
-                                        <option value="{{ old('tipe_jadwal', $jadwal->tipe_jadwal) }}" selected>Perjalan Dinas</option>
-                                        <option value="1">Mengajar</option>
-                                    @endif --}}
                                 </select>
                             </div>
-                            <div id="form_kegiatan" class="col-md-6 mt-4">
+                            <div id="form_kegiatan" class="col-md-6 mt-4" style="display:{{ $jadwal->tipe_jadwal == '2' ? 'none' : '' }}">
                                 <label for="kegiatan">Kegiatan</label> <span class="text-danger">*</span>
                                 <select class="form-control" id="kegiatan" name="kegiatan_id">
                                     @foreach($kegiatan as $keg)
@@ -40,20 +33,8 @@
                                     @endforeach
                                 </select>
                             </div>
-                            {{-- <div class="col-md-6 mt-4">
-                                <label for="pengajar">Pengajar</label>
-                                <select class="form-control" id="pengajar" name="user_id" @if(Auth::user()->level == 'User')disabled @endif>
-                                    @foreach($pegawai as $pgw)
-                                        @if(old('kegiatan_id', $jadwal->user_id) == $keg->id)
-                                            <option value="{{ $pgw->id }}" selected>{{ $pgw->name }}</option>
-                                        @else
-                                            <option value="{{ $pgw->id }}">{{ $pgw->name }}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div> --}}
                             <div class="col-md-6 mt-4">
-                                <label for="pengajar">Tanggal</label>
+                                <label for="pengajar">Tanggal</label> <span class="text-danger">*</span>
                                 <div class="input-group">
                                     <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" placeholder="Tanggal Kegiatan" value="{{ old('waktu_mulai', date('Y-m-d', strtotime($jadwal->waktu_mulai))) }}">
                                     @error('tanggal')
@@ -63,7 +44,7 @@
                                 @enderror
                                 </div>
                             </div>
-                            <div id="form_mulai" class="col-md-4 mt-4">
+                            <div id="form_mulai" class="col-md-4 mt-4" style="display:{{ $jadwal->tipe_jadwal == '2' ? 'none' : '' }}" >
                                 <label for="mulai" class="m-t-20">Jam Mulai</label> <span class="text-danger">*</span>
                                 <input type="time" class="form-control @error('waktu_mulai') is-invalid @enderror" id="mulai" name="waktu_mulai" placeholder="Check time" value="{{ old('waktu_mulai', date('H:i', strtotime($jadwal->waktu_mulai))) }}">
                                 @error('waktu_mulai')
@@ -72,7 +53,7 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div id="form_selesai" class="col-md-4 mt-4">
+                            <div id="form_selesai" class="col-md-4 mt-4" style="display:{{ $jadwal->tipe_jadwal == '2' ? 'none' : '' }}">
                                 <label for="selesai" class="m-t-20">Jam Selesai</label> <span class="text-danger">*</span>
                                 <input type="time" class="form-control @error('waktu_selesai') is-invalid @enderror" id="selesai" name="waktu_selesai" placeholder="Check time" value="{{ old('waktu_selesai', date('H:i', strtotime($jadwal->waktu_selesai))) }}">
                                 @error('waktu_selesai')
@@ -92,7 +73,7 @@
                                     </datalist>
                                 </div>
                             </div>
-                            <div id="form_jamPelajaran"class="col-md-3 mt-2">
+                            <div id="form_jamPelajaran"class="col-md-3 mt-2" style="display:{{ $jadwal->tipe_jadwal == '2' ? 'none' : '' }}">
                                 <label for="jp" class="m-t-20">Jumlah Jam Pelajaran</label> <span class="text-danger">*</span>
                                 <input type="text" class="form-control @error('jp') is-invalid @enderror" placeholder="" id="jp" name="jp" value="{{ old('jp', $jadwal->jp) }}" readonly="true">
                                 @error('jp')
@@ -101,7 +82,7 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div id="form_angkatan" class="col-md-3 mt-2">
+                            <div id="form_angkatan" class="col-md-3 mt-2" style="display:{{ $jadwal->tipe_jadwal == '2' ? 'none' : '' }}">
                                 <label for="angkatan" class="m-t-20">Angkatan</label> <span class="text-danger">*</span>
                                 <input type="text" class="form-control @error('angkatan') is-invalid @enderror" placeholder="Angkatan" id="angkatan" name="angkatan" value="{{ old('angkatan', $jadwal->angkatan) }}">
                                 @error('angkatan')
@@ -110,7 +91,7 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div id="form_keterangan" class="col-md-6 mt-4">
+                            <div id="form_keterangan" class="{{ $jadwal->tipe_jadwal == '2' ? 'col-md-6' : 'col-md-6 mt-4' }}">
                                 <label for="angkatan" class="m-t-20">Keterangan</label>
                                 <textarea class="form-control @error('keterangan') is-invalid @enderror" on placeholder="Keterangan" id="keterangan" name="keterangan" rows="3">{{ old('keterangan', $jadwal->keterangan) }}</textarea>
                                 @error('keterangan')
@@ -254,36 +235,6 @@
     document.getElementById('form_date').classList = styleClass;
     });
 </script>
-{{-- <script>
-    function changeType() {
-        document.getElementById('tipe_jadwal').addEventListener('change', function () {
-
-        var style = this.value == 1 ? '' : 'none';
-        var styleClass = this.value == 1 ? 'col-md-4 mt-1' : 'col-md-6 mt-1';
-
-        var btnSubmit = document.getElementById('btnSubmit');
-        btnSubmit = this.value == 1 ? btnSubmit.classList.remove('pull-right') : btnSubmit.classList.add('pull-right');
-
-        document.getElementById('form_kegiatan').style.display = style;
-        document.getElementById('form_mulai').style.display = style;
-        document.getElementById('form_selesai').style.display = style;
-        document.getElementById('form_jamPelajaran').style.display = style;
-        document.getElementById('form_angkatan').style.display = style;
-        document.getElementById('form_keterangan').classList = styleClass;
-        document.getElementById('form_date').classList = styleClass;
-        });
-    }
-</script> --}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
-{{-- <script>
-    const kegiatan = document.querySelector('#kegiatan');
-    const jp = document.querySelector('#jp');
-
-    kegiatan.addEventListener('change', function() {
-        fetch('/add-data/checkJP?kegiatan=' + kegiatan.value)
-        .then(response => response.json())
-        .then(data => jp.value = data.jp)
-    });
-</script> --}}
 @endsection
