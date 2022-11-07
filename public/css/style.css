@@ -124,6 +124,10 @@ body {
 [tabindex="-1"]:focus {
   outline: 0 !important; }
 
+input:disabled {
+  background: #dddddd;
+}
+
 hr {
   box-sizing: content-box;
   height: 0;

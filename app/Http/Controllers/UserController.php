@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Jadwal;
 use App\Mail\NotifUser;
 use App\Models\Golongan;
 use Illuminate\Http\Request;
@@ -75,6 +76,9 @@ class UserController extends Controller
 
         $email = $request->email;
         
+        if($request->email != null){
+            Mail::to($email)->send(new NotifUser($validatedData));
+        }
         Mail::to($email)->send(new NotifUser($validatedData));
 
         Alert::success('Congrats', 'Data Pegawai Berhasil dibuat.');
@@ -89,10 +93,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $user, Jadwal $jadwal)
     {
         return view('dashboard.pegawai.show-pegawai', [
-            "user" => $user
+            "user" => $user,
+            'jadwal' => $jadwal
         ]);
     }
 

@@ -21,7 +21,7 @@
                             <div id="form_golongan" class="col-md-4 mt-2">
                                 <label class="m-t-20" for="jenis_golongan">Golongan <span class="text-danger">*</span></label>
                                 <select class="form-control" id="jenis_golongan" name="jenis_golongan">
-                                    <option value="{{ old('jenis_golongan', $golongan->jenis_golongan) }}" selected>{{ old('jenis_golongan', $golongan->jenis_golongan) }}</option>
+                                    <option value="{{ old('jenis_golongan', $golongan->jenis_golongan) }}" selected disabled>{{ old('jenis_golongan', $golongan->jenis_golongan) }}</option>
                                     <option value="I">I</option>
                                     <option value="II">II</option>
                                     <option value="III">III</option>

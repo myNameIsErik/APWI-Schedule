@@ -31,7 +31,9 @@ Route::group(['middleware' => 'auth'], function () {
     //perubahan jadwal
     Route::get('/perubahan-jadwal', [RubahJadwalController::class, 'index']);
     Route::get('{jadwal}.editJadwal', [RubahJadwalController::class, 'edit']);
-    Route::patch('data-ubahJadwal.{jadwal}', [RubahJadwalController::class, 'update']);
+    Route::patch('data-ubah-jadwal.{jadwal}', [RubahJadwalController::class, 'update']);
+    Route::patch('acc-jadwal.{jadwal}', [RubahJadwalController::class, 'AccRequest']);
+    // Route::get('jadwal-{jadwal:kegiatan_id}', [RubahJadwalController::class, 'show']);
 
     //logout
     Route::post('/logout', [LoginController::class, 'logout']);
@@ -75,7 +77,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('editJadwal-{jadwal:id}', [JadwalController::class, 'edit']);
     Route::patch('data-jadwal.{jadwal}', [JadwalController::class, 'update']);
     Route::delete('data-jadwal.{jadwal}', [JadwalController::class, 'destroy']);
-    Route::get('jadwal-{user:nip}', [JadwalController::class, 'showFull']);
+    Route::get('data-jadwal-{jadwal:kegiatan_id}', [JadwalController::class, 'show']);
+    Route::get('jadwal-{jadwal:user_id}', [JadwalController::class, 'showFull']);
 
     //ajax
     Route::get('/get-pegawai', [JadwalController::class, 'checkJadwal']);

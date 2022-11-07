@@ -6,9 +6,6 @@
         <div class="card">
             <div class="card-body">
                 <div class="form-validation">
-                    <form class="form-valide" action="data-ubahJadwal.{{ $jadwal->id }}" method="post">
-                        @method('patch')
-                        @csrf
                         <div class="row form-material">
                             <div class="col-md-6 mt-4">
                                 <label for="tipe_kegiatan">Tipe Jadwal</label> <span class="text-danger">*</span>
@@ -58,6 +55,48 @@
                                 <label for="selesai" class="m-t-20">Jam Selesai</label> <span class="text-danger">*</span>
                                 <input type="time" class="form-control @error('waktu_selesai') is-invalid @enderror" id="selesai" name="waktu_selesai" placeholder="Check time" value="{{ old('waktu_selesai', date('H:i', strtotime($jadwal->waktu_selesai))) }}" disabled>
                                 @error('waktu_selesai')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h4>Request Perubahan Jadwal</h4>
+                <div class="form-validation">
+                    <form class="form-valide" action="data-ubah-jadwal.{{ $jadwal->id }}" method="post">
+                        @method('patch')
+                        @csrf
+                        <div class="row form-material">
+                            <div class="col-md-4 mt-4">
+                                <label for="req_tanggal">Tanggal</label>
+                                <div class="input-group">
+                                    <input type="date" class="form-control @error('req_tanggal') is-invalid @enderror" id="req_tanggal" name="req_tanggal" placeholder="Tanggal Kegiatan" value="{{ old('waktu_mulai', date('Y-m-d', strtotime($jadwal->waktu_mulai))) }}">
+                                    @error('req_tanggal')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                                </div>
+                            </div>
+                            <div id="form_mulai" class="col-md-4 mt-4">
+                                <label for="req_mulai" class="m-t-20">Jam Mulai</label> <span class="text-danger">*</span>
+                                <input type="time" class="form-control @error('req_mulai') is-invalid @enderror" id="req_mulai" name="req_mulai" placeholder="Check time" value="{{ old('req_mulai', date('H:i', strtotime($jadwal->waktu_mulai))) }}">
+                                @error('req_mulai')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div id="form_selesai" class="col-md-4 mt-4">
+                                <label for="req_selesai" class="m-t-20">Jam Selesai</label> <span class="text-danger">*</span>
+                                <input type="time" class="form-control @error('req_selesai') is-invalid @enderror" id="req_selesai" name="req_selesai" placeholder="Check time" value="{{ old('req_selesai', date('H:i', strtotime($jadwal->waktu_selesai))) }}">
+                                @error('req_selesai')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>

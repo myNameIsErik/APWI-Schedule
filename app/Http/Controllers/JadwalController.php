@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Jadwal;
+use App\Mail\NotifEdit;
 use App\Models\Kegiatan;
 use App\Mail\NotifJadwal;
 use Illuminate\Http\Request;
@@ -24,11 +25,11 @@ class JadwalController extends Controller
     {
         if (auth()->user()->level === "Admin") {
             return view('dashboard.jadwal.data-jadwal', [
-                'jadwal' => Jadwal::where('request', false)->whereRaw("((STR_TO_DATE(waktu_mulai, '%Y-%m-%d') ) >= curdate())")->orderBy('waktu_mulai', 'ASC')->get()
+                'jadwal' => Jadwal::where('request', false)->whereRaw("((STR_TO_DATE(waktu_mulai, '%Y-%m-%d') ) >= curdate())")->orderBy('waktu_mulai', 'DESC')->get()
             ]);
         } else {
             return view('dashboard.jadwal.data-jadwal', [
-                'jadwal' => Jadwal::where('user_id', Auth::user()->id)->where('request', false)->whereRaw("((STR_TO_DATE(waktu_mulai, '%Y-%m-%d') ) >= curdate())")->orderBy('waktu_mulai', 'ASC')->get()
+                'jadwal' => Jadwal::where('user_id', Auth::user()->id)->where('request', false)->whereRaw("((STR_TO_DATE(waktu_mulai, '%Y-%m-%d') ) >= curdate())")->orderBy('waktu_mulai', 'DESC')->get()
             ]);
         }
     }
@@ -118,8 +119,10 @@ class JadwalController extends Controller
 
         $getEmail = User::find($getIdUser)->email;
 
-        Mail::to($getEmail)->send(new NotifJadwal($validatedData));
-        
+        if($getEmail != null){
+            Mail::to($getEmail)->send(new NotifJadwal($validatedData));
+        }
+
         return redirect('/');
   
         // return redirect('/')->with('success', 'Jadwal Berhasil dibuat.');
@@ -133,7 +136,9 @@ class JadwalController extends Controller
      */
     public function show(Jadwal $jadwal)
     {
-    
+        return view('dashboard.jadwal.show-jadwal', [
+            'jdwl' => $jadwal
+        ]);
     }
 
     /**
@@ -208,6 +213,14 @@ class JadwalController extends Controller
             $validatedData['alasan'] = null;
         }
 
+        $getIdUser = $validatedData['user_id'];
+
+        $getEmail = User::find($getIdUser)->email;
+
+        if($getEmail != null){
+            Mail::to($getEmail)->send(new NotifEdit($validatedData));
+        }
+
         Jadwal::where('id', $jadwal->id)->update($validatedData);
         
         Alert::success('Congrats', 'Jadwal Berhasil diubah!');
@@ -230,12 +243,12 @@ class JadwalController extends Controller
         // return redirect('/')->with('success', 'Jadwal Berhasil dihapus.');
     }
 
-    public function showFull(User $user)
+    public function showFull(Jadwal $jadwal, User $user)
     {
         return view('dashboard.jadwal.showfull-jadwal', [
-            $user_id = $user->id,
+            $getUserId = $jadwal->user_id,
             'user' => $user,
-            'jadwal' => Jadwal::where('user_id', $user_id)->orderBy('waktu_mulai', 'DESC')->get()
+            'jadwal' => Jadwal::where('user_id', $getUserId)->orderBy('waktu_mulai', 'DESC')->get()
         ]);
     }
 

@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NotifAccJadwal;
 use App\Models\User;
 use App\Models\Jadwal;
 use App\Models\Kegiatan;
 use Illuminate\Http\Request;
+use App\Mail\NotifEditJadwal;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class RubahJadwalController extends Controller
@@ -78,13 +81,52 @@ class RubahJadwalController extends Controller
     public function update(Request $request, Jadwal $jadwal)
     {
         $validatedData = $request->validate([
-            'alasan' => 'required'
+            'req_tanggal' => 'required',
+            'req_mulai' => 'required',
+            'req_selesai' => 'required',
+            'alasan' => 'required',
         ]);
+
+        $validatedData['req_mulai'] = $validatedData['req_tanggal'] . " " . $validatedData['req_mulai'];
+        $validatedData['req_selesai'] = $validatedData['req_tanggal'] . " ".$validatedData['req_selesai'];
+        unset($validatedData['req_tanggal']);
+
         $validatedData['request'] = 1;
 
         Jadwal::where('id', $jadwal->id)->update($validatedData);
 
+        $getIdUser = $jadwal['user_id'];
+
+        $getEmail = User::find($getIdUser)->email;
+
+        if($getEmail != null){
+            Mail::to($getEmail)->send(new NotifEditJadwal($validatedData));
+        }
+
         Alert::success('Congrats', 'Permintaan Berhasil Terkirim!');
+        return redirect('/');
+        // return redirect('/')->with('success', 'Permintaan Berhasil Terkirim.');
+    }
+
+    public function AccRequest(Jadwal $jadwal)
+    {
+        $data = [];
+        $data['request'] = false;
+        $data['alasan'] = null;
+        $data['waktu_mulai'] = $jadwal['req_mulai'];
+        $data['waktu_selesai'] = $jadwal['req_selesai'];
+
+        Jadwal::where('id', $jadwal->id)->update($data);
+
+        $getIdUser = $jadwal['user_id'];
+
+        $getEmail = User::find($getIdUser)->email;
+
+        if($getEmail != null){
+            Mail::to($getEmail)->send(new NotifAccJadwal($data));
+        }
+
+        Alert::success('Congrats', 'Jadwal Berhasil Diatur!');
         return redirect('/');
         // return redirect('/')->with('success', 'Permintaan Berhasil Terkirim.');
     }

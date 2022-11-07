@@ -1,5 +1,5 @@
 @component('mail::message')
-Jadwal Baru pada:
+Jadwal telah diubah menjadi:
 
 <p>Tanggal: {{ date('d-m-Y', strtotime($validatedData['waktu_mulai'])); }}</p>
 <p>Pukul: {{ date('H:i', strtotime($validatedData['waktu_mulai'])) }} - {{ date('H:i', strtotime($validatedData['waktu_selesai'])) }}</p>

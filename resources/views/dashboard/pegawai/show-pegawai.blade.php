@@ -42,11 +42,11 @@
                         </tr>
                         <tr>
                             <th scope="row">Pangkat-Gol/Ruang:</th>
-                            <td>{{ $user->golongan->nama_pangkat }}-{{ $user->golongan->jenis_golongan }}/{{ $user->golongan->ruang }}</td>
+                            <td>{{ isset($user->golongan)?$user->golongan->nama_pangkat:'-' }}-{{ isset($user->golongan)?$user->golongan->jenis_golongan:'-' }}/{{ isset($user->golongan)?$user->golongan->ruang:'-' }}</td>
                         </tr>
                         <tr>
                             <th scope="row">E-mail:</th>
-                            <td>{{ $user->email }}</td>
+                            <td>{{ isset($user->email)?$user->email:'-' }}</td>
                         </tr>
                         <tr>
                             <th scope="row">Phone:</th>
@@ -71,7 +71,7 @@
                         <tr>
                             <th scope="row">Jadwal:</th>
                             <td>
-                                <a href="jadwal-{{ $user->nip }}"><button type="button" class="btn btn-primary btn-sm text-white"><i class="bi bi-calendar2-check"></i> Lihat Semua Jadwal</button></a> 
+                                <a href="jadwal-{{ $user->id }}"><button type="button" class="btn btn-primary btn-sm text-white"><i class="bi bi-calendar2-check"></i> Lihat Semua Jadwal</button></a> 
                             </td>
                         </tr>
                         </tbody>
