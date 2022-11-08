@@ -243,12 +243,12 @@ class JadwalController extends Controller
         // return redirect('/')->with('success', 'Jadwal Berhasil dihapus.');
     }
 
-    public function showFull(Jadwal $jadwal, User $user)
+    public function showFull(User $user)
     {
         return view('dashboard.jadwal.showfull-jadwal', [
-            $getUserId = $jadwal->user_id,
+            $user_id = $user->id,
             'user' => $user,
-            'jadwal' => Jadwal::where('user_id', $getUserId)->orderBy('waktu_mulai', 'DESC')->get()
+            'jadwal' => Jadwal::where('user_id', $user_id)->orderBy('waktu_mulai', 'DESC')->get()
         ]);
     }
 

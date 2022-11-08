@@ -36,8 +36,8 @@
                                 <td>{{ $pgw->nip }}</td>
                                 <td>{{ $pgw->name }}</td>
                                 <td>{{ $pgw->jabatan }}</td>
-                                <td>{{ isset($pgw->golongan)?$pgw->golongan->nama_pangkat:'-' }} - {{ isset($pgw->golongan)?$pgw->golongan->jenis_golongan:'-' }}/{{ isset($pgw->golongan)?$pgw->golongan->ruang:'-' }}</td>
-                                <td>{{ $pgw->email }}</td>
+                                <td>{{ isset($pgw->golongan)?$pgw->golongan->nama_pangkat:'- ' }} - {{ isset($pgw->golongan)?$pgw->golongan->jenis_golongan:'- ' }}/{{ isset($pgw->golongan)?$pgw->golongan->ruang:' -' }}</td>
+                                <td>{{ isset($pgw->email)?$pgw->email:'-' }}</td>
                                 <td class="text-center">
                                     @if($pgw->status_anggota == 1)
                                         <button type="button" class="btn btn-success btn-sm text-white">Aktif</button>

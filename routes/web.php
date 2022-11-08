@@ -78,7 +78,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::patch('data-jadwal.{jadwal}', [JadwalController::class, 'update']);
     Route::delete('data-jadwal.{jadwal}', [JadwalController::class, 'destroy']);
     Route::get('data-jadwal-{jadwal:kegiatan_id}', [JadwalController::class, 'show']);
-    Route::get('jadwal-{jadwal:user_id}', [JadwalController::class, 'showFull']);
+    Route::get('jadwal-{user:nip}', [JadwalController::class, 'showFull']);
 
     //ajax
     Route::get('/get-pegawai', [JadwalController::class, 'checkJadwal']);

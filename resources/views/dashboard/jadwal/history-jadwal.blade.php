@@ -44,7 +44,7 @@
                                     @if ($jdwl->tipe_jadwal == 2)
                                         Perjalanan Dinas
                                     @else
-                                        {{ $jdwl->kegiatan->nama_kegiatan }}
+                                        {{ isset($jdwl->kegiatan)?$jdwl->kegiatan->nama_kegiatan: '-' }}
                                     @endif
                                 </td>
                                 <td>{{ isset($jdwl->user)?$jdwl->user->name:'-' }}</td>

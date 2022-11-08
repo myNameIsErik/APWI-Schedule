@@ -18,11 +18,11 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function edit(User $user, Golongan $golongan)
+    public function edit(User $user)
     {
         return view('profile.edit-profile', [
             "user" => $user,
-            "golongan" => $golongan
+            "golongan" => Golongan::all()
         ]);
     }
 
@@ -31,22 +31,31 @@ class ProfileController extends Controller
         $rules = [
             'name' => 'required',
             'jabatan' => '',
+            'golongan_id' => '',
             'status_anggota' => ''
         ];
 
         if($request->nip != $user->nip){
-            $rules['nip'] = 'unique:users';
+            $rules['nip'] = 'required|unique:users';
         }
 
-        if($request->email != $user->email){
+        if(($request->email != null) && ($request->email != $user->email)){
             $rules['email'] = 'unique:users';
         }
 
-        if($request->phone != $user->phone){
+        if(($request->phone != null) && ($request->phone != $user->phone)){
             $rules['phone'] = 'unique:users';
         }
 
         $validatedData = $request->validate($rules);
+        
+        if($request->email == null){
+            $validatedData['email'] = null;
+        }
+        
+        if($request->phone == null){
+            $validatedData['phone'] = null;
+        }
         
         User::where('id', $user->id)->update($validatedData);
 

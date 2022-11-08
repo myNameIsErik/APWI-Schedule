@@ -46,11 +46,11 @@
                         </tr>
                         <tr>
                             <th scope="row">E-mail:</th>
-                            <td>{{ $profile->email }}</td>
+                            <td>{{ isset($profile->email)?$profile->email:'-' }}</td>
                         </tr>
                         <tr>
                             <th scope="row">Phone:</th>
-                            <td>{{ $profile->phone }}</td>
+                            <td>{{ isset($profile->phone)?$profile->phone:'-' }}</td>
                         </tr>
                         <tr>
                             <th scope="row">Status Anggota:</th>

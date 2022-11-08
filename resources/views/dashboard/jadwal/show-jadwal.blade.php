@@ -33,7 +33,7 @@
                         @if($jdwl->tipe_jadwal != 1)
                         <td>Perjalanan Dinas</td>
                         @else
-                        <td>{{ $jdwl->kegiatan->nama_kegiatan }}</td>
+                        <td>{{ isset($jdwl->kegiatan)?$jdwl->kegiatan->nama_kegiatan: '-' }}</td>
                         @endif
                     </tr>
                     <tr>
@@ -58,7 +58,7 @@
                     </tr>
                     <tr>
                         <th scope="row">Keterangan:</th>
-                        <td>{{ $jdwl->keterangan }}</td>
+                        <td>{{ isset($jdwl->keterangan)?$jdwl->keterangan: '-' }}</td>
                     </tr>
                     </tbody>
                 </table>
