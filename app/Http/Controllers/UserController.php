@@ -21,7 +21,7 @@ class UserController extends Controller
     public function index()
     {
         return view('dashboard.pegawai.data-pegawai', [
-            "pegawai" => User::all()->sortBy('name')
+            "pegawai" => User::where('id', '!=', '1')->orderBy('name', 'ASC')->get()
         ]);
     }
 
@@ -80,7 +80,6 @@ class UserController extends Controller
         if($request->email != null){
             Mail::to($email)->send(new NotifUser($validatedData));
         }
-        Mail::to($email)->send(new NotifUser($validatedData));
 
         Alert::success('Congrats', 'Data Pegawai Berhasil dibuat.');
         
