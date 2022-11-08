@@ -81,15 +81,8 @@ class RubahJadwalController extends Controller
     public function update(Request $request, Jadwal $jadwal)
     {
         $validatedData = $request->validate([
-            'req_tanggal' => 'required',
-            'req_mulai' => 'required',
-            'req_selesai' => 'required',
             'alasan' => 'required',
         ]);
-
-        $validatedData['req_mulai'] = $validatedData['req_tanggal'] . " " . $validatedData['req_mulai'];
-        $validatedData['req_selesai'] = $validatedData['req_tanggal'] . " ".$validatedData['req_selesai'];
-        unset($validatedData['req_tanggal']);
 
         $validatedData['request'] = 1;
 
@@ -108,28 +101,28 @@ class RubahJadwalController extends Controller
         // return redirect('/')->with('success', 'Permintaan Berhasil Terkirim.');
     }
 
-    public function AccRequest(Jadwal $jadwal)
-    {
-        $data = [];
-        $data['request'] = false;
-        $data['alasan'] = null;
-        $data['waktu_mulai'] = $jadwal['req_mulai'];
-        $data['waktu_selesai'] = $jadwal['req_selesai'];
+    // public function AccRequest(Jadwal $jadwal)
+    // {
+    //     $data = [];
+    //     $data['request'] = false;
+    //     $data['alasan'] = null;
+    //     $data['waktu_mulai'] = $jadwal['req_mulai'];
+    //     $data['waktu_selesai'] = $jadwal['req_selesai'];
 
-        Jadwal::where('id', $jadwal->id)->update($data);
+    //     Jadwal::where('id', $jadwal->id)->update($data);
 
-        $getIdUser = $jadwal['user_id'];
+    //     $getIdUser = $jadwal['user_id'];
 
-        $getEmail = User::find($getIdUser)->email;
+    //     $getEmail = User::find($getIdUser)->email;
 
-        if($getEmail != null){
-            Mail::to($getEmail)->send(new NotifAccJadwal($data));
-        }
+    //     if($getEmail != null){
+    //         Mail::to($getEmail)->send(new NotifAccJadwal($data));
+    //     }
 
-        Alert::success('Congrats', 'Jadwal Berhasil Diatur!');
-        return redirect('/');
-        // return redirect('/')->with('success', 'Permintaan Berhasil Terkirim.');
-    }
+    //     Alert::success('Congrats', 'Jadwal Berhasil Diatur!');
+    //     return redirect('/');
+    //     // return redirect('/')->with('success', 'Permintaan Berhasil Terkirim.');
+    // }
 
     /**
      * Remove the specified resource from storage.

@@ -26,15 +26,11 @@
                                 <th>Pegawai</th>
                                 @endcan
                                 <th>Jumlah JP</th>
-                                @can('admin')
                                 <th>Tanggal Kegiatan</th>
-                                @endcan
-                                <th>Permintaan Tanggal</th>
-                                @can('admin')
                                 <th>Jam</th>
-                                @endcan
-                                <th>Permintaan Jam</th>
                                 <th>Angkatan</th>
+                                <th>Keterangan</th>
+                                <th>Alasan</th>
                                 <th>Aksi</th>
                                 
                             </tr>
@@ -60,25 +56,21 @@
                                         Full Day
                                     @endif
                                 </td>
-                                @can('admin')
                                 <td>{{ date('d-m-Y', strtotime($jdwl->waktu_mulai)); }}</td>
-                                @endcan
-                                <td>{{ date('d-m-Y', strtotime($jdwl->req_mulai)); }}</td>
-                                @can('admin')
                                 <td>{{ date('H:i', strtotime($jdwl->waktu_mulai)) }} - {{ date('H:i', strtotime($jdwl->waktu_selesai)) }}</td>
-                                @endcan
-                                <td>{{ date('H:i', strtotime($jdwl->req_mulai)) }} - {{ date('H:i', strtotime($jdwl->req_selesai)) }}</td>
                                 <td>{{ isset($jdwl->angkatan)?$jdwl->angkatan:'-' }}</td>
+                                <td>{{ $jdwl->keterangan }}</td>
+                                <td>{{ $jdwl->alasan }}</td>
                                 <td>
                                     @if(Auth::user()->level == 'Admin')
                                     <div class="row">
                                         <div class="col-lg-12" style="white-space: nowrap">
-                                            {{-- <a href="editJadwal-{{ $jdwl->id }}"><button type="button" class="btn btn-sm mb-1 btn-success text-white"><i class="bi bi-pencil-square"></i> Edit</button></a> --}}
-                                            <form action="acc-jadwal.{{ $jdwl->id }}" method="post" class="d-inline">
+                                            <a href="editJadwal-{{ $jdwl->id }}"><button type="button" class="btn btn-sm mb-1 btn-success text-white"><i class="bi bi-pencil-square"></i> Edit</button></a>
+                                            {{-- <form action="acc-jadwal.{{ $jdwl->id }}" method="post" class="d-inline">
                                                 @method('patch')
                                                 @csrf
                                                 <button type="submit" class="btn btn-sm mb-1 btn-success text-white"><i class="bi bi-check-circle"></i> Terima</button>
-                                            </form>
+                                            </form> --}}
                                             <form action="tolak-jadwal.{{ $jdwl->id }}" method="post" class="d-inline">
                                                 @method('patch')
                                                 @csrf
