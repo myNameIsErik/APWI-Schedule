@@ -21,7 +21,7 @@
                             <form action="data-jadwal.{{ $jdwl->id }}" method="post" class="d-inline" id="deleteForm" onclick="return confirm('Apakah anda yakin ingin menghapus jadwal ini?');">
                                 @method('delete')
                                 @csrf
-                                <button type="submit" class="btn btn-sm mb-1 btn-danger"><i class="bi bi-trash"></i> Hapus</button>
+                                <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i> Hapus</button>
                             </form>
                         </li>
                     </ul>
@@ -44,15 +44,15 @@
                         <th scope="row">Tanggal:</th>
                         <td>{{ date('d-m-Y', strtotime($jdwl->waktu_mulai)); }}</td>
                     </tr>
-                    <tr>
+                    <tr style="display:{{ $jdwl->tipe_jadwal == '2' ? 'none' : '' }}">
                         <th scope="row">Waktu:</th>
                         <td>{{ date('H:i', strtotime($jdwl->waktu_mulai)) }} - {{ date('H:i', strtotime($jdwl->waktu_selesai)) }}</td>
                     </tr>
-                    <tr>
+                    <tr style="display:{{ $jdwl->tipe_jadwal == '2' ? 'none' : '' }}">
                         <th scope="row">Jam Pelajaran:</th>
                         <td>{{ $jdwl->jp }}</td>
                     </tr>
-                    <tr>
+                    <tr style="display:{{ $jdwl->tipe_jadwal == '2' ? 'none' : '' }}">
                         <th scope="row">Angkatan:</th>
                         <td>{{ $jdwl->angkatan }}</td>
                     </tr>

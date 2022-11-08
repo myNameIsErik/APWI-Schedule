@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
 {
@@ -23,7 +24,7 @@ class LoginController extends Controller
                         orWhere('nip', $request['login'])->first();
 
         $password = $request->input('password');
-        
+
         if($user){
             if(Hash::check($password, $user->password)){
                 if(!is_numeric($request['login'])){
@@ -41,8 +42,10 @@ class LoginController extends Controller
                 }
             }
         }
-
-        return back()->with('loginError', 'Login Failed!');
+        
+        Alert::error('Uppss!', 'Username atau Password Salah');
+        
+        return back();
     }
 
     public function logout(Request $request){

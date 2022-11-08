@@ -29,8 +29,6 @@
                                 <th>Tanggal Kegiatan</th>
                                 <th>Jam</th>
                                 <th>Angkatan</th>
-                                <th>Keterangan</th>
-                                <th>Alasan</th>
                                 <th>Aksi</th>
                                 
                             </tr>
@@ -59,28 +57,27 @@
                                 <td>{{ date('d-m-Y', strtotime($jdwl->waktu_mulai)); }}</td>
                                 <td>{{ date('H:i', strtotime($jdwl->waktu_mulai)) }} - {{ date('H:i', strtotime($jdwl->waktu_selesai)) }}</td>
                                 <td>{{ isset($jdwl->angkatan)?$jdwl->angkatan:'-' }}</td>
-                                <td>{{ $jdwl->keterangan }}</td>
-                                <td>{{ $jdwl->alasan }}</td>
                                 <td>
                                     @if(Auth::user()->level == 'Admin')
                                     <div class="row">
                                         <div class="col-lg-12" style="white-space: nowrap">
-                                            <a href="editJadwal-{{ $jdwl->id }}"><button type="button" class="btn btn-sm mb-1 btn-success text-white"><i class="bi bi-pencil-square"></i> Edit</button></a>
+                                            <a href="ubah-jadwal-{{ $jdwl->id }}"><button type="button" class="btn btn-sm mb-1 btn-primary"><i class="bi bi-eye"></i> Lihat</button></a>
                                             {{-- <form action="acc-jadwal.{{ $jdwl->id }}" method="post" class="d-inline">
                                                 @method('patch')
                                                 @csrf
                                                 <button type="submit" class="btn btn-sm mb-1 btn-success text-white"><i class="bi bi-check-circle"></i> Terima</button>
                                             </form> --}}
+                                            {{-- <a href="editJadwal-{{ $jdwl->id }}"><button type="button" class="btn btn-sm mb-1 btn-success text-white"><i class="bi bi-pencil-square"></i> Edit</button></a> --}}
                                             <form action="tolak-jadwal.{{ $jdwl->id }}" method="post" class="d-inline">
                                                 @method('patch')
                                                 @csrf
                                                 <button type="submit" class="btn btn-sm mb-1 btn-warning text-white"><i class="bi bi-dash-circle"></i> Tolak</button>
                                             </form>
-                                            <form action="data-jadwal.{{ $jdwl->id }}" method="post" class="d-inline">
+                                            {{-- <form action="data-jadwal.{{ $jdwl->id }}" method="post" class="d-inline">
                                                 @method('delete')
                                                 @csrf
                                                 <button type="submit" class="btn btn-sm mb-1 btn-danger"><i class="bi bi-trash"></i> Hapus</button>
-                                            </form>
+                                            </form> --}}
                                         </div>
                                     </div>
                                     @elseif(Auth::user()->level == 'User')

@@ -22,7 +22,7 @@ class ProfileController extends Controller
     {
         return view('profile.edit-profile', [
             "user" => $user,
-            "golongan" => Golongan::all()
+            "golongan" => Golongan::orderBy('jenis_golongan', 'ASC')->orderBy('ruang', 'ASC')->get()
         ]);
     }
 
@@ -56,7 +56,7 @@ class ProfileController extends Controller
         if($request->phone == null){
             $validatedData['phone'] = null;
         }
-        
+
         User::where('id', $user->id)->update($validatedData);
 
         Alert::success('Congrats', 'Data Profile Berhasil diubah!');

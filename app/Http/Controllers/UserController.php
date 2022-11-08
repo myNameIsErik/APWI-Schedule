@@ -34,7 +34,7 @@ class UserController extends Controller
     {
         return view('dashboard.pegawai.add-pegawai', [
             "pegawai" => User::all(),
-            "golongan" => Golongan::all()
+            "golongan" => Golongan::orderBy('jenis_golongan', 'ASC')->orderBy('ruang', 'ASC')->get()
         ]);
     }
 
@@ -48,6 +48,7 @@ class UserController extends Controller
     {
 
         $rules = [
+            'nip' => 'required',
             'name' => 'required',
             'jabatan' => 'required',
             'golongan_id' => 'required',
@@ -55,7 +56,7 @@ class UserController extends Controller
         ];
 
         if($request->nip != $user->nip){
-            $rules['nip'] = 'required|unique:users';
+            $rules['nip'] = 'unique:users';
         }
 
         if($request->email != $user->email){
@@ -111,7 +112,7 @@ class UserController extends Controller
     {
         return view('dashboard.pegawai.edit-pegawai', [
             "pegawai" => $pegawai,
-            "golongan" => Golongan::all()
+            "golongan" => Golongan::orderBy('jenis_golongan', 'ASC')->orderBy('ruang', 'ASC')->get()
         ]);
     }
 

@@ -53,7 +53,9 @@ class RubahJadwalController extends Controller
      */
     public function show(Jadwal $jadwal)
     {
-    
+        return view('dashboard.rubah-jadwal.show-ubah-jadwal', [
+            'jadwal' => $jadwal
+        ]);
     }
 
     /**
@@ -88,13 +90,13 @@ class RubahJadwalController extends Controller
 
         Jadwal::where('id', $jadwal->id)->update($validatedData);
 
-        $getIdUser = $jadwal['user_id'];
+        // $getIdUser = $jadwal['user_id'];
 
-        $getEmail = User::find($getIdUser)->email;
+        // $getEmail = User::find($getIdUser)->email;
 
-        if($getEmail != null){
-            Mail::to($getEmail)->send(new NotifEditJadwal($validatedData));
-        }
+        // if($getEmail != null){
+        //     Mail::to($getEmail)->send(new NotifEditJadwal($validatedData));
+        // }
 
         Alert::success('Congrats', 'Permintaan Berhasil Terkirim!');
         return redirect('/');

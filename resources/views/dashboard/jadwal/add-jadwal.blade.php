@@ -13,12 +13,8 @@
                             <div class="col-md-6 mt-1">
                                 <label for="tipe_kegiatan">Tipe Jadwal</label> <span class="text-danger">*</span>
                                 <select class="form-control" id="tipe_jadwal" name="tipe_jadwal">
-                                    @if(old('tipe_jadwal'))
-                                        <option value="{{ old('tipe_jadwal') }}">{{ old('tipe_jadwal') }}</option>
-                                    @else
                                         <option value="1" selected>Mengajar</option>
                                         <option value="2">Perjalanan Dinas</option>
-                                    @endif
                                 </select>
                             </div>
                             <div id="form_kegiatan" class="col-md-6 mt-1">
@@ -68,7 +64,7 @@
                             <div id="form_pengajar" class="col-md-6 mt-2">
                                 <label for="pengajar">Pegawai</label> <span class="text-danger">*</span>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Cari Pegawai" name="user_id" list="list-pengajar" id="pengajar" autocomplete="off">
+                                    <input type="text" class="form-control" placeholder="Cari Pegawai" name="user_id" list="list-pengajar" id="user_id" autocomplete="off">
                                     <datalist id="list-pengajar">
                                     </datalist>
                                 </div>
@@ -171,7 +167,7 @@
                         },
                         dataType: "json",
                         success: function ({data, debug}) {
-                            console.log(debug, data);
+                            // console.log(debug, data);
                             $('#list-pengajar').html(data.map(({ id, name }) => (`<option value="${name}"></option>`)).join(''));
                         },
                         error: function (xhr) {
@@ -206,7 +202,7 @@
                         },
                         dataType: "json",
                         success: function ({data, debug}) {
-                            console.log(debug, data);
+                            // console.log(debug, data);
                             $('#list-pengajar').html(data.map(({ id, name }) => (`<option value="${name}"></option>`)).join(''));
                         },
                         error: function (xhr) {

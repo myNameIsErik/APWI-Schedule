@@ -77,7 +77,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('editJadwal-{jadwal:id}', [JadwalController::class, 'edit']);
     Route::patch('data-jadwal.{jadwal}', [JadwalController::class, 'update']);
     Route::delete('data-jadwal.{jadwal}', [JadwalController::class, 'destroy']);
-    Route::get('data-jadwal-{jadwal:kegiatan_id}', [JadwalController::class, 'show']);
+    Route::get('data-jadwal-{jadwal:id}', [JadwalController::class, 'show']);
     Route::get('jadwal-{user:nip}', [JadwalController::class, 'showFull']);
 
     //ajax
@@ -85,6 +85,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/get-pegawaiUpdate', [JadwalController::class, 'checkJadwalUpdate']);
 
     //perubahan jadwal
+    Route::get('ubah-jadwal-{jadwal:id}', [RubahJadwalController::class, 'show']);
     Route::patch('tolak-jadwal.{jadwal}', [RubahJadwalController::class, 'tolakJadwal']);
 });
 

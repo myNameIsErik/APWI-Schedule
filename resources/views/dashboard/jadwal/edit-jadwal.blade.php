@@ -33,7 +33,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-4 mt-4">
+                            <div class="col-md-6 mt-4">
                                 <label for="pengajar">Tanggal</label> <span class="text-danger">*</span>
                                 <div class="input-group">
                                     <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" placeholder="Tanggal Kegiatan" value="{{ old('waktu_mulai', date('Y-m-d', strtotime($jadwal->waktu_mulai))) }}">
@@ -44,7 +44,7 @@
                                 @enderror
                                 </div>
                             </div>
-                            <div id="form_mulai" class="col-md-4 mt-4" style="display:{{ $jadwal->tipe_jadwal == '2' ? 'none' : '' }}" >
+                            <div id="form_mulai" class="col-md-3 mt-4" style="display:{{ $jadwal->tipe_jadwal == '2' ? 'none' : '' }}" >
                                 <label for="mulai" class="m-t-20">Jam Mulai</label> <span class="text-danger">*</span>
                                 <input type="time" class="form-control @error('waktu_mulai') is-invalid @enderror" id="mulai" name="waktu_mulai" placeholder="Check time" value="{{ old('waktu_mulai', date('H:i', strtotime($jadwal->waktu_mulai))) }}">
                                 @error('waktu_mulai')
@@ -53,7 +53,7 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div id="form_selesai" class="col-md-4 mt-4" style="display:{{ $jadwal->tipe_jadwal == '2' ? 'none' : '' }}">
+                            <div id="form_selesai" class="col-md-3 mt-4" style="display:{{ $jadwal->tipe_jadwal == '2' ? 'none' : '' }}">
                                 <label for="selesai" class="m-t-20">Jam Selesai</label> <span class="text-danger">*</span>
                                 <input type="time" class="form-control @error('waktu_selesai') is-invalid @enderror" id="selesai" name="waktu_selesai" placeholder="Check time" value="{{ old('waktu_selesai', date('H:i', strtotime($jadwal->waktu_selesai))) }}">
                                 @error('waktu_selesai')
@@ -171,7 +171,7 @@
                         },
                         dataType: "json",
                         success: function ({data, debug}) {
-                            console.log(debug, data);
+                            // console.log(debug, data);
                             $('#list-pengajar').html(data.map(({ id, name }) => (`<option value="${name}"></option>`)).join(''));
                         },
                         error: function (xhr) {
@@ -206,7 +206,7 @@
                         },
                         dataType: "json",
                         success: function ({data, debug}) {
-                            console.log(debug, data);
+                            // console.log(debug, data);
                             $('#list-pengajar').html(data.map(({ id, name }) => (`<option value="${name}"></option>`)).join(''));
                         },
                         error: function (xhr) {

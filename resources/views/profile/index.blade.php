@@ -42,7 +42,7 @@
                         </tr>
                         <tr>
                             <th scope="row">Pangkat-Gol.Ruang:</th>
-                            <td>{{ isset($profile->golongan)?$profile->golongan->nama_pangkat:'-' }}-{{ isset($profile->golongan)?$profile->golongan->jenis_golongan:'-' }}/{{ isset($profile->golongan)?$profile->golongan->ruang:'-' }}</td>
+                            <td>{{ isset($profile->golongan)?$profile->golongan->nama_pangkat:'- ' }} - {{ isset($profile->golongan)?$profile->golongan->jenis_golongan:'- ' }}/{{ isset($profile->golongan)?$profile->golongan->ruang:' -' }}</td>
                         </tr>
                         <tr>
                             <th scope="row">E-mail:</th>

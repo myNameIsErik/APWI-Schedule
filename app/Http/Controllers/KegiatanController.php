@@ -16,7 +16,7 @@ class KegiatanController extends Controller
     public function index()
     {
         return view('dashboard.kegiatan.data-kegiatan', [
-            "kegiatan" => Kegiatan::all()
+            "kegiatan" => Kegiatan::orderBy('kode_kegiatan', 'ASC')->get()
         ]);
     }
 
@@ -28,7 +28,7 @@ class KegiatanController extends Controller
     public function create()
     {
         return view('dashboard.kegiatan.add-kegiatan', [
-            "kegiatan" => Kegiatan::all()
+            "kegiatan" => Kegiatan::orderBy('kode_kegiatan', 'ASC')->get()
         ]);
     }
 

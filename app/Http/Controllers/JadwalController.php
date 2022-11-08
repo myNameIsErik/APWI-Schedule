@@ -25,11 +25,11 @@ class JadwalController extends Controller
     {
         if (auth()->user()->level === "Admin") {
             return view('dashboard.jadwal.data-jadwal', [
-                'jadwal' => Jadwal::where('request', false)->whereRaw("((STR_TO_DATE(waktu_mulai, '%Y-%m-%d') ) >= curdate())")->orderBy('waktu_mulai', 'DESC')->get()
+                'jadwal' => Jadwal::where('request', false)->whereRaw("((STR_TO_DATE(waktu_mulai, '%Y-%m-%d') ) >= curdate())")->orderBy('waktu_mulai', 'ASC')->get()
             ]);
         } else {
             return view('dashboard.jadwal.data-jadwal', [
-                'jadwal' => Jadwal::where('user_id', Auth::user()->id)->where('request', false)->whereRaw("((STR_TO_DATE(waktu_mulai, '%Y-%m-%d') ) >= curdate())")->orderBy('waktu_mulai', 'DESC')->get()
+                'jadwal' => Jadwal::where('user_id', Auth::user()->id)->where('request', false)->whereRaw("((STR_TO_DATE(waktu_mulai, '%Y-%m-%d') ) >= curdate())")->orderBy('waktu_mulai', 'ASC')->get()
             ]);
         }
     }
@@ -280,7 +280,7 @@ class JadwalController extends Controller
             $arr_user_id[] = $item->user_id;
         }
 
-        $checking = DB::table('users')->where('status_anggota', true)->whereNotIn('id', $arr_user_id)->get();
+        $checking = DB::table('users')->orderBy('name', 'ASC')->where('status_anggota', true)->whereNotIn('id', $arr_user_id)->get();
         
         echo json_encode([
             'data' => $checking,
@@ -322,7 +322,7 @@ class JadwalController extends Controller
             $arr_user_id[] = $item->user_id;
         }
 
-        $checking = DB::table('users')->where('status_anggota', true)->whereNotIn('id', $arr_user_id)->get();
+        $checking = DB::table('users')->orderBy('name', 'ASC')->where('status_anggota', true)->whereNotIn('id', $arr_user_id)->get();
         
         echo json_encode([
             'data' => $checking,
