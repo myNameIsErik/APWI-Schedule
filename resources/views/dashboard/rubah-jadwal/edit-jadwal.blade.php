@@ -6,6 +6,9 @@
         <div class="card">
             <div class="card-body">
                 <div class="form-validation">
+                    <form class="form-valide" action="data-ubah-jadwal.{{ $jadwal->id }}" method="post">
+                        @method('patch')
+                        @csrf
                         <div class="row form-material">
                             <div class="col-md-6 mt-4">
                                 <label for="tipe_kegiatan">Tipe Jadwal</label> <span class="text-danger">*</span>
@@ -60,12 +63,24 @@
                                     </div>
                                 @enderror
                             </div>
+                            <div id="form_alasan" class="col-md-6 mt-4">
+                                <label for="angkatan" class="m-t-20">Alasan</label>
+                                <textarea class="form-control @error('alasan') is-invalid @enderror" placeholder="Masukkan Alasan Perubahan Jadwal..." id="alasan" name="alasan" rows="3">{{ old('alasan', $jadwal->alasan) }}</textarea>
+                                @error('alasan')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div id="form_submit" class="col-12 mt-3">
+                                <button id="btnSubmit" type="submit" class="btn btn-info">Simpan</button>
+                            </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="card">
+        {{-- <div class="card">
             <div class="card-body">
                 <h4>Request Perubahan Jadwal</h4>
                 <div class="form-validation">
@@ -118,7 +133,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

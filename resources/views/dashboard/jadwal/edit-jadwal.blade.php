@@ -33,7 +33,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-6 mt-4">
+                            <div class="col-md-4 mt-4">
                                 <label for="pengajar">Tanggal</label> <span class="text-danger">*</span>
                                 <div class="input-group">
                                     <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" placeholder="Tanggal Kegiatan" value="{{ old('waktu_mulai', date('Y-m-d', strtotime($jadwal->waktu_mulai))) }}">
