@@ -49,7 +49,7 @@
                                     @if ($jdwl->tipe_jadwal == 2)
                                         Perjalanan Dinas
                                     @else
-                                        {{ $jdwl->kegiatan->nama_kegiatan }}
+                                        {{ isset($jdwl->kegiatan)?$jdwl->kegiatan->nama_kegiatan: '-' }}
                                     @endif
                                 </td>
                                 <td>{{ isset($jdwl->user)?$jdwl->user->name:'-' }}</td>
@@ -68,7 +68,7 @@
                                     @if(Auth::user()->level == 'Admin')
                                     <div class="row">
                                         <div class="col-lg-12" style="white-space: nowrap">
-                                            <a href="data-jadwal-{{ $jdwl->kegiatan_id }}"><button type="button" class="btn btn-sm mb-1 btn-primary"><i class="bi bi-eye"></i> Lihat</button></a>
+                                            <a href="data-jadwal-{{ $jdwl->id }}"><button type="button" class="btn btn-sm mb-1 btn-primary"><i class="bi bi-eye"></i> Lihat</button></a>
                                         </div>
                                     </div>
                                     @elseif(Auth::user()->level == 'User')

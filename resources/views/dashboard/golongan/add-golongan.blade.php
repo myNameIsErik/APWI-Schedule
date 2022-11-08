@@ -36,11 +36,11 @@
                                     @if(old('jenis_golongan'))
                                         <option value="{{ old('ruang') }}">{{ old('ruang') }}</option>
                                     @else
-                                        <option value="A" selected>A</option>
-                                        <option value="B">B</option>
-                                        <option value="C">C</option>
-                                        <option value="D">D</option>
-                                        <option value="E">E</option>
+                                        <option value="a" selected>a</option>
+                                        <option value="b">b</option>
+                                        <option value="c">c</option>
+                                        <option value="d">d</option>
+                                        <option value="e">e</option>
                                     @endif
                                 </select>
                             </div>

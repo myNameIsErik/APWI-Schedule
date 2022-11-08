@@ -21,7 +21,7 @@ class UserController extends Controller
     public function index()
     {
         return view('dashboard.pegawai.data-pegawai', [
-            "pegawai" => User::all()->sortBy('name')
+            "pegawai" => User::where('id', '!=', '1')->orderBy('name', 'ASC')->get()
         ]);
     }
 
@@ -34,7 +34,7 @@ class UserController extends Controller
     {
         return view('dashboard.pegawai.add-pegawai', [
             "pegawai" => User::all(),
-            "golongan" => Golongan::all()
+            "golongan" => Golongan::orderBy('jenis_golongan', 'ASC')->orderBy('ruang', 'ASC')->get()
         ]);
     }
 
@@ -48,6 +48,7 @@ class UserController extends Controller
     {
 
         $rules = [
+            'nip' => 'required',
             'name' => 'required',
             'jabatan' => 'required',
             'golongan_id' => 'required',
@@ -55,7 +56,7 @@ class UserController extends Controller
         ];
 
         if($request->nip != $user->nip){
-            $rules['nip'] = 'required|unique:users';
+            $rules['nip'] = 'unique:users';
         }
 
         if($request->email != $user->email){
@@ -79,7 +80,6 @@ class UserController extends Controller
         if($request->email != null){
             Mail::to($email)->send(new NotifUser($validatedData));
         }
-        Mail::to($email)->send(new NotifUser($validatedData));
 
         Alert::success('Congrats', 'Data Pegawai Berhasil dibuat.');
         
@@ -111,7 +111,7 @@ class UserController extends Controller
     {
         return view('dashboard.pegawai.edit-pegawai', [
             "pegawai" => $pegawai,
-            "golongan" => Golongan::all()
+            "golongan" => Golongan::orderBy('jenis_golongan', 'ASC')->orderBy('ruang', 'ASC')->get()
         ]);
     }
 
@@ -124,11 +124,12 @@ class UserController extends Controller
      */
     public function update(Request $request, User $pegawai)
     {
+        
         $rules = [
             'nip' => 'required',
             'name' => 'required',
             'jabatan' => 'required',
-            'golongan_id' => 'required',
+            'golongan_id' => '',
             'level' => 'required',
             'status_anggota' => 'required'
         ];
@@ -137,16 +138,24 @@ class UserController extends Controller
             $rules['nip'] = 'required|unique:users';
         }
 
-        if($request->email != $pegawai->email){
+        if(($request->email != null) && ($request->email != $pegawai->email)){
             $rules['email'] = 'unique:users';
         }
 
-        if($request->phone != $pegawai->phone){
+        if(($request->phone != null) && ($request->phone != $pegawai->phone)){
             $rules['phone'] = 'unique:users';
         }
 
         $validatedData = $request->validate($rules);
+
+        if($request->email == null){
+            $validatedData['email'] = null;
+        }
         
+        if($request->phone == null){
+            $validatedData['phone'] = null;
+        }
+
         User::where('id', $pegawai->id)->update($validatedData);
 
         Alert::success('Congrats', 'Data Pegawai Berhasil diubah!');
@@ -163,6 +172,10 @@ class UserController extends Controller
      */
     public function destroy(User $pegawai)
     {
+        $pegawaiId = $pegawai->id;
+        $jadwalId = Jadwal::where('user_id', $pegawaiId);
+        $jadwalId->delete();
+        
         User::destroy($pegawai->id);
 
         Alert::success('Congrats', 'Data Pegawai Berhasil dihapus.');

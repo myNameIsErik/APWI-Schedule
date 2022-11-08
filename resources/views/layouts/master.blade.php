@@ -122,7 +122,7 @@
         <div class="nk-sidebar">           
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
-                    <li class="nav-label">Dashboard</li>
+                    <li class="nav-label">Dashboard @can('admin') Admin @endcan</li>
                     <li>
                         <a class="has-arrow text-decoration-none" href="javascript:void()" aria-expanded="false">
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Penjadwalan</span>

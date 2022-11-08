@@ -46,17 +46,14 @@
                                 </div>
                             </div>
                             <div id="" class="form-group row">
-                                <label class="col-lg-4 col-form-label" for="jabatan">Golongan <span class="text-danger">*</span>
+                                <label class="col-lg-4 col-form-label" for="golongan_id">Golongan <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-lg-6">
-                                    <select class="form-control" id="golongan" name="golongan">
-                                        {{-- @foreach($kegiatan as $keg)
-                                            @if(old('kegiatan_id') == $keg->id)
-                                                <option value="{{ $keg->id }}" selected>{{ $keg->nama_kegiatan }}</option>
-                                            @else
-                                                <option value="{{ $keg->id }}">{{ $keg->nama_kegiatan }}</option>
-                                            @endif
-                                        @endforeach --}}
+                                    <select class="form-control @error('golongan_id') is-invalid @enderror" id="golongan_id" name="golongan_id">
+                                        <option value="{{ old('golongan_id', $user->golongan_id) }}" selected disabled>{{ isset($user->golongan)?$user->golongan->nama_pangkat:'- ' }} - {{ isset($user->golongan)?$user->golongan->jenis_golongan:'- ' }}/{{ isset($user->golongan)?$user->golongan->ruang:' -' }}</option>
+                                        @foreach($golongan as $gol)
+                                            <option value="{{ $gol->id }}">{{ $gol->nama_pangkat }} - {{ $gol->jenis_golongan }}/{{ $gol->ruang }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -103,7 +100,7 @@
                                         <option value="1" {{ old('status_anggota', $user->status_anggota) == 1 ? 'selected' : '' }}>
                                             Aktif
                                         </option>
-                                        <option value="0" {{ old('status_anggota', $user->status_anggota) == 2 ? 'selected' : '' }}>
+                                        <option value="0" {{ old('status_anggota', $user->status_anggota) == 0 ? 'selected' : '' }}>
                                             Tidak Aktif
                                         </option>
                                     </select>

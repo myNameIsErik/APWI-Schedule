@@ -54,7 +54,9 @@ class RubahJadwalController extends Controller
      */
     public function show(Jadwal $jadwal)
     {
-    
+        return view('dashboard.rubah-jadwal.show-ubah-jadwal', [
+            'jadwal' => $jadwal
+        ]);
     }
 
     /**

@@ -59,9 +59,9 @@
                             <label class="col-lg-4 col-form-label" for="golongan">Gol. Ruang <span class="text-danger">*</span></label>
                             <div class="col-lg-6">
                                 <select class="form-control @error('golongan_id') is-invalid @enderror" id="golongan_id" name="golongan_id">
-                                    <option value="{{ old('golongan_id', $pegawai->golongan_id) }}" selected disabled>{{ $pegawai->golongan->nama_pangkat }}</option>
+                                    <option value="{{ old('golongan_id', $pegawai->golongan_id) }}" selected disabled>{{ isset($pegawai->golongan)?$pegawai->golongan->nama_pangkat:'- ' }} - {{ isset($pegawai->golongan)?$pegawai->golongan->jenis_golongan:'- ' }}/{{ isset($pegawai->golongan)?$pegawai->golongan->ruang:' -' }}</option>
                                     @foreach($golongan as $gol)
-                                        <option value="{{ $gol->id }}">{{ $gol->nama_pangkat }}</option>
+                                        <option value="{{ $gol->id }}">{{ $gol->nama_pangkat }} - {{ $gol->jenis_golongan }}/{{ $gol->ruang }}</option>
                                     @endforeach
                                 </select>
                             </div>

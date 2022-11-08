@@ -31,12 +31,12 @@
                             <div id="form_ruang" class="col-md-4 mt-2">
                                 <label class="m-t-20" for="ruang">Ruang <span class="text-danger">*</span></label>
                                 <select class="form-control" id="ruang" name="ruang">
-                                    <option value="{{ old('ruang', $golongan->ruang) }}" selected>{{ old('ruang', $golongan->ruang) }}</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                    <option value="D">D</option>
-                                    <option value="E">E</option>
+                                    <option value="{{ old('ruang', $golongan->ruang) }}" selected disabled>{{ old('ruang', $golongan->ruang) }}</option>
+                                    <option value="a">a</option>
+                                    <option value="b">b</option>
+                                    <option value="c">c</option>
+                                    <option value="d">d</option>
+                                    <option value="e">e</option>
                                 </select>
                             </div>
                             <div id="form_submit" class="col-12 mt-3">

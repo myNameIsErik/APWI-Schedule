@@ -16,7 +16,7 @@ class GolonganController extends Controller
     public function index()
     {
         return view('dashboard.golongan.data-golongan', [
-            "golongan" => Golongan::orderBy('jenis_golongan', 'ASC')->get()
+            "golongan" => Golongan::orderBy('jenis_golongan', 'ASC')->orderBy('ruang', 'ASC')->get()
         ]);
     }
 
@@ -89,8 +89,8 @@ class GolonganController extends Controller
     {
         $validatedData = $request->validate([
             'nama_pangkat' => 'required',
-            'jenis_golongan' => 'required',
-            'ruang' => 'required'
+            'jenis_golongan' => '',
+            'ruang' => ''
         ]);
 
         Golongan::where('id', $golongan->id)->update($validatedData);

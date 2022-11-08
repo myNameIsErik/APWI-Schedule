@@ -14,7 +14,7 @@
 </head>
 
 <body class="h-100">
-    
+    @include('sweetalert::alert')
     <!--*******************
         Preloader start
     ********************-->
