@@ -2,6 +2,7 @@
 @section('content')
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<link rel="stylesheet" href="sweetalert2.min.css">
 
 <div class="row">
     <div class="col-12">
@@ -18,10 +19,10 @@
                             </a>
                         </li>
                         <li class="list-inline-item">
-                            <form action="data-jadwal.{{ $jdwl->id }}" method="post" class="d-inline" id="deleteForm" onclick="return confirm('Apakah anda yakin ingin menghapus jadwal ini?');">
-                                @method('delete')
+                            <form action="data-jadwal.{{ $jdwl->id }}" method="POST" id="deleteForm">
                                 @csrf
-                                <button type="submit" class="btn btn-sm mb-1 btn-danger"><i class="bi bi-trash"></i> Hapus</button>
+                                @method('delete')
+                                <button class="btn" type="submit"><i class="bi bi-dash-circle"></i> Delete</button>
                             </form>
                         </li>
                     </ul>
@@ -66,4 +67,41 @@
         </div>
     </div>
 </div>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.min.js"></script>
+
+<script type="text/javascript">
+    try {
+        const btnDelete = document.querySelectorAll('#deleteForm');
+        btnDelete.forEach((button, index) => {
+            button.addEventListener('submit', function(e) {
+                var form = this;
+                e.preventDefault(); // <--- prevent form from submitting
+                new swal({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then(function(isConfirm) {
+                    if (isConfirm) {
+                        new swal({
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        }).then(function() {
+                            form.submit();
+                        });
+                    } else {
+                        new swal("Dibatalkan", "Data batal dihapus :)", "error");
+                    }
+                })
+            });
+        });
+    } catch (error) {
+    }
+</script>
 @endsection
