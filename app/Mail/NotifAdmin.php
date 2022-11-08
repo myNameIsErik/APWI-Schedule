@@ -7,19 +7,19 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class NotifEditJadwal extends Mailable
+class NotifAdmin extends Mailable
 {
     use Queueable, SerializesModels;
-    public $data;
+    public $validatedData;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($validatedData)
     {
-        $this->data = $data;
+        $this->validatedData = $validatedData;
     }
 
     /**
@@ -29,8 +29,8 @@ class NotifEditJadwal extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail.notif-edit-jadwal')
-                    ->subject('Permintaan Perubahan Jadwal Anda Sedang Diproses!')
-                    ->with('data', $this->data);
+        return $this->markdown('mail.notif-admin')
+                    ->subject('Permintaan Perubahan Jadwal Baru!')
+                    ->with('validatedData', $this->validatedData);
     }
 }

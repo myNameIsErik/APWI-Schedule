@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\NotifAccJadwal;
+use App\Mail\NotifAdmin;
 use App\Models\User;
 use App\Models\Jadwal;
 use App\Models\Kegiatan;
@@ -91,9 +92,18 @@ class RubahJadwalController extends Controller
         $getIdUser = $jadwal['user_id'];
 
         $getEmail = User::find($getIdUser)->email;
+        $emailAdmin = User::where('level', 'Admin')->get();
+        $arr_email = [];
+        foreach($emailAdmin as $item){
+            $arr_email[] = $item->email;
+        }
 
         if($getEmail != null){
             Mail::to($getEmail)->send(new NotifEditJadwal($validatedData));
+
+            Mail::to($arr_email)->send(new NotifAdmin($validatedData));
+        } else {
+            Mail::to($arr_email)->send(new NotifAdmin($validatedData));
         }
 
         Alert::success('Congrats', 'Permintaan Berhasil Terkirim!');
