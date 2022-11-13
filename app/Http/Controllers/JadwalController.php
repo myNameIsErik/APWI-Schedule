@@ -322,7 +322,7 @@ class JadwalController extends Controller
             $arr_user_id[] = $item->user_id;
         }
 
-        $checking = DB::table('users')->orderBy('name', 'ASC')->where('status_anggota', true)->whereNotIn('id', $arr_user_id)->get();
+        $checking = DB::table('users')->orderBy('name', 'ASC')->where('status_anggota', true)->where('id', '!=', '1')->whereNotIn('id', $arr_user_id)->get();
         
         echo json_encode([
             'data' => $checking,
