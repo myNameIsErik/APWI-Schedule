@@ -115,6 +115,29 @@
             var tipe_jadwal2 = document.getElementById("mulai").value;
             var tipe_jadwal3 = document.getElementById("selesai").value;
             
+            //Get startTime
+            var startTime = tipe_jadwal2;
+            var arrStart = startTime.split(':');
+            var endStartHrs = $.trim(arrStart[0]);
+            var endStartMnt = $.trim(arrStart[1]);
+                    
+            //Get endTime
+            var endTime = tipe_jadwal3;
+            var arrEnd = endTime.split(':');
+            var endHoursHrs = $.trim(arrEnd[0]);
+            var endHoursMnt = $.trim(arrEnd[1]);
+
+            //Get results
+            var getHours = endHoursHrs - endStartHrs;
+            var getMnts = endHoursMnt - endStartMnt;
+            var y = (getHours*60) + getMnts;
+            var z = y / 45;
+            var str = z.toString();
+
+            var arrFix = str.split('.');
+            var strResults = $.trim(arrFix[0]);
+            var results = parseInt(strResults);
+
             if(check_tipe == 1){
                 if (!tipe_jadwal || !tipe_jadwal2 || !tipe_jadwal3) {
                     var checkSpan = document.getElementById('checkSpan');
@@ -123,35 +146,30 @@
                     setTimeout(() => {
                         checkSpan.style.display = 'none';
                     }, 3000);
-                } else {
+                    
+                } else if(results <= 0){
+                    var checkSpan = document.getElementById('checkSpan');
+                    checkSpan.style.display = '';
+                    checkSpan.innerHTML = "Inputan Jam Salah!"
+                    setTimeout(() => {
+                        checkSpan.style.display = 'none';
+                    }, 3000);
+                    
+                }else if(results > 15){
+                    var checkSpan = document.getElementById('checkSpan');
+                    checkSpan.style.display = '';
+                    checkSpan.innerHTML = "Maks JP Mengajar adalah 15!"
+                    setTimeout(() => {
+                        checkSpan.style.display = 'none';
+                    }, 3000);
+                    
+                }else{
                     var checkSpan = document.getElementById('checkSpan');
                     checkSpan.style.display = '';
                     checkSpan.innerHTML = "Check Pegawai Berhasil!"
                     setTimeout(() => {
                         checkSpan.style.display = 'none';
                     }, 3000);
-
-                    //Get startTime
-                    var startTime = tipe_jadwal2;
-                    var arrStart = startTime.split(':');
-                    var endStartHrs = $.trim(arrStart[0]);
-                    var endStartMnt = $.trim(arrStart[1]);
-                    
-                    //Get endTime
-                    var endTime = tipe_jadwal3;
-                    var arrEnd = endTime.split(':');
-                    var endHoursHrs = $.trim(arrEnd[0]);
-                    var endHoursMnt = $.trim(arrEnd[1]);
-
-                    //Get results
-                    var getHours = endHoursHrs - endStartHrs;
-                    var getMnts = endHoursMnt - endStartMnt;
-                    var y = (getHours*60) + getMnts;
-                    var z = y / 45;
-                    var str = z.toString();
-
-                    var arrFix = str.split('.');
-                    var results = $.trim(arrFix[0])
 
                     var jp = document.getElementById('jp');
                     jp.value  = results;

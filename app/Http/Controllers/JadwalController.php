@@ -80,7 +80,7 @@ class JadwalController extends Controller
 
             $validatedData['kegiatan_id'] = null;
             $validatedData['angkatan'] = null;
-            $validatedData['jp'] = '15';
+            $validatedData['jp'] = 15;
             $validatedData['waktu_mulai'] = $validatedData['tanggal'] . " 00:00:00";
             $validatedData['waktu_selesai'] = $validatedData['tanggal'] . " 23:59:00";
         
@@ -257,7 +257,7 @@ class JadwalController extends Controller
         $limit_max_jp = 15;
         $tanggal_mulai = $request->tanggal.' '.$request->mulai;
         $tanggal_selesai = $request->tanggal.' '.$request->selesai;
-        $jp = (int) $request->jp;
+        $jp = $request->jp;
         
         $arr_user_id = [];
 
@@ -298,7 +298,7 @@ class JadwalController extends Controller
         $tanggal_mulai = $request->tanggal.' '.$request->mulai;
         $tanggal_selesai = $request->tanggal.' '.$request->selesai;
         $id = $request->id;
-        $jp = (int) $request->jp;
+        $jp = $request->jp;
         
         $arr_user_id = [];
         $bentrok = DB::table('jadwals')->select('user_id')->whereRaw("
