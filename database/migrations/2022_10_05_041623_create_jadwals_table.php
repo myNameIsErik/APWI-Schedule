@@ -20,7 +20,7 @@ class CreateJadwalsTable extends Migration
             $table->foreignId('user_id');
             $table->dateTime('waktu_mulai');
             $table->dateTime('waktu_selesai');
-            $table->string('jp');
+            $table->integer('jp');
             $table->string('angkatan')->nullable();
             $table->string('keterangan')->nullable();
             $table->string('alasan')->nullable();
