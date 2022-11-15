@@ -10,15 +10,16 @@ use Illuminate\Queue\SerializesModels;
 class NotifTolak extends Mailable
 {
     use Queueable, SerializesModels;
+    public $data;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -28,6 +29,8 @@ class NotifTolak extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail.notif-tolak');
+        return $this->markdown('mail.notif-tolak')
+                    ->subject('Permintaan Perubahan Jadwal Anda Ditolak!')
+                    ->with('data', $this->data);
     }
 }

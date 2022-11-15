@@ -9,6 +9,7 @@ use App\Models\Jadwal;
 use App\Models\Kegiatan;
 use Illuminate\Http\Request;
 use App\Mail\NotifEditJadwal;
+use App\Mail\NotifTolak;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -164,6 +165,14 @@ class RubahJadwalController extends Controller
         $data['alasan'] = null;
 
         Jadwal::where('id', $jadwal->id)->update($data);
+
+        $getIdUser = $jadwal['user_id'];
+
+        $getEmail = User::find($getIdUser)->email;
+
+        if($getEmail != null){
+            Mail::to($getEmail)->send(new NotifTolak($data));
+        }
 
         Alert::success('Congrats', 'Jadwal ditolak!');
         return redirect('/perubahan-jadwal');

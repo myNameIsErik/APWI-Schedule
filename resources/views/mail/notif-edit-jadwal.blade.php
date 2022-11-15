@@ -1,10 +1,10 @@
 @component('mail::message')
 Jadwal Sedang diproses.
 
-Mohon tunggu notifikasi selanjutnya.
+<p>Mohon tunggu notifikasi selanjutnya.</p>
 
-Untuk melihat jadwal lebih lanjut kunjungi Website
-E-Schedule, atau bisa langsung dengan klik tombol di bawah.
+<p>Untuk melihat jadwal lebih lanjut kunjungi Website
+E-Schedule, atau bisa langsung dengan klik tombol di bawah.</p>
 
 @component('mail::button', ['url' => ''])
 Klik di sini
