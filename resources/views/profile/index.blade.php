@@ -20,7 +20,7 @@
                 <div class="card-header">
                 My Profile
                 <div class="float-right">
-                    <a href="editProfile-{{ $profile->nip }}">
+                    <a href="editProfile-{{ $profile->name }}">
                     <button type="button" class="btn btn-warning btn-sm text-white"><i class="bi bi-pencil-square"></i> Edit Profile</button>
                     </a>
                 </div>

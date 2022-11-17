@@ -32,7 +32,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/perubahan-jadwal', [RubahJadwalController::class, 'index']);
     Route::get('{jadwal}.editJadwal', [RubahJadwalController::class, 'edit']);
     Route::patch('data-ubah-jadwal.{jadwal}', [RubahJadwalController::class, 'update']);
-    Route::patch('acc-jadwal.{jadwal}', [RubahJadwalController::class, 'AccRequest']);
     // Route::get('jadwal-{jadwal:kegiatan_id}', [RubahJadwalController::class, 'show']);
 
     //logout
@@ -40,7 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // profil
     Route::get('/profile', [ProfileController::class, 'index']);
-    Route::get('editProfile-{user:nip}', [ProfileController::class, 'edit']);
+    Route::get('editProfile-{user:name}', [ProfileController::class, 'edit']);
     Route::patch('profile.{user}', [ProfileController::class, 'update']);
     Route::post('change-password', [ProfileController::class, 'changePassword'])->name('change.password');
 });
@@ -87,6 +86,7 @@ Route::group(['middleware' => 'admin'], function () {
     //perubahan jadwal
     Route::get('ubah-jadwal-{jadwal:id}', [RubahJadwalController::class, 'show']);
     Route::patch('tolak-jadwal.{jadwal}', [RubahJadwalController::class, 'tolakJadwal']);
+    Route::patch('acc-jadwal.{jadwal}', [RubahJadwalController::class, 'AccRequest']);
 });
 
 // login

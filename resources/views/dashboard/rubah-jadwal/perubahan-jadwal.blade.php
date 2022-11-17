@@ -62,22 +62,11 @@
                                     <div class="row">
                                         <div class="col-lg-12" style="white-space: nowrap">
                                             <a href="ubah-jadwal-{{ $jdwl->id }}"><button type="button" class="btn btn-sm mb-1 btn-primary"><i class="bi bi-eye"></i> Lihat</button></a>
-                                            {{-- <form action="acc-jadwal.{{ $jdwl->id }}" method="post" class="d-inline">
-                                                @method('patch')
-                                                @csrf
-                                                <button type="submit" class="btn btn-sm mb-1 btn-success text-white"><i class="bi bi-check-circle"></i> Terima</button>
-                                            </form> --}}
-                                            {{-- <a href="editJadwal-{{ $jdwl->id }}"><button type="button" class="btn btn-sm mb-1 btn-success text-white"><i class="bi bi-pencil-square"></i> Edit</button></a> --}}
                                             <form action="tolak-jadwal.{{ $jdwl->id }}" method="post" class="d-inline">
                                                 @method('patch')
                                                 @csrf
-                                                <button type="submit" class="btn btn-sm mb-1 btn-warning text-white"><i class="bi bi-dash-circle"></i> Tolak</button>
+                                                <button type="submit" class="btn btn-sm mb-1 btn-warning text-white" onclick="return confirm('Apakah anda yakin ingin menolak jadwal ini?');"><i class="bi bi-dash-circle"></i> Tolak</button>
                                             </form>
-                                            {{-- <form action="data-jadwal.{{ $jdwl->id }}" method="post" class="d-inline">
-                                                @method('delete')
-                                                @csrf
-                                                <button type="submit" class="btn btn-sm mb-1 btn-danger"><i class="bi bi-trash"></i> Hapus</button>
-                                            </form> --}}
                                         </div>
                                     </div>
                                     @elseif(Auth::user()->level == 'User')

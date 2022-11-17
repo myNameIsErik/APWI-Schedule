@@ -6,7 +6,7 @@ Jadwal Sedang diproses.
 <p>Untuk melihat jadwal lebih lanjut kunjungi Website
 E-Schedule, atau bisa langsung dengan klik tombol di bawah.</p>
 
-@component('mail::button', ['url' => ''])
+@component('mail::button', ['url' => 'schedule.regbandung.com'])
 Klik di sini
 @endcomponent
 

@@ -8,6 +8,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="keyword" content="Aplikasi E-Schedule PPSDM Regional Bandung">
     <meta name="description" content="Aplikasi E-Schedule PPSDM Regional Bandung, E-Schedule Widya Iswara, E-Schedule WI">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+    
     <title>APWI-Schedule</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/logo/logo.png">
